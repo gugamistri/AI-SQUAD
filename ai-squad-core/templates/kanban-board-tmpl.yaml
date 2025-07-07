@@ -1,0 +1,418 @@
+title: Kanban Board Template
+version: v4
+type: kanban-board-configuration
+description: Template for configuring Kanban board structure and workflow automation for GitHub Projects V2
+
+# Kanban Board Configuration Template
+# This template defines the Kanban board structure, column definitions, and workflow automation
+# for GitHub Projects V2 integration with AI-SQUAD
+
+metadata:
+  boardName: "{{board-name}}"
+  workflowType: "{{workflow-type}}" # greenfield-fullstack, brownfield-service, etc.
+  teamSize: "{{team-size}}"
+  projectDuration: "{{project-duration}}"
+  aiSquadVersion: "{{version}}"
+  createdBy: "AI-SQUAD {{agent-name}}"
+  lastUpdated: "{{timestamp}}"
+
+# Column Definitions
+columns:
+  noStatus:
+    name: "No Status"
+    description: "Items without defined status, newly created items, or blocked items"
+    color: "gray"
+    position: 1
+    automation:
+      - trigger: "item_added"
+        action: "add_label"
+        value: "status-undefined"
+      - trigger: "item_blocked"
+        action: "move_here"
+        condition: "blocked_label_added"
+    
+    itemTypes:
+      - "New issues without status"
+      - "Blocked items requiring resolution"
+      - "Items waiting for dependencies"
+      - "Items requiring clarification"
+    
+    exitCriteria:
+      - "Status defined and requirements clear"
+      - "Blockers resolved"
+      - "Dependencies available"
+      - "Proper prioritization assigned"
+
+  todo:
+    name: "Todo"
+    description: "Ready for development - well-defined, prioritized, and unblocked"
+    color: "blue"
+    position: 2
+    automation:
+      - trigger: "item_moved_here"
+        action: "add_label"
+        value: "status-ready"
+      - trigger: "item_moved_here"
+        action: "remove_label"
+        value: "status-undefined"
+    
+    itemTypes:
+      - "Stories ready for development"
+      - "Tasks with clear acceptance criteria"
+      - "Bugs ready for fixing"
+      - "Epics broken down into stories"
+    
+    entryCriteria:
+      - "Clear description and acceptance criteria"
+      - "Proper priority assigned"
+      - "No blocking dependencies"
+      - "Assigned to appropriate agent/team member"
+    
+    exitCriteria:
+      - "Work started by assigned team member"
+      - "Status moved to In Progress"
+
+  inProgress:
+    name: "In Progress"
+    description: "Currently being worked on by team members"
+    color: "yellow"
+    position: 3
+    automation:
+      - trigger: "item_moved_here"
+        action: "add_label"
+        value: "status-in-progress"
+      - trigger: "item_moved_here"
+        action: "remove_label"
+        value: "status-ready"
+      - trigger: "item_moved_here"
+        action: "assign_to_mover"
+        condition: "no_assignee"
+    
+    itemTypes:
+      - "Stories being implemented"
+      - "Bugs being fixed"
+      - "Tasks being executed"
+      - "Epics being managed"
+    
+    entryCriteria:
+      - "Assigned team member starts work"
+      - "Branch created (for development items)"
+      - "Clear understanding of requirements"
+    
+    exitCriteria:
+      - "Work completed according to acceptance criteria"
+      - "All tasks in story completed"
+      - "Initial testing completed"
+      - "Ready for review"
+    
+    workInProgressLimits:
+      smallTeam: 3    # 1-3 people
+      mediumTeam: 6   # 4-8 people
+      largeTeam: 10   # 9+ people
+
+  humanReview:
+    name: "Human Review"
+    description: "Completed work awaiting human review, approval, or validation"
+    color: "orange"
+    position: 4
+    automation:
+      - trigger: "item_moved_here"
+        action: "add_label"
+        value: "status-review"
+      - trigger: "item_moved_here"
+        action: "remove_label"
+        value: "status-in-progress"
+      - trigger: "pull_request_opened"
+        action: "move_here"
+        condition: "linked_issue"
+      - trigger: "item_moved_here"
+        action: "notify_reviewers"
+    
+    itemTypes:
+      - "Stories completed and ready for PO review"
+      - "Code changes awaiting code review"
+      - "Pull requests awaiting approval"
+      - "Designs awaiting UX review"
+      - "Documents awaiting stakeholder approval"
+    
+    entryCriteria:
+      - "Work completed by implementer"
+      - "Definition of Done checklist completed"
+      - "Tests passing"
+      - "Pull request created (for code changes)"
+    
+    exitCriteria:
+      - "Review completed and approved"
+      - "No requested changes remaining"
+      - "Quality gates met"
+      - "Stakeholder sign-off received"
+    
+    reviewTypes:
+      - type: "code_review"
+        reviewers: ["tech-lead", "senior-developer"]
+        timeLimit: "24 hours"
+      - type: "product_review"
+        reviewers: ["product-owner"]
+        timeLimit: "48 hours"
+      - type: "ux_review"
+        reviewers: ["ux-expert"]
+        timeLimit: "72 hours"
+      - type: "stakeholder_review"
+        reviewers: ["stakeholders"]
+        timeLimit: "1 week"
+
+  done:
+    name: "Done"
+    description: "Completed and approved items"
+    color: "green"
+    position: 5
+    automation:
+      - trigger: "item_moved_here"
+        action: "add_label"
+        value: "status-done"
+      - trigger: "item_moved_here"
+        action: "remove_label"
+        value: "status-review"
+      - trigger: "pull_request_merged"
+        action: "move_here"
+        condition: "linked_issue"
+      - trigger: "item_moved_here"
+        action: "close_issue"
+        condition: "auto_close_enabled"
+    
+    itemTypes:
+      - "Stories completed and accepted"
+      - "Bugs fixed and verified"
+      - "Tasks completed and validated"
+      - "Epics completed with all stories done"
+    
+    entryCriteria:
+      - "Review completed and approved"
+      - "All acceptance criteria met"
+      - "Quality gates passed"
+      - "Changes deployed (if applicable)"
+    
+    definitionOfDone:
+      - "All acceptance criteria verified"
+      - "Code merged to main branch"
+      - "Tests passing in all environments"
+      - "Documentation updated"
+      - "No known defects"
+      - "Stakeholder acceptance received"
+
+# Workflow Automation Rules
+automation:
+  moveRules:
+    - name: "Auto-assign on start"
+      trigger: "item_moved_to_in_progress"
+      condition: "no_assignee"
+      action: "assign_to_user_who_moved"
+    
+    - name: "Block when dependencies fail"
+      trigger: "dependency_failed"
+      action: "move_to_no_status"
+      label: "blocked-dependency"
+    
+    - name: "Review notification"
+      trigger: "item_moved_to_review"
+      action: "notify_team_members"
+      roles: ["reviewers", "product-owner"]
+    
+    - name: "Epic completion check"
+      trigger: "story_moved_to_done"
+      condition: "part_of_epic"
+      action: "check_epic_completion"
+    
+    - name: "Auto-close on merge"
+      trigger: "pull_request_merged"
+      condition: "auto_close_enabled"
+      action: "move_to_done"
+
+  labelAutomation:
+    - trigger: "item_moved"
+      action: "sync_status_labels"
+      rules:
+        "No Status": ["status-undefined", "blocked"]
+        "Todo": ["status-ready"]
+        "In Progress": ["status-in-progress"]
+        "Human Review": ["status-review"]
+        "Done": ["status-done", "completed"]
+    
+    - trigger: "priority_changed"
+      action: "update_priority_labels"
+      rules:
+        "High": "priority-high"
+        "Medium": "priority-medium"
+        "Low": "priority-low"
+
+# Team Configuration
+teamConfiguration:
+  workingHours:
+    start: "09:00"
+    end: "17:00"
+    timezone: "{{team-timezone}}"
+    workingDays: ["monday", "tuesday", "wednesday", "thursday", "friday"]
+  
+  reviewerAssignment:
+    codeReview:
+      - "senior-developer"
+      - "tech-lead"
+      - "architect"
+    
+    productReview:
+      - "product-owner"
+      - "product-manager"
+    
+    uxReview:
+      - "ux-expert"
+      - "design-lead"
+  
+  notificationPreferences:
+    itemMovedToReview: ["email", "slack"]
+    itemBlocked: ["email", "slack", "teams"]
+    epicCompleted: ["email"]
+    deadlineApproaching: ["slack"]
+
+# Metrics and Reporting
+metrics:
+  trackingEnabled: true
+  
+  cycleTimeTracking:
+    enabled: true
+    startColumn: "Todo"
+    endColumn: "Done"
+    reportingInterval: "weekly"
+  
+  throughputTracking:
+    enabled: true
+    measurementPeriod: "weekly"
+    itemTypes: ["story", "bug", "task"]
+  
+  workInProgressTracking:
+    enabled: true
+    alerts:
+      wipLimitExceeded: true
+      itemsInProgressTooLong: true
+      reviewBottleneck: true
+  
+  cumulativeFlowDiagram:
+    enabled: true
+    dataRetention: "3 months"
+    updateFrequency: "daily"
+
+# Integration Settings
+integration:
+  aiSquad:
+    syncWorkflowPlans: true
+    updateStoryFiles: true
+    autoCreateIssues: true
+    bidirectionalSync: true
+  
+  github:
+    useProjectV2: true
+    enableWebhooks: true
+    autoCreatePR: false
+    autoMergePR: false
+  
+  notifications:
+    slack:
+      enabled: false
+      webhook: "{{slack-webhook-url}}"
+      channels:
+        general: "#general"
+        development: "#dev"
+        reviews: "#reviews"
+    
+    email:
+      enabled: true
+      smtpServer: "{{smtp-server}}"
+      fromAddress: "ai-squad@{{domain}}"
+    
+    teams:
+      enabled: false
+      webhook: "{{teams-webhook-url}}"
+
+# Custom Fields
+customFields:
+  storyPoints:
+    type: "number"
+    description: "Estimated effort in story points"
+    defaultValue: 0
+    range: [0, 21]
+  
+  epicRef:
+    type: "text"
+    description: "Reference to parent epic"
+    pattern: "EPIC-[0-9]+"
+  
+  aiSquadAgent:
+    type: "single_select"
+    description: "AI-SQUAD agent responsible for this item"
+    options:
+      - "PM"
+      - "PO"
+      - "SM"
+      - "Dev"
+      - "QA"
+      - "Architect"
+      - "Analyst"
+      - "UX-Expert"
+  
+  businessValue:
+    type: "single_select"
+    description: "Business value of this item"
+    options:
+      - "High"
+      - "Medium"
+      - "Low"
+  
+  technicalComplexity:
+    type: "single_select"
+    description: "Technical complexity assessment"
+    options:
+      - "High"
+      - "Medium"
+      - "Low"
+
+# Board Views
+views:
+  teamView:
+    name: "Team Board"
+    description: "Standard team Kanban view"
+    columns: ["noStatus", "todo", "inProgress", "humanReview", "done"]
+    filters: []
+    groupBy: "none"
+  
+  sprintView:
+    name: "Current Sprint"
+    description: "Items in current sprint"
+    columns: ["todo", "inProgress", "humanReview", "done"]
+    filters:
+      - field: "milestone"
+        operator: "equals"
+        value: "{{current-sprint}}"
+    groupBy: "assignee"
+  
+  epicView:
+    name: "Epic Progress"
+    description: "Progress view grouped by epic"
+    columns: ["todo", "inProgress", "humanReview", "done"]
+    filters:
+      - field: "labels"
+        operator: "contains"
+        value: "epic"
+    groupBy: "epicRef"
+  
+  reviewQueue:
+    name: "Review Queue"
+    description: "Items awaiting review"
+    columns: ["humanReview"]
+    filters: []
+    groupBy: "reviewer"
+  
+  agentView:
+    name: "AI-SQUAD Agents"
+    description: "Items grouped by AI-SQUAD agent"
+    columns: ["todo", "inProgress", "humanReview", "done"]
+    filters: []
+    groupBy: "aiSquadAgent"

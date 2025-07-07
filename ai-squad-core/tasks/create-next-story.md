@@ -112,3 +112,27 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
   - Any deviations or conflicts noted between epic and architecture
   - Checklist Results
   - Next steps: For Complex stories, suggest the user carefully review the story draft and also optionally have the PO run the task `validate-next-story`
+
+### 7. GitHub Integration (Optional)
+
+[[LLM: After story creation, optionally create GitHub issue if integration is enabled]]
+
+If GitHub integration is enabled in core-config.yaml:
+
+- Check if `github.enabled` is true and `github.syncOptions.autoCreateIssues` is enabled
+- If enabled, automatically call `create-github-issue` task with the created story
+- Update story file with GitHub issue reference and project URL
+- Add story to GitHub Project Kanban board in "Todo" column
+- Report GitHub integration status to user
+
+If integration is disabled or fails:
+
+- Continue with normal story creation flow
+- Inform user that GitHub issue can be created later using `@github-pm *create-issue` command
+
+GitHub Integration Summary:
+
+- ✅ GitHub Issue Created: #{{issue-number}}
+- ✅ Added to Project Board: {{project-name}}
+- ✅ Story file updated with GitHub metadata
+- 🔗 Issue URL: {{github-issue-url}}

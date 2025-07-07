@@ -1,0 +1,363 @@
+title: GitHub Project Template
+version: v4
+type: github-project-setup
+description: Template for creating and configuring GitHub Projects V2 with AI-SQUAD integration
+
+# GitHub Project Configuration Template
+# This template defines the structure for GitHub Projects V2 integration with AI-SQUAD workflows
+
+metadata:
+  projectName: "{{project-name}}"
+  description: "{{project-description}}"
+  projectType: "{{project-type}}" # fullstack, service, ui, brownfield
+  workflowId: "{{workflow-id}}"
+  createdBy: "AI-SQUAD {{agent-name}}"
+  aiSquadVersion: "{{version}}"
+  lastUpdated: "{{timestamp}}"
+
+# GitHub Project V2 Configuration
+githubProject:
+  # Basic project settings
+  settings:
+    name: "{{project-name}}"
+    description: "{{project-description}} - Managed by AI-SQUAD"
+    visibility: "PRIVATE" # PUBLIC, PRIVATE
+    readme: |
+      # {{project-name}}
+      
+      This project is managed by AI-SQUAD framework for automated workflow tracking and issue management.
+      
+      ## Project Overview
+      {{project-description}}
+      
+      ## Workflow Information
+      - **Workflow Type**: {{project-type}}
+      - **AI-SQUAD Version**: {{version}}
+      - **Last Sync**: {{timestamp}}
+      
+      ## Column Meanings
+      - **No Status**: Items without defined status or blocked items
+      - **Todo**: Ready for development, properly defined and prioritized
+      - **In Progress**: Currently being worked on by team members
+      - **Human Review**: Completed work awaiting human review/approval
+      - **Done**: Completed and approved items
+      
+      ## Automation
+      This project uses AI-SQUAD automation for:
+      - Issue creation from stories
+      - Status synchronization with local workflow
+      - Progress tracking and reporting
+      - Team notifications and updates
+
+  # Field definitions for the project
+  fields:
+    - name: "Status"
+      type: "SINGLE_SELECT"
+      options:
+        - name: "No Status"
+          description: "Items without status or blocked"
+          color: "gray"
+        - name: "Todo"
+          description: "Ready for development"
+          color: "blue"
+        - name: "In Progress"
+          description: "Currently being worked on"
+          color: "yellow"
+        - name: "Human Review"
+          description: "Awaiting human review"
+          color: "orange"
+        - name: "Done"
+          description: "Completed and approved"
+          color: "green"
+    
+    - name: "Priority"
+      type: "SINGLE_SELECT"
+      options:
+        - name: "High"
+          description: "Critical priority items"
+          color: "red"
+        - name: "Medium"
+          description: "Normal priority items"
+          color: "yellow"
+        - name: "Low"
+          description: "Low priority items"
+          color: "gray"
+    
+    - name: "Epic"
+      type: "TEXT"
+      description: "Epic or feature group this item belongs to"
+    
+    - name: "Story Points"
+      type: "NUMBER"
+      description: "Estimated effort for the item"
+    
+    - name: "AI-SQUAD Agent"
+      type: "SINGLE_SELECT"
+      options:
+        - name: "PM"
+          color: "blue"
+        - name: "PO"
+          color: "purple"
+        - name: "SM"
+          color: "green"
+        - name: "Dev"
+          color: "orange"
+        - name: "QA"
+          color: "red"
+        - name: "Architect"
+          color: "navy"
+        - name: "Analyst"
+          color: "teal"
+        - name: "UX-Expert"
+          color: "pink"
+    
+    - name: "Story Type"
+      type: "SINGLE_SELECT"
+      options:
+        - name: "User Story"
+          color: "blue"
+        - name: "Epic"
+          color: "purple"
+        - name: "Task"
+          color: "gray"
+        - name: "Bug"
+          color: "red"
+        - name: "Technical Debt"
+          color: "orange"
+
+# Issue Template Configuration
+issueTemplates:
+  userStory:
+    name: "AI-SQUAD User Story"
+    description: "User story created by AI-SQUAD framework"
+    title: "[STORY-{{story-id}}] {{story-title}}"
+    labels: ["user-story", "ai-squad"]
+    body: |
+      ## Description
+      {{story-description}}
+      
+      ## Acceptance Criteria
+      {{acceptance-criteria}}
+      
+      ## Tasks
+      {{task-checklist}}
+      
+      ## Story Details
+      - **Story ID**: {{story-id}}
+      - **Epic**: {{epic-name}}
+      - **Priority**: {{priority}}
+      - **Estimated Effort**: {{effort-estimate}}
+      - **Assigned Agent**: {{assigned-agent}}
+      
+      ## AI-SQUAD Metadata
+      - **Source File**: `{{source-file-path}}`
+      - **Workflow**: {{workflow-name}}
+      - **Created By**: AI-SQUAD {{agent-name}}
+      - **Generated**: {{timestamp}}
+      
+      ---
+      *This issue was automatically generated from AI-SQUAD workflow. Updates will be synchronized with the local story file.*
+
+  epic:
+    name: "AI-SQUAD Epic"
+    description: "Epic created by AI-SQUAD framework"
+    title: "[EPIC-{{epic-id}}] {{epic-title}}"
+    labels: ["epic", "ai-squad"]
+    body: |
+      ## Epic Overview
+      {{epic-description}}
+      
+      ## Objectives
+      {{epic-objectives}}
+      
+      ## Success Criteria
+      {{success-criteria}}
+      
+      ## Stories in Epic
+      {{story-list}}
+      
+      ## Epic Details
+      - **Epic ID**: {{epic-id}}
+      - **Target Completion**: {{target-date}}
+      - **Estimated Effort**: {{total-effort}}
+      - **Dependencies**: {{dependencies}}
+      
+      ## AI-SQUAD Metadata
+      - **Source File**: `{{source-file-path}}`
+      - **Workflow**: {{workflow-name}}
+      - **Created By**: AI-SQUAD {{agent-name}}
+      - **Generated**: {{timestamp}}
+      
+      ---
+      *This epic was automatically generated from AI-SQUAD workflow.*
+
+  task:
+    name: "AI-SQUAD Task"
+    description: "Technical task created by AI-SQUAD framework"
+    title: "[TASK-{{task-id}}] {{task-title}}"
+    labels: ["task", "ai-squad"]
+    body: |
+      ## Task Description
+      {{task-description}}
+      
+      ## Implementation Notes
+      {{implementation-notes}}
+      
+      ## Acceptance Criteria
+      {{acceptance-criteria}}
+      
+      ## Task Details
+      - **Task ID**: {{task-id}}
+      - **Related Story**: {{related-story}}
+      - **Priority**: {{priority}}
+      - **Estimated Effort**: {{effort-estimate}}
+      - **Assigned Agent**: {{assigned-agent}}
+      
+      ## AI-SQUAD Metadata
+      - **Source**: {{source-type}}
+      - **Workflow**: {{workflow-name}}
+      - **Created By**: AI-SQUAD {{agent-name}}
+      - **Generated**: {{timestamp}}
+      
+      ---
+      *This task was automatically generated from AI-SQUAD workflow.*
+
+# Label Configuration
+labels:
+  - name: "ai-squad"
+    description: "Items managed by AI-SQUAD framework"
+    color: "0075ca"
+  
+  - name: "user-story"
+    description: "User story from AI-SQUAD"
+    color: "1d76db"
+  
+  - name: "epic"
+    description: "Epic from AI-SQUAD"
+    color: "5319e7"
+  
+  - name: "task"
+    description: "Technical task from AI-SQUAD"
+    color: "fbca04"
+  
+  - name: "bug"
+    description: "Bug fix from AI-SQUAD"
+    color: "d73a4a"
+  
+  - name: "priority-high"
+    description: "High priority item"
+    color: "d73a4a"
+  
+  - name: "priority-medium"
+    description: "Medium priority item"
+    color: "fbca04"
+  
+  - name: "priority-low"
+    description: "Low priority item"
+    color: "7057ff"
+  
+  - name: "status-draft"
+    description: "Draft status"
+    color: "fef2c0"
+  
+  - name: "status-ready"
+    description: "Ready for development"
+    color: "0052cc"
+  
+  - name: "status-in-progress"
+    description: "Currently in development"
+    color: "fbca04"
+  
+  - name: "status-review"
+    description: "In review"
+    color: "f9d0c4"
+  
+  - name: "status-blocked"
+    description: "Blocked item"
+    color: "d73a4a"
+  
+  - name: "status-done"
+    description: "Completed item"
+    color: "0e8a16"
+
+# Milestone Configuration
+milestones:
+  epic:
+    title: "{{epic-name}}"
+    description: "{{epic-description}}"
+    dueDate: "{{epic-due-date}}"
+    state: "open" # open, closed
+  
+  sprint:
+    title: "Sprint {{sprint-number}}"
+    description: "Sprint {{sprint-number}} - {{sprint-goal}}"
+    dueDate: "{{sprint-end-date}}"
+    state: "open"
+
+# Automation Rules
+automation:
+  # Move items when issue is assigned
+  - trigger: "issue.assigned"
+    condition: "status == 'Todo'"
+    action: "move_to_column"
+    column: "In Progress"
+  
+  # Move items when PR is created
+  - trigger: "pull_request.opened"
+    condition: "linked_to_issue"
+    action: "move_to_column"
+    column: "Human Review"
+  
+  # Move items when PR is merged
+  - trigger: "pull_request.merged"
+    condition: "linked_to_issue"
+    action: "move_to_column"
+    column: "Done"
+  
+  # Add blocked label when moved to No Status
+  - trigger: "item.moved"
+    condition: "column == 'No Status'"
+    action: "add_label"
+    label: "status-blocked"
+
+# Integration Settings
+integration:
+  syncInterval: 300 # seconds
+  webhookEvents:
+    - "issues"
+    - "pull_request"
+    - "project_card"
+    - "milestone"
+  
+  notifications:
+    - event: "item_moved_to_review"
+      recipients: ["reviewers", "product-owner"]
+    - event: "item_blocked"
+      recipients: ["project-manager", "stakeholders"]
+    - event: "epic_completed"
+      recipients: ["all-team"]
+
+# Setup Instructions
+setup:
+  prerequisites:
+    - "GitHub repository with admin access"
+    - "GitHub CLI installed and authenticated"
+    - "GitHub Projects V2 feature enabled"
+    - "AI-SQUAD framework configured"
+  
+  steps:
+    1: "Create GitHub Project V2 using this template"
+    2: "Configure project fields and columns"
+    3: "Set up issue templates in .github/ISSUE_TEMPLATE/"
+    4: "Create labels using GitHub API"
+    5: "Configure webhooks for automation"
+    6: "Update AI-SQUAD configuration with project ID"
+    7: "Test integration with sample issue creation"
+  
+  validation:
+    - "Project visible in GitHub Projects"
+    - "All columns and fields configured"
+    - "Issue templates available"
+    - "Labels created and visible"
+    - "AI-SQUAD can access project via API"
+    - "Webhooks receiving events"

@@ -113,6 +113,18 @@ language:
       ko: 지은
       ru: София
       ar: صوفيا
+    github-pm:
+      en: GitHubPM
+      es: GitHubPM
+      pt: GitHubPM
+      fr: GitHubPM
+      de: GitHubPM
+      it: GitHubPM
+      zh-cn: GitHubPM
+      ja: GitHubPM
+      ko: GitHubPM
+      ru: GitHubPM
+      ar: GitHubPM
 prd:
   prdFile: docs/prd.md
   prdVersion: v4
@@ -136,3 +148,31 @@ workflow:
   trackProgress: true
   enforceSequence: false
   updateOnCompletion: true
+github:
+  enabled: true
+  apiToken: null  # Set via GITHUB_TOKEN environment variable
+  repository: "gugamistri/AI-SQUAD"
+  projectId: "1"
+  organization: null
+  kanbanColumns:
+    noStatus: "No Status"
+    humanReview: "Human Review"
+    todo: "Todo"
+    inProgress: "In Progress"
+    done: "Done"
+  syncOptions:
+    autoCreateIssues: true
+    autoUpdateStatus: true
+    bidirectionalSync: true
+    syncInterval: 300
+  issueMapping:
+    story: "user-story"
+    epic: "epic"
+    task: "task"
+    bug: "bug"
+  gitOperations:
+    autoCommit: false
+    autoPush: false
+    createPR: false
+    branchNaming: "ai-squad/{story-id}"
+    commitMessage: "feat: {story-title} - AI-SQUAD generated"

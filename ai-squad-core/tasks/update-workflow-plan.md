@@ -115,6 +115,22 @@ If user selected option 5:
    - Complete (all steps done)
 3. Update plan header with new status
 
+#### 4.6 GitHub Integration Sync
+
+[[LLM: If GitHub integration is enabled, sync workflow updates with GitHub Projects]]
+
+If GitHub integration is enabled:
+
+1. Check if `github.enabled` is true in core-config.yaml
+2. Call `sync-github-projects` task to synchronize workflow plan changes
+3. Update GitHub Project Kanban board with new status
+4. Ensure bidirectional sync between workflow plan and GitHub issues
+
+If sync fails or is disabled:
+
+- Continue with local workflow plan updates
+- Log GitHub sync status for user information
+
 ### 5. Automatic Updates (When Called by Tasks)
 
 [[LLM: When called automatically by another task]]

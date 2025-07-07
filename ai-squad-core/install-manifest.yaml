@@ -16,6 +16,7 @@ files:
   - .ai-squad-core/agents/qa.md
   - .ai-squad-core/agents/sm.md
   - .ai-squad-core/agents/ux-expert.md
+  - .ai-squad-core/agents/github-pm.md
   - .ai-squad-core/agent-teams/team-all.yaml
   - .ai-squad-core/agent-teams/team-fullstack.yaml
   - .ai-squad-core/agent-teams/team-ide-minimal.yaml
@@ -38,6 +39,8 @@ files:
   - .ai-squad-core/templates/prd-tmpl.yaml
   - .ai-squad-core/templates/project-brief-tmpl.yaml
   - .ai-squad-core/templates/story-tmpl.yaml
+  - .ai-squad-core/templates/github-project-tmpl.yaml
+  - .ai-squad-core/templates/kanban-board-tmpl.yaml
   - .ai-squad-core/tasks/advanced-elicitation.md
   - .ai-squad-core/tasks/brownfield-create-epic.md
   - .ai-squad-core/tasks/brownfield-create-story.md
@@ -56,6 +59,10 @@ files:
   - .ai-squad-core/tasks/shard-doc.md
   - .ai-squad-core/tasks/update-workflow-plan.md
   - .ai-squad-core/tasks/validate-next-story.md
+  - .ai-squad-core/tasks/sync-github-projects.md
+  - .ai-squad-core/tasks/create-github-issue.md
+  - .ai-squad-core/tasks/update-kanban-status.md
+  - .ai-squad-core/tasks/git-operations.md
   - .ai-squad-core/checklists/architect-checklist.md
   - .ai-squad-core/checklists/change-checklist.md
   - .ai-squad-core/checklists/pm-checklist.md
