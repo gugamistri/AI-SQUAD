@@ -14,11 +14,44 @@ class WebBuilder {
       "md-assets",
       "web-agent-startup-instructions.md"
     );
+    this.languageConfig = null; // Cache for language configuration
   }
 
   parseYaml(content) {
     const yaml = require("js-yaml");
     return yaml.load(content);
+  }
+
+  async loadLanguageConfig() {
+    if (this.languageConfig) {
+      return this.languageConfig;
+    }
+
+    try {
+      const yaml = require("js-yaml");
+      const coreConfigPath = path.join(this.rootDir, "ai-squad-core", "core-config.yaml");
+      const configContent = await fs.readFile(coreConfigPath, "utf8");
+      const config = yaml.load(configContent);
+      this.languageConfig = config.language || {};
+      return this.languageConfig;
+    } catch (error) {
+      console.warn("Could not load language configuration:", error.message);
+      this.languageConfig = {};
+      return this.languageConfig;
+    }
+  }
+
+  getLocalizedAgentName(agentId, languageCode = 'en') {
+    if (!this.languageConfig || !this.languageConfig.agentNames) {
+      return null;
+    }
+
+    const agentNames = this.languageConfig.agentNames[agentId];
+    if (!agentNames) {
+      return null;
+    }
+
+    return agentNames[languageCode] || agentNames['en'] || null;
   }
 
   convertToWebPath(filePath, bundleRoot = 'ai-squad-core') {
@@ -105,11 +138,17 @@ These references map directly to bundle sections:
 
   async buildAgents() {
     const agents = await this.resolver.listAgents();
+    await this.loadLanguageConfig();
+
+    const supportedLanguages = this.languageConfig.supportedLanguages || ['en'];
+    let totalBundles = 0;
 
     for (const agentId of agents) {
       console.log(`  Building agent: ${agentId}`);
+      
+      // Build default English version
       const bundle = await this.buildAgentBundle(agentId);
-
+      
       // Write to all output directories
       for (const outputDir of this.outputDirs) {
         const outputPath = path.join(outputDir, "agents");
@@ -117,16 +156,43 @@ These references map directly to bundle sections:
         const outputFile = path.join(outputPath, `${agentId}.txt`);
         await fs.writeFile(outputFile, bundle, "utf8");
       }
+      totalBundles++;
+
+      // Build localized versions for supported languages (except English)
+      for (const languageCode of supportedLanguages) {
+        if (languageCode === 'en') continue; // Skip English as it's already built
+        
+        const localizedName = this.getLocalizedAgentName(agentId, languageCode);
+        if (localizedName) {
+          console.log(`    Building ${languageCode} version: ${localizedName}`);
+          const localizedBundle = await this.buildAgentBundle(agentId, languageCode);
+          
+          // Write localized versions to language-specific directories
+          for (const outputDir of this.outputDirs) {
+            const outputPath = path.join(outputDir, "agents", languageCode);
+            await fs.mkdir(outputPath, { recursive: true });
+            const outputFile = path.join(outputPath, `${agentId}.txt`);
+            await fs.writeFile(outputFile, localizedBundle, "utf8");
+          }
+          totalBundles++;
+        }
+      }
     }
 
-    console.log(`Built ${agents.length} agent bundles in ${this.outputDirs.length} locations`);
+    console.log(`Built ${totalBundles} agent bundles (including localized versions) in ${this.outputDirs.length} locations`);
   }
 
   async buildTeams() {
     const teams = await this.resolver.listTeams();
+    await this.loadLanguageConfig();
+
+    const supportedLanguages = this.languageConfig.supportedLanguages || ['en'];
+    let totalBundles = 0;
 
     for (const teamId of teams) {
       console.log(`  Building team: ${teamId}`);
+      
+      // Build default English version
       const bundle = await this.buildTeamBundle(teamId);
 
       // Write to all output directories
@@ -136,20 +202,45 @@ These references map directly to bundle sections:
         const outputFile = path.join(outputPath, `${teamId}.txt`);
         await fs.writeFile(outputFile, bundle, "utf8");
       }
+      totalBundles++;
+
+      // Build localized versions for supported languages (except English)
+      for (const languageCode of supportedLanguages) {
+        if (languageCode === 'en') continue; // Skip English as it's already built
+        
+        console.log(`    Building ${languageCode} version of team: ${teamId}`);
+        const localizedBundle = await this.buildTeamBundle(teamId, languageCode);
+        
+        // Write localized versions to language-specific directories
+        for (const outputDir of this.outputDirs) {
+          const outputPath = path.join(outputDir, "teams", languageCode);
+          await fs.mkdir(outputPath, { recursive: true });
+          const outputFile = path.join(outputPath, `${teamId}.txt`);
+          await fs.writeFile(outputFile, localizedBundle, "utf8");
+        }
+        totalBundles++;
+      }
     }
 
-    console.log(`Built ${teams.length} team bundles in ${this.outputDirs.length} locations`);
+    console.log(`Built ${totalBundles} team bundles (including localized versions) in ${this.outputDirs.length} locations`);
   }
 
-  async buildAgentBundle(agentId) {
+  async buildAgentBundle(agentId, languageCode = 'en') {
     const dependencies = await this.resolver.resolveAgentDependencies(agentId);
     const template = this.generateWebInstructions('agent');
 
     const sections = [template];
 
-    // Add agent configuration
+    // Add agent configuration with localized name if specified
     const agentPath = this.convertToWebPath(dependencies.agent.path, 'ai-squad-core');
-    sections.push(this.formatSection(agentPath, dependencies.agent.content, 'ai-squad-core'));
+    let agentContent = dependencies.agent.content;
+    
+    // Apply localized name if not English
+    if (languageCode !== 'en') {
+      agentContent = this.processAgentContentForLanguage(agentContent, agentId, languageCode);
+    }
+    
+    sections.push(this.formatSection(agentPath, agentContent, 'ai-squad-core'));
 
     // Add all dependencies
     for (const resource of dependencies.resources) {
@@ -160,7 +251,7 @@ These references map directly to bundle sections:
     return sections.join("\n");
   }
 
-  async buildTeamBundle(teamId) {
+  async buildTeamBundle(teamId, languageCode = 'en') {
     const dependencies = await this.resolver.resolveTeamDependencies(teamId);
     const template = this.generateWebInstructions('team');
 
@@ -170,10 +261,19 @@ These references map directly to bundle sections:
     const teamPath = this.convertToWebPath(dependencies.team.path, 'ai-squad-core');
     sections.push(this.formatSection(teamPath, dependencies.team.content, 'ai-squad-core'));
 
-    // Add all agents
+    // Add all agents with localized names if specified
     for (const agent of dependencies.agents) {
       const agentPath = this.convertToWebPath(agent.path, 'ai-squad-core');
-      sections.push(this.formatSection(agentPath, agent.content, 'ai-squad-core'));
+      let agentContent = agent.content;
+      
+      // Apply localized name if not English
+      if (languageCode !== 'en') {
+        // Extract agent ID from the agent path
+        const agentId = path.basename(agent.path, '.md');
+        agentContent = this.processAgentContentForLanguage(agentContent, agentId, languageCode);
+      }
+      
+      sections.push(this.formatSection(agentPath, agentContent, 'ai-squad-core'));
     }
 
     // Add all deduplicated resources
@@ -234,6 +334,68 @@ These references map directly to bundle sections:
       console.warn("Failed to process agent YAML:", error.message);
       // If parsing fails, return original content
       return content;
+    }
+  }
+
+  processAgentContentForLanguage(content, agentId, languageCode) {
+    // Get localized name
+    const localizedName = this.getLocalizedAgentName(agentId, languageCode);
+    if (!localizedName) {
+      return this.processAgentContent(content);
+    }
+
+    const yamlContent = yamlUtils.extractYamlFromAgent(content);
+    if (!yamlContent) return content;
+
+    const yamlMatch = content.match(/```ya?ml\n([\s\S]*?)\n```/);
+    if (!yamlMatch) return content;
+    
+    const yamlStartIndex = content.indexOf(yamlMatch[0]);
+    const yamlEndIndex = yamlStartIndex + yamlMatch[0].length;
+
+    // Parse YAML and apply localized name
+    try {
+      const yaml = require("js-yaml");
+      const parsed = yaml.load(yamlContent);
+
+      // Remove IDE-specific properties
+      delete parsed.root;
+      delete parsed["IDE-FILE-RESOLUTION"];
+      delete parsed["REQUEST-RESOLUTION"];
+
+      // Update agent name with localized version
+      if (parsed.agent) {
+        parsed.agent.name = localizedName;
+      }
+
+      // Clean activation-instructions
+      if (parsed["activation-instructions"] && Array.isArray(parsed["activation-instructions"])) {
+        parsed["activation-instructions"] = parsed["activation-instructions"].filter(
+          (instruction) => {
+            return (
+              typeof instruction === 'string' &&
+              !instruction.startsWith("IDE-FILE-RESOLUTION:") &&
+              !instruction.startsWith("REQUEST-RESOLUTION:")
+            );
+          }
+        );
+      }
+
+      // Reconstruct the YAML
+      const cleanedYaml = yaml.dump(parsed, { lineWidth: -1 });
+
+      // Get the agent ID for the header (keep ID, not name)
+      const agentName = parsed.agent?.id || "agent";
+
+      // Build the new content with localized agent header
+      const newHeader = `# ${agentName}\n\nCRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:\n\n`;
+      const afterYaml = content.substring(yamlEndIndex);
+
+      return newHeader + "```yaml\n" + cleanedYaml.trim() + "\n```" + afterYaml;
+    } catch (error) {
+      console.warn("Failed to process agent YAML for localization:", error.message);
+      // If parsing fails, return original content
+      return this.processAgentContent(content);
     }
   }
 

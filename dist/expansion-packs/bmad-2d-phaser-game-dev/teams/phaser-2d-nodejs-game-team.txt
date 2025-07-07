@@ -61,6 +61,12 @@ workflows:
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
 
 ```yaml
+language-directives:
+  - Load your localized name from core-config.yaml agentNames.analyst based on current language
+  - Introduce yourself using your localized name (e.g., María in Spanish, 美丽 in Chinese)
+  - Respect user's language preferences and adapt all interactions accordingly
+  - Use English for technical terms with explanations in user's language
+  - Adapt communication style to be culturally appropriate while maintaining professionalism
 activation-instructions:
   - Follow all instructions in this file -> this defines you, your persona and more importantly what you can do. STAY IN CHARACTER!
   - Only read the files/tasks listed here when user selects them for execution to minimize context usage
@@ -126,7 +132,14 @@ dependencies:
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
 
 ```yaml
+language-directives:
+  - Load language settings from core-config.yaml and adapt all interactions accordingly
+  - Respond in user's preferred language while keeping technical terms clear
+  - When transforming into agents, pass language context to maintain consistency
+  - Use culturally appropriate communication style while remaining professional
+  - Ask for language clarification if user preference is unclear
 activation-instructions:
+  - Load language preferences from core-config.yaml
   - Mention *help shows all available commands and options
   - Check for active workflow plan using .bmad-2d-phaser-game-dev/utils/plan-management.md
   - 'If plan exists: Show 📋 Active plan: {workflow} ({progress}% complete). Use *plan-status for details.'
@@ -170,6 +183,10 @@ commands:
   plan-status: Show current workflow plan progress
   plan-update: Update workflow plan status
   checklist: Execute a checklist (list if name not specified)
+  lang: Show current language settings and available options
+  lang {code}: Switch to specified language (e.g., *lang es, *lang pt)
+  lang auto: Enable automatic language detection
+  lang reset: Reset to default language from configuration
   yolo: Toggle skip confirmations mode
   party-mode: Group chat with all agents
   doc-out: Output full document
@@ -254,6 +271,7 @@ dependencies:
   utils:
     - plan-management.md
     - workflow-management.md
+    - language-manager.md
 ```
 ==================== END: .bmad-2d-phaser-game-dev/agents/ai-squad-orchestrator.md ====================
 
@@ -478,7 +496,7 @@ If user selects Option 1, present numbered list of techniques from the brainstor
 1. Apply selected technique according to data file description
 2. Keep engaging with technique until user indicates they want to:
    - Choose a different technique
-   - Apply current ideas to a new technique  
+   - Apply current ideas to a new technique
    - Move to convergent phase
    - End session
 
@@ -1084,7 +1102,7 @@ Generate comprehensive documentation for existing projects optimized for AI deve
 
 [[LLM: First, check if a PRD or requirements document exists in context. If yes, use it to focus your documentation efforts on relevant areas only.
 
-**IF PRD EXISTS**: 
+**IF PRD EXISTS**:
 
 - Review the PRD to understand what enhancement/feature is planned
 - Identify which modules, services, or areas will be affected
@@ -1101,6 +1119,7 @@ Ask the user:
 2. **Provide existing requirements** - Do you have a requirements document, epic, or feature description you can share?
 
 3. **Describe the focus** - Can you briefly describe what enhancement or feature you're planning? For example:
+
    - 'Adding payment processing to the user service'
    - 'Refactoring the authentication module'
    - 'Integrating with a new third-party API'
@@ -1137,6 +1156,7 @@ Ask the user these elicitation questions to better understand their needs:
 [[LLM: Before generating documentation, conduct extensive analysis of the existing codebase:
 
 1. **Explore Key Areas**:
+
    - Entry points (main files, index files, app initializers)
    - Configuration files and environment setup
    - Package dependencies and versions
@@ -1144,6 +1164,7 @@ Ask the user these elicitation questions to better understand their needs:
    - Test suites and coverage
 
 2. **Ask Clarifying Questions**:
+
    - "I see you're using [technology X]. Are there any custom patterns or conventions I should document?"
    - "What are the most critical/complex parts of this system that developers struggle with?"
    - "Are there any undocumented 'tribal knowledge' areas I should capture?"
@@ -1164,6 +1185,7 @@ Ask the user these elicitation questions to better understand their needs:
 [[LLM: Generate a comprehensive BROWNFIELD architecture document that reflects the ACTUAL state of the codebase.
 
 **CRITICAL**: This is NOT an aspirational architecture document. Document what EXISTS, including:
+
 - Technical debt and workarounds
 - Inconsistent patterns between different parts
 - Legacy code that can't be changed
@@ -1175,20 +1197,24 @@ Ask the user these elicitation questions to better understand their needs:
 # [Project Name] Brownfield Architecture Document
 
 ## Introduction
+
 This document captures the CURRENT STATE of the [Project Name] codebase, including technical debt, workarounds, and real-world patterns. It serves as a reference for AI agents working on enhancements.
 
 ### Document Scope
+
 [If PRD provided: "Focused on areas relevant to: {enhancement description}"]
 [If no PRD: "Comprehensive documentation of entire system"]
 
 ### Change Log
-| Date | Version | Description | Author |
-|------|---------|-------------|--------|
-| [Date] | 1.0 | Initial brownfield analysis | [Analyst] |
+
+| Date   | Version | Description                 | Author    |
+| ------ | ------- | --------------------------- | --------- |
+| [Date] | 1.0     | Initial brownfield analysis | [Analyst] |
 
 ## Quick Reference - Key Files and Entry Points
 
 ### Critical Files for Understanding the System
+
 - **Main Entry**: `src/index.js` (or actual entry point)
 - **Configuration**: `config/app.config.js`, `.env.example`
 - **Core Business Logic**: `src/services/`, `src/domain/`
@@ -1197,22 +1223,26 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 - **Key Algorithms**: [List specific files with complex logic]
 
 ### If PRD Provided - Enhancement Impact Areas
+
 [Highlight which files/modules will be affected by the planned enhancement]
 
 ## High Level Architecture
 
 ### Technical Summary
+
 [Real assessment of architecture - mention if it's well-structured or has issues]
 
 ### Actual Tech Stack (from package.json/requirements.txt)
-| Category | Technology | Version | Notes |
-|----------|------------|---------|--------|
-| Runtime | Node.js | 16.x | [Any constraints] |
-| Framework | Express | 4.18.2 | [Custom middleware?] |
-| Database | PostgreSQL | 13 | [Connection pooling setup] |
-| [etc...] |
+
+| Category  | Technology | Version | Notes                      |
+| --------- | ---------- | ------- | -------------------------- |
+| Runtime   | Node.js    | 16.x    | [Any constraints]          |
+| Framework | Express    | 4.18.2  | [Custom middleware?]       |
+| Database  | PostgreSQL | 13      | [Connection pooling setup] |
+| [etc...]  |
 
 ### Repository Structure Reality Check
+
 - Type: [Monorepo/Polyrepo/Hybrid]
 - Package Manager: [npm/yarn/pnpm]
 - Notable: [Any unusual structure decisions]
@@ -1220,6 +1250,7 @@ This document captures the CURRENT STATE of the [Project Name] codebase, includi
 ## Source Tree and Module Organization
 
 ### Project Structure (Actual)
+
 ```
 project-root/
 ├── src/
@@ -1234,6 +1265,7 @@ project-root/
 ```
 
 ### Key Modules and Their Purpose
+
 - **User Management**: `src/services/userService.js` - Handles all user operations
 - **Authentication**: `src/middleware/auth.js` - JWT-based, custom implementation
 - **Payment Processing**: `src/legacy/payment.js` - CRITICAL: Do not refactor, tightly coupled
@@ -1242,12 +1274,15 @@ project-root/
 ## Data Models and APIs
 
 ### Data Models
+
 Instead of duplicating, reference actual model files:
+
 - **User Model**: See `src/models/User.js`
 - **Order Model**: See `src/models/Order.js`
 - **Related Types**: TypeScript definitions in `src/types/`
 
 ### API Specifications
+
 - **OpenAPI Spec**: `docs/api/openapi.yaml` (if exists)
 - **Postman Collection**: `docs/api/postman-collection.json`
 - **Manual Endpoints**: [List any undocumented endpoints discovered]
@@ -1255,12 +1290,14 @@ Instead of duplicating, reference actual model files:
 ## Technical Debt and Known Issues
 
 ### Critical Technical Debt
+
 1. **Payment Service**: Legacy code in `src/legacy/payment.js` - tightly coupled, no tests
 2. **User Service**: Different pattern than other services, uses callbacks instead of promises
 3. **Database Migrations**: Manually tracked, no proper migration tool
 4. **[Other significant debt]**
 
 ### Workarounds and Gotchas
+
 - **Environment Variables**: Must set `NODE_ENV=production` even for staging (historical reason)
 - **Database Connections**: Connection pool hardcoded to 10, changing breaks payment service
 - **[Other workarounds developers need to know]**
@@ -1268,13 +1305,15 @@ Instead of duplicating, reference actual model files:
 ## Integration Points and External Dependencies
 
 ### External Services
-| Service | Purpose | Integration Type | Key Files |
-|---------|---------|------------------|-----------|
-| Stripe | Payments | REST API | `src/integrations/stripe/` |
-| SendGrid | Emails | SDK | `src/services/emailService.js` |
+
+| Service  | Purpose  | Integration Type | Key Files                      |
+| -------- | -------- | ---------------- | ------------------------------ |
+| Stripe   | Payments | REST API         | `src/integrations/stripe/`     |
+| SendGrid | Emails   | SDK              | `src/services/emailService.js` |
 | [etc...] |
 
 ### Internal Integration Points
+
 - **Frontend Communication**: REST API on port 3000, expects specific headers
 - **Background Jobs**: Redis queue, see `src/workers/`
 - **[Other integrations]**
@@ -1282,11 +1321,13 @@ Instead of duplicating, reference actual model files:
 ## Development and Deployment
 
 ### Local Development Setup
+
 1. Actual steps that work (not ideal steps)
 2. Known issues with setup
 3. Required environment variables (see `.env.example`)
 
 ### Build and Deployment Process
+
 - **Build Command**: `npm run build` (webpack config in `webpack.config.js`)
 - **Deployment**: Manual deployment via `scripts/deploy.sh`
 - **Environments**: Dev, Staging, Prod (see `config/environments/`)
@@ -1294,12 +1335,14 @@ Instead of duplicating, reference actual model files:
 ## Testing Reality
 
 ### Current Test Coverage
+
 - Unit Tests: 60% coverage (Jest)
 - Integration Tests: Minimal, in `tests/integration/`
 - E2E Tests: None
 - Manual Testing: Primary QA method
 
 ### Running Tests
+
 ```bash
 npm test           # Runs unit tests
 npm run test:integration  # Runs integration tests (requires local DB)
@@ -1308,18 +1351,22 @@ npm run test:integration  # Runs integration tests (requires local DB)
 ## If Enhancement PRD Provided - Impact Analysis
 
 ### Files That Will Need Modification
+
 Based on the enhancement requirements, these files will be affected:
+
 - `src/services/userService.js` - Add new user fields
 - `src/models/User.js` - Update schema
 - `src/routes/userRoutes.js` - New endpoints
 - [etc...]
 
 ### New Files/Modules Needed
+
 - `src/services/newFeatureService.js` - New business logic
 - `src/models/NewFeature.js` - New data model
 - [etc...]
 
 ### Integration Considerations
+
 - Will need to integrate with existing auth middleware
 - Must follow existing response format in `src/utils/responseFormatter.js`
 - [Other integration points]
@@ -1327,6 +1374,7 @@ Based on the enhancement requirements, these files will be affected:
 ## Appendix - Useful Commands and Scripts
 
 ### Frequently Used Commands
+
 ```bash
 npm run dev         # Start development server
 npm run build       # Production build
@@ -1335,6 +1383,7 @@ npm run seed        # Seed test data
 ```
 
 ### Debugging and Troubleshooting
+
 - **Logs**: Check `logs/app.log` for application logs
 - **Debug Mode**: Set `DEBUG=app:*` for verbose logging
 - **Common Issues**: See `docs/troubleshooting.md`]]
@@ -1344,6 +1393,7 @@ npm run seed        # Seed test data
 [[LLM: After generating the complete architecture document:
 
 1. **In Web UI (Gemini, ChatGPT, Claude)**:
+
    - Present the entire document in one response (or multiple if too long)
    - Tell user to copy and save as `docs/brownfield-architecture.md` or `docs/project-architecture.md`
    - Mention it can be sharded later in IDE if needed
@@ -1354,6 +1404,7 @@ npm run seed        # Seed test data
    - Can be sharded later using PO agent if desired
 
 The document should be comprehensive enough that future agents can understand:
+
 - The actual state of the system (not idealized)
 - Where to find key files and logic
 - What technical debt exists
@@ -2440,8 +2491,54 @@ npx ai-squad install
 - `.ai-squad-core/` folder created with all agents
 - IDE-specific integration files created
 - All agent commands/rules/modes available
+- Language preferences configured in `core-config.yaml`
 
 **Remember**: At its core, AI-SQUAD is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use AI-SQUAD - the framework provides the structured prompts and workflows that make AI development effective
+
+## Language Configuration
+
+AI-SQUAD supports multilingual Human-in-the-Loop (HITL) interactions. During installation, you can select your preferred language, and agents will adapt their communication style accordingly.
+
+### Supported Languages
+
+- **English** (en) - Default
+- **Spanish** (es) - Español
+- **Portuguese** (pt) - Português
+- **French** (fr) - Français
+- **German** (de) - Deutsch
+- **Italian** (it) - Italiano
+- **Chinese Simplified** (zh-cn) - 简体中文
+- **Japanese** (ja) - 日本語
+- **Korean** (ko) - 한국어
+- **Russian** (ru) - Русский
+- **Arabic** (ar) - العربية
+
+### Language Configuration
+
+Language settings are stored in `ai-squad-core/core-config.yaml`:
+
+```yaml
+language:
+  default: en                    # Your preferred language
+  hitlMode: adaptive            # adaptive, strict, or bilingual
+  fallbackToEnglish: true       # Fallback for technical terms
+  supportedLanguages: [...]     # List of available languages
+```
+
+### Language Commands
+
+All agents support language commands:
+
+- `*lang` - Show current language and available options
+- `*lang [code]` - Switch to specified language (e.g., `*lang es`)
+- `*lang auto` - Enable automatic language detection
+- `*lang reset` - Reset to default language
+
+### Language Modes
+
+- **Adaptive**: Detects user language and adapts responses
+- **Strict**: Uses only the configured default language
+- **Bilingual**: Provides responses in both languages
 
 ### Environment Selection Guide
 
@@ -2617,8 +2714,8 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 ### Meta Agents
 
-| Agent               | Role             | Primary Functions                     | When to Use                       |
-| ------------------- | ---------------- | ------------------------------------- | --------------------------------- |
+| Agent                   | Role             | Primary Functions                     | When to Use                       |
+| ----------------------- | ---------------- | ------------------------------------- | --------------------------------- |
 | `ai-squad-orchestrator` | Team Coordinator | Multi-agent workflows, role switching | Complex multi-role tasks          |
 | `ai-squad-master`       | Universal Expert | All capabilities without switching    | Single-session comprehensive work |
 
@@ -2809,6 +2906,7 @@ that can handle [specific requirements]."
 **Prerequisites**: Planning documents must exist in `docs/` folder
 
 1. **Document Sharding** (CRITICAL STEP):
+
    - Documents created by PM/Architect (in Web or IDE) MUST be sharded for development
    - Two methods to shard:
      a) **Manual**: Drag `shard-doc` task + document file into chat
@@ -2831,17 +2929,20 @@ Resulting Folder Structure:
 1. **Development Cycle** (Sequential, one story at a time):
 
    **CRITICAL CONTEXT MANAGEMENT**:
+
    - **Context windows matter!** Always use fresh, clean context windows
    - **Model selection matters!** Use most powerful thinking model for SM story creation
    - **ALWAYS start new chat between SM, Dev, and QA work**
 
    **Step 1 - Story Creation**:
+
    - **NEW CLEAN CHAT** → Select powerful model → `@sm` → `*create`
    - SM executes create-next-story task
    - Review generated story in `docs/stories/`
    - Update status from "Draft" to "Approved"
 
    **Step 2 - Story Implementation**:
+
    - **NEW CLEAN CHAT** → `@dev`
    - Agent asks which story to implement
    - Include story file content to save dev agent lookup time
@@ -2850,6 +2951,7 @@ Resulting Folder Structure:
    - Dev marks story as "Review" when complete with all tests passing
 
    **Step 3 - Senior QA Review**:
+
    - **NEW CLEAN CHAT** → `@qa` → execute review-story task
    - QA performs senior developer code review
    - QA can refactor and improve code directly
@@ -2874,7 +2976,7 @@ Each status change requires user verification and approval before proceeding.
 #### Greenfield Development
 
 - Business analysis and market research
-- Product requirements and feature definition  
+- Product requirements and feature definition
 - System architecture and design
 - Development execution
 - Testing and deployment
@@ -2901,9 +3003,11 @@ Each status change requires user verification and approval before proceeding.
 1. **Upload project to Gemini Web**
 2. **Document everything**: `@analyst` → `*document-project`
 3. **Then create PRD**: `@pm` → `*create-doc brownfield-prd`
+
    - More thorough but can create excessive documentation
 
 4. **Requirements Gathering**:
+
    - **Brownfield PRD**: Use PM agent with `brownfield-prd-tmpl`
    - **Analyzes**: Existing system, constraints, integration points
    - **Defines**: Enhancement scope, compatibility requirements, risk assessment
@@ -2983,8 +3087,11 @@ Templates with Level 2 headings (`##`) can be automatically sharded:
 
 ```markdown
 ## Goals and Background Context
-## Requirements  
+
+## Requirements
+
 ## User Interface Design Goals
+
 ## Success Metrics
 ```
 
@@ -3190,10 +3297,12 @@ Guide users through workflow selection and create a detailed plan document that 
 Ask the user:
 
 1. **Project Type**:
+
    - Are you starting a new project (greenfield) or enhancing an existing one (brownfield)?
    - What type of application? (web app, service/API, UI only, full-stack)
 
 2. **For Greenfield**:
+
    - Do you need a quick prototype or production-ready application?
    - Will this have a UI component?
    - Single service or multiple services?
@@ -3274,6 +3383,7 @@ version: 1.0
 ### Planning Phase
 
 - [ ] Step 1: {{step name}} <!-- step-id: 1.1, agent: {{agent}}, task: {{task}} -->
+
   - **Agent**: {{agent name}}
   - **Action**: {{what happens}}
   - **Output**: {{what's created}}
@@ -3290,9 +3400,11 @@ version: 1.0
 ### Development Phase (IDE)
 
 - [ ] Document Sharding <!-- step-id: 2.1, agent: po, task: shard-doc -->
+
   - Prepare documents for story creation
 
 - [ ] Story Development Cycle <!-- step-id: 2.2, repeats: true -->
+
   - [ ] Create story (SM agent) <!-- step-id: 2.2.1, agent: sm, task: create-next-story -->
   - [ ] Review story (optional) <!-- step-id: 2.2.2, agent: analyst, optional: true -->
   - [ ] Implement story (Dev agent) <!-- step-id: 2.2.3, agent: dev -->
@@ -3314,11 +3426,13 @@ version: 1.0
 ## Expected Outputs
 
 ### Planning Documents
+
 - [ ] {{document 1}} - {{description}}
 - [ ] {{document 2}} - {{description}}
-{{etc...}}
+      {{etc...}}
 
 ### Development Artifacts
+
 - [ ] Stories in `docs/stories/`
 - [ ] Implementation code
 - [ ] Tests
@@ -3331,11 +3445,12 @@ Before starting this workflow, ensure you have:
 - [ ] {{prerequisite 1}}
 - [ ] {{prerequisite 2}}
 - [ ] {{prerequisite 3}}
-{{etc...}}
+      {{etc...}}
 
 ## Customization Options
 
 Based on your project needs, you may:
+
 - Skip {{optional step}} if {{condition}}
 - Add {{additional step}} if {{condition}}
 - Choose {{alternative}} instead of {{default}}
@@ -3343,6 +3458,7 @@ Based on your project needs, you may:
 ## Risk Considerations
 
 {{For brownfield only}}
+
 - Integration complexity: {{assessment}}
 - Rollback strategy: {{approach}}
 - Testing requirements: {{special needs}}
@@ -3359,7 +3475,8 @@ Based on your project needs, you may:
 {{Any additional context or warnings}}
 
 ---
-*This plan can be updated as you progress through the workflow. Check off completed items to track progress.*
+
+_This plan can be updated as you progress through the workflow. Check off completed items to track progress._
 ```
 
 ### 5. Save and Present Plan
@@ -3470,18 +3587,21 @@ BMad Orchestrator: "I've created a workflow plan at docs/workflow-plan.md. This 
 # KB Mode Interaction Task
 
 ## Purpose
+
 Provide a user-friendly interface to the BMad knowledge base without overwhelming users with information upfront.
 
 ## Instructions
 
-When entering KB mode (*kb-mode), follow these steps:
+When entering KB mode (\*kb-mode), follow these steps:
 
 ### 1. Welcome and Guide
+
 Announce entering KB mode with a brief, friendly introduction:
 
 "I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method."
 
 ### 2. Present Topic Areas
+
 Offer a concise list of main topic areas the user might want to explore:
 
 **What would you like to know more about?**
@@ -3498,26 +3618,30 @@ Offer a concise list of main topic areas the user might want to explore:
 Or ask me about anything else related to BMad-Method!
 
 ### 3. Respond Contextually
+
 - Wait for user's specific question or topic selection
 - Provide focused, relevant information from the knowledge base
 - Offer to dive deeper or explore related topics
 - Keep responses concise unless user asks for detailed explanations
 
 ### 4. Interactive Exploration
+
 - After answering, suggest related topics they might find helpful
 - Maintain conversational flow rather than data dumping
 - Use examples when appropriate
 - Reference specific documentation sections when relevant
 
 ### 5. Exit Gracefully
+
 When user is done or wants to exit KB mode:
+
 - Summarize key points discussed if helpful
-- Remind them they can return to KB mode anytime with *kb-mode
+- Remind them they can return to KB mode anytime with \*kb-mode
 - Suggest next steps based on what was discussed
 
 ## Example Interaction
 
-**User**: *kb-mode
+**User**: \*kb-mode
 
 **Assistant**: I've entered KB mode and have access to the full BMad knowledge base. I can help you with detailed information about any aspect of BMad-Method.
 
@@ -3739,15 +3863,18 @@ Progress: {X}% complete ({completed}/{total} steps)
 Last Updated: {timestamp}
 
 ✅ Completed Steps:
+
 - [x] Step 1.1: {description} (completed: {date})
 - [x] Step 1.2: {description} (completed: {date})
 
 🔄 Current Step:
+
 - [ ] Step 2.1: {description} <!-- current-step -->
-  Agent: {agent_name}
-  Task: {task_name}
+      Agent: {agent_name}
+      Task: {task_name}
 
 📌 Upcoming Steps:
+
 - [ ] Step 2.2: {description}
 - [ ] Step 3.1: {description}
 
@@ -3755,6 +3882,7 @@ Last Updated: {timestamp}
 {any_deviation_notes}
 
 📊 Decision Points:
+
 - Decision 1: {status} - {choice_made}
 - Decision 2: Pending
 
@@ -3796,16 +3924,19 @@ The update is successful when:
 ## Core Reflective Methods
 
 **Expand or Contract for Audience**
+
 - Ask whether to 'expand' (add detail, elaborate) or 'contract' (simplify, clarify)
 - Identify specific target audience if relevant
 - Tailor content complexity and depth accordingly
 
 **Explain Reasoning (CoT Step-by-Step)**
+
 - Walk through the step-by-step thinking process
 - Reveal underlying assumptions and decision points
 - Show how conclusions were reached from current role's perspective
 
 **Critique and Refine**
+
 - Review output for flaws, inconsistencies, or improvement areas
 - Identify specific weaknesses from role's expertise
 - Suggest refined version reflecting domain knowledge
@@ -3813,12 +3944,14 @@ The update is successful when:
 ## Structural Analysis Methods
 
 **Analyze Logical Flow and Dependencies**
+
 - Examine content structure for logical progression
 - Check internal consistency and coherence
 - Identify and validate dependencies between elements
 - Confirm effective ordering and sequencing
 
 **Assess Alignment with Overall Goals**
+
 - Evaluate content contribution to stated objectives
 - Identify any misalignments or gaps
 - Interpret alignment from specific role's perspective
@@ -3827,12 +3960,14 @@ The update is successful when:
 ## Risk and Challenge Methods
 
 **Identify Potential Risks and Unforeseen Issues**
+
 - Brainstorm potential risks from role's expertise
 - Identify overlooked edge cases or scenarios
 - Anticipate unintended consequences
 - Highlight implementation challenges
 
 **Challenge from Critical Perspective**
+
 - Adopt critical stance on current content
 - Play devil's advocate from specified viewpoint
 - Argue against proposal highlighting weaknesses
@@ -3841,12 +3976,14 @@ The update is successful when:
 ## Creative Exploration Methods
 
 **Tree of Thoughts Deep Dive**
+
 - Break problem into discrete "thoughts" or intermediate steps
 - Explore multiple reasoning paths simultaneously
 - Use self-evaluation to classify each path as "sure", "likely", or "impossible"
 - Apply search algorithms (BFS/DFS) to find optimal solution paths
 
 **Hindsight is 20/20: The 'If Only...' Reflection**
+
 - Imagine retrospective scenario based on current content
 - Identify the one "if only we had known/done X..." insight
 - Describe imagined consequences humorously or dramatically
@@ -3855,6 +3992,7 @@ The update is successful when:
 ## Multi-Persona Collaboration Methods
 
 **Agile Team Perspective Shift**
+
 - Rotate through different Scrum team member viewpoints
 - Product Owner: Focus on user value and business impact
 - Scrum Master: Examine process flow and team dynamics
@@ -3862,12 +4000,14 @@ The update is successful when:
 - QA: Identify testing scenarios and quality concerns
 
 **Stakeholder Round Table**
+
 - Convene virtual meeting with multiple personas
 - Each persona contributes unique perspective on content
 - Identify conflicts and synergies between viewpoints
 - Synthesize insights into actionable recommendations
 
 **Meta-Prompting Analysis**
+
 - Step back to analyze the structure and logic of current approach
 - Question the format and methodology being used
 - Suggest alternative frameworks or mental models
@@ -3876,24 +4016,28 @@ The update is successful when:
 ## Advanced 2025 Techniques
 
 **Self-Consistency Validation**
+
 - Generate multiple reasoning paths for same problem
 - Compare consistency across different approaches
 - Identify most reliable and robust solution
 - Highlight areas where approaches diverge and why
 
 **ReWOO (Reasoning Without Observation)**
+
 - Separate parametric reasoning from tool-based actions
 - Create reasoning plan without external dependencies
 - Identify what can be solved through pure reasoning
 - Optimize for efficiency and reduced token usage
 
 **Persona-Pattern Hybrid**
+
 - Combine specific role expertise with elicitation pattern
 - Architect + Risk Analysis: Deep technical risk assessment
 - UX Expert + User Journey: End-to-end experience critique
 - PM + Stakeholder Analysis: Multi-perspective impact review
 
 **Emergent Collaboration Discovery**
+
 - Allow multiple perspectives to naturally emerge
 - Identify unexpected insights from persona interactions
 - Explore novel combinations of viewpoints
@@ -3902,18 +4046,21 @@ The update is successful when:
 ## Game-Based Elicitation Methods
 
 **Red Team vs Blue Team**
+
 - Red Team: Attack the proposal, find vulnerabilities
 - Blue Team: Defend and strengthen the approach
 - Competitive analysis reveals blind spots
 - Results in more robust, battle-tested solutions
 
 **Innovation Tournament**
+
 - Pit multiple alternative approaches against each other
 - Score each approach across different criteria
 - Crowd-source evaluation from different personas
 - Identify winning combination of features
 
 **Escape Room Challenge**
+
 - Present content as constraints to work within
 - Find creative solutions within tight limitations
 - Identify minimum viable approach
@@ -3922,6 +4069,7 @@ The update is successful when:
 ## Process Control
 
 **Proceed / No Further Actions**
+
 - Acknowledge choice to finalize current work
 - Accept output as-is or move to next step
 - Prepare to continue without additional elicitation
@@ -3950,11 +4098,13 @@ Check for workflow plan:
 **Plan Parsing Logic:**
 
 1. **Identify Step Structure**:
+
    - Look for checkbox lines: `- [ ]` or `- [x]`
    - Extract step IDs from comments: `<!-- step-id: X.Y -->`
    - Identify agent assignments: `<!-- agent: pm -->`
 
 2. **Determine Current State**:
+
    - Last completed step (highest numbered `[x]`)
    - Next expected step (first `[ ]` after completed steps)
    - Overall progress percentage
@@ -3971,6 +4121,7 @@ Check for workflow plan:
 **Validation Rules:**
 
 1. **Strict Mode** (enforceSequence: true):
+
    - Must complete steps in exact order
    - Warn and block if out of sequence
    - Require explicit override justification
@@ -3983,7 +4134,7 @@ Check for workflow plan:
 **Warning Templates:**
 
 ```text
-SEQUENCE WARNING: 
+SEQUENCE WARNING:
 The workflow plan shows you should complete "{expected_step}" next.
 You're attempting to: "{requested_action}"
 
@@ -3998,11 +4149,13 @@ In flexible mode: Allow with confirmation
 **Update Actions:**
 
 1. **Mark Step Complete**:
+
    - Change `- [ ]` to `- [x]`
    - Add completion timestamp comment
    - Update any status metadata
 
 2. **Add Deviation Note**:
+
    - Insert note explaining why sequence changed
    - Reference the deviation in plan
 
@@ -4072,11 +4225,11 @@ When encountering a decision point in the plan:
 
 1. **Identify Decision Marker**: `<!-- decision: {decision_id} -->`
 2. **Check Decision Status**: Made/Pending
-3. **If Pending**: 
+3. **If Pending**:
    - Block progress until decision made
    - Show options to user
    - Record decision when made
-4. **If Made**: 
+4. **If Made**:
    - Verify current path aligns with decision
    - Warn if attempting alternate path
 
@@ -4114,7 +4267,7 @@ Use *agent pm to switch, or *plan-status to see full progress.
 User: *task create-next-story
 
 [Plan check triggered]
-⚠️ SEQUENCE WARNING: 
+⚠️ SEQUENCE WARNING:
 Your workflow plan indicates the PRD hasn't been created yet.
 Creating stories before the PRD may lead to incomplete requirements.
 
@@ -4220,6 +4373,264 @@ Handle conditional paths by asking clarifying questions when needed.
 
 Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
 ==================== END: .bmad-2d-phaser-game-dev/utils/workflow-management.md ====================
+
+==================== START: .bmad-2d-phaser-game-dev/utils/language-manager.md ====================
+# Language Manager Utility
+
+## Purpose
+
+This utility provides language management functionality for AI-SQUAD agents to support Human-in-the-Loop (HITL) interactions in multiple languages.
+
+## Configuration
+
+Language settings are defined in `core-config.yaml` under the `language` section:
+
+```yaml
+language:
+  default: en                    # Default language code
+  hitlMode: adaptive            # adaptive, strict, or bilingual
+  fallbackToEnglish: true       # Whether to fall back to English if target language fails
+  supportedLanguages:           # List of supported language codes
+    - en  # English
+    - es  # Spanish
+    - pt  # Portuguese
+    - fr  # French
+    - de  # German
+    - it  # Italian
+    - zh-cn  # Chinese Simplified
+    - ja  # Japanese
+    - ko  # Korean
+    - ru  # Russian
+    - ar  # Arabic
+```
+
+## Language Modes
+
+### Adaptive Mode (Recommended)
+- Detects user's language from input
+- Responds in the same language when possible
+- Falls back to English for complex technical terms
+- Best for mixed-language environments
+
+### Strict Mode
+- Uses only the configured default language
+- Maintains consistency across all interactions
+- Best for team environments with shared language
+
+### Bilingual Mode
+- Provides responses in both default language and English
+- Useful for learning environments
+- Ensures accessibility while supporting localization
+
+## Language Codes
+
+| Code   | Language             | Native Name    |
+|--------|----------------------|----------------|
+| en     | English              | English        |
+| es     | Spanish              | Español        |
+| pt     | Portuguese           | Português      |
+| fr     | French               | Français       |
+| de     | German               | Deutsch        |
+| it     | Italian              | Italiano       |
+| zh-cn  | Chinese Simplified   | 简体中文       |
+| ja     | Japanese             | 日本語         |
+| ko     | Korean               | 한국어         |
+| ru     | Russian              | Русский        |
+| ar     | Arabic               | العربية        |
+
+## Agent Integration
+
+Agents should include language directives in their YAML configuration:
+
+```yaml
+language-directives:
+  - "Respond in the user's preferred language when possible"
+  - "Use technical terms in English with local language explanations"
+  - "For code comments and documentation, follow language preferences"
+  - "If uncertain about language, ask the user for clarification"
+  - "Maintain professional tone regardless of language"
+```
+
+## Usage Instructions
+
+### For Agent Developers
+
+1. **Check Language Configuration**: Always reference the language settings from core-config.yaml
+2. **Detect User Language**: Analyze user input to determine preferred language
+3. **Adapt Response Style**: Adjust communication style based on language and culture
+4. **Provide Fallbacks**: Always have English fallbacks for technical terms
+5. **Be Culturally Aware**: Consider cultural context in communication style
+
+### For Users
+
+1. **Set Default Language**: Configure your preferred language in core-config.yaml
+2. **Use Language Commands**: Use `*lang [code]` to change language during interaction
+3. **Mixed Language Support**: Feel free to mix languages - agents will adapt
+4. **Technical Terms**: Expect some technical terms to remain in English for clarity
+
+## Language Command Implementation
+
+Agents should support the following language commands:
+
+- `*lang` - Show current language and available options
+- `*lang [code]` - Switch to specified language
+- `*lang auto` - Enable automatic language detection
+- `*lang reset` - Reset to default language from configuration
+
+## Best Practices
+
+### Communication Guidelines
+
+1. **Clarity Over Translation**: Use English for technical terms when necessary
+2. **Cultural Sensitivity**: Adapt communication style to cultural context
+3. **Consistent Terminology**: Maintain consistent technical vocabulary
+4. **Professional Tone**: Keep professional tone regardless of language
+5. **Error Handling**: Gracefully handle language-related errors
+
+### Technical Implementation
+
+1. **Lazy Loading**: Load language resources only when needed
+2. **Graceful Degradation**: Fall back to English if translation fails
+3. **Context Preservation**: Maintain context when switching languages
+4. **Performance**: Cache common translations for better performance
+5. **Accessibility**: Ensure language features don't hinder accessibility
+
+## Localization Notes
+
+### Technical Documentation
+- Code examples remain in English
+- Comments can be localized
+- Variable names stay in English
+- Error messages should be localized
+
+### User Interface Elements
+- Button labels and menus should be localized
+- Help text should be in user's language
+- Status messages should be localized
+- Progress indicators should use local formats
+
+### Cultural Considerations
+- Date/time formats vary by locale
+- Number formats differ between cultures
+- Address formats are region-specific
+- Color meanings vary across cultures
+
+## Agent Name Localization
+
+### Overview
+
+AI-SQUAD supports localized agent names to provide culturally appropriate interactions. Each agent has a set of names in different languages that maintain cultural sensitivity while preserving the agent's professional identity.
+
+### Agent Name Mapping
+
+Agent names are configured in `core-config.yaml` under `language.agentNames`:
+
+```yaml
+language:
+  agentNames:
+    analyst:
+      en: Mary        # English
+      es: María       # Spanish  
+      pt: Maria       # Portuguese
+      fr: Marie       # French
+      de: Maria       # German
+      it: Maria       # Italian
+      zh-cn: 美丽     # Chinese Simplified
+      ja: 美里        # Japanese
+      ko: 마리아      # Korean
+      ru: Мария       # Russian
+      ar: مريم        # Arabic
+    # ... other agents
+```
+
+### Name Resolution Logic
+
+Agents should resolve their localized names using this priority order:
+
+1. **Language-specific name**: Use the name from `agentNames.[agent-id].[language-code]`
+2. **English fallback**: If language-specific name not found, use English name
+3. **Default fallback**: If neither found, use the original `agent.name` field
+
+### Implementation Pattern
+
+```yaml
+language-directives:
+  - "Load your localized name from core-config.yaml agentNames.[agent-id] based on current language"
+  - "Introduce yourself using your localized name (e.g., María in Spanish, 美丽 in Chinese)"
+  - "Respect user's language preferences and adapt all interactions accordingly"
+  - "Use English for technical terms with explanations in user's language"
+  - "Adapt communication style to be culturally appropriate while maintaining professionalism"
+```
+
+### Localized Agent Names by Role
+
+| Agent ID | Role | English | Spanish | Portuguese | French | German | Italian | Chinese | Japanese | Korean | Russian | Arabic |
+|----------|------|---------|---------|------------|--------|--------|---------|---------|----------|--------|---------|--------|
+| analyst | Business Analyst | Mary | María | Maria | Marie | Maria | Maria | 美丽 | 美里 | 마리아 | Мария | مريم |
+| architect | System Architect | Winston | Víctor | Victor | Victor | Viktor | Vittorio | 伟强 | 勝 | 승현 | Виктор | وليد |
+| dev | Developer | James | Diego | João | Antoine | Stefan | Marco | 建华 | 拓海 | 준호 | Дмитрий | أحمد |
+| pm | Product Manager | John | Carlos | Pedro | Pierre | Hans | Giovanni | 志强 | 健太 | 민수 | Иван | كريم |
+| po | Product Owner | Sarah | Ana | Ana | Sophie | Anna | Anna | 安娜 | 恵美 | 수연 | Анна | سارة |
+| qa | QA Engineer | Quinn | Alex | Alex | Alex | Alex | Alex | 志杰 | 翔太 | 현우 | Алекс | عماد |
+| sm | Scrum Master | Bob | Roberto | Roberto | Robert | Robert | Roberto | 博文 | 博 | 성민 | Роберт | روبرت |
+| ux-expert | UX Designer | Sally | Sofía | Sofia | Camille | Sophie | Sofia | 思雅 | 美咲 | 지은 | София | صوفيا |
+
+**Note**: Meta agents (AI-SQUAD Master, AI-SQUAD Orchestrator) maintain their technical names across all languages.
+
+### Cultural Considerations for Names
+
+#### Name Selection Criteria
+- **Professional Sound**: Names chosen to sound professional in business contexts
+- **Cultural Appropriateness**: Names that are common and well-accepted in each culture
+- **Easy Pronunciation**: Names that are relatively easy for AI agents to use consistently
+- **Gender Considerations**: Balanced representation where culturally appropriate
+
+#### Regional Variations
+- **Chinese Names**: Traditional meanings - 美丽 (Beautiful), 伟强 (Great Strength), 建华 (Build China)
+- **Arabic Names**: Classic names with positive meanings
+- **European Languages**: Common professional names that translate well across cultures
+- **Asian Languages**: Names that sound natural for business interactions
+
+### Greeting Templates
+
+Agents should adapt their greetings based on their localized names:
+
+**English**: "Hello! I'm Mary, your Business Analyst."
+**Spanish**: "¡Hola! Soy María, tu Analista de Negocios."
+**Portuguese**: "Olá! Sou Maria, sua Analista de Negócios."
+**French**: "Bonjour! Je suis Marie, votre Analyste Métier."
+**German**: "Hallo! Ich bin Maria, Ihre Geschäftsanalystin."
+**Chinese**: "你好！我是美丽，您的业务分析师。"
+**Japanese**: "こんにちは！美里です、ビジネスアナリストです。"
+
+### Implementation Example
+
+```yaml
+# In agent YAML header
+language-settings:
+  respectUserLanguage: true
+  technicalTermsInEnglish: true
+  fallbackLanguage: en
+  cultureAware: true
+  useLocalizedName: true
+
+startup-instructions:
+  - Check core-config.yaml for language preferences
+  - Load localized name based on user's language
+  - Detect user language from initial input
+  - Set communication language accordingly
+  - Introduce yourself with your localized name
+  - Inform user of language capabilities if asked
+```
+
+## Future Enhancements
+
+1. **Machine Translation Integration**: Support for additional languages via translation APIs
+2. **Voice Language Detection**: Support for voice-based language detection
+3. **Regional Variants**: Support for regional language variants (en-US, en-GB, etc.)
+4. **Custom Terminology**: User-defined technical term translations
+5. **Team Language Profiles**: Shared language settings for team collaboration
+==================== END: .bmad-2d-phaser-game-dev/utils/language-manager.md ====================
 
 ==================== START: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 # Checklist Validation Task

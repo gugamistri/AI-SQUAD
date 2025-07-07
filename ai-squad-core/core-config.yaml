@@ -1,5 +1,118 @@
 version: 4.27.0
 markdownExploder: true
+language:
+  default: en
+  hitlMode: adaptive
+  fallbackToEnglish: true
+  supportedLanguages:
+    - en  # English
+    - es  # Spanish
+    - pt  # Portuguese
+    - fr  # French
+    - de  # German
+    - it  # Italian
+    - zh-cn  # Chinese Simplified
+    - ja  # Japanese
+    - ko  # Korean
+    - ru  # Russian
+    - ar  # Arabic
+  agentNames:
+    analyst:
+      en: Mary
+      es: María
+      pt: Maria
+      fr: Marie
+      de: Maria
+      it: Maria
+      zh-cn: 美丽
+      ja: 美里
+      ko: 마리아
+      ru: Мария
+      ar: مريم
+    architect:
+      en: Winston
+      es: Víctor
+      pt: Victor
+      fr: Victor
+      de: Viktor
+      it: Vittorio
+      zh-cn: 伟强
+      ja: 勝
+      ko: 승현
+      ru: Виктор
+      ar: وليد
+    dev:
+      en: James
+      es: Diego
+      pt: João
+      fr: Antoine
+      de: Stefan
+      it: Marco
+      zh-cn: 建华
+      ja: 拓海
+      ko: 준호
+      ru: Дмитрий
+      ar: أحمد
+    pm:
+      en: John
+      es: Carlos
+      pt: Pedro
+      fr: Pierre
+      de: Hans
+      it: Giovanni
+      zh-cn: 志强
+      ja: 健太
+      ko: 민수
+      ru: Иван
+      ar: كريم
+    po:
+      en: Sarah
+      es: Ana
+      pt: Ana
+      fr: Sophie
+      de: Anna
+      it: Anna
+      zh-cn: 安娜
+      ja: 恵美
+      ko: 수연
+      ru: Анна
+      ar: سارة
+    qa:
+      en: Quinn
+      es: Alex
+      pt: Alex
+      fr: Alex
+      de: Alex
+      it: Alex
+      zh-cn: 志杰
+      ja: 翔太
+      ko: 현우
+      ru: Алекс
+      ar: عماد
+    sm:
+      en: Bob
+      es: Roberto
+      pt: Roberto
+      fr: Robert
+      de: Robert
+      it: Roberto
+      zh-cn: 博文
+      ja: 博
+      ko: 성민
+      ru: Роберт
+      ar: روبرت
+    ux-expert:
+      en: Sally
+      es: Sofía
+      pt: Sofia
+      fr: Camille
+      de: Sophie
+      it: Sofia
+      zh-cn: 思雅
+      ja: 美咲
+      ko: 지은
+      ru: София
+      ar: صوفيا
 prd:
   prdFile: docs/prd.md
   prdVersion: v4

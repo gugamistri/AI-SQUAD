@@ -17,11 +17,13 @@ AI-SQUAD builds upon the foundations of the BMad Method (Breakthrough Method of 
 
 ## Overview
 
-**AI-SQUAD's Two Key Innovations (inherited from BMad Method):**
+**AI-SQUAD's Key Innovations (inherited from BMad Method):**
 
 **1. Agentic Planning:** Dedicated agents (Analyst, PM, Architect) collaborate with you to create detailed, consistent PRDs and Architecture documents. Through advanced prompt engineering and human-in-the-loop refinement, these planning agents produce comprehensive specifications that go far beyond generic AI task generation.
 
 **2. Context-Engineered Development:** The Scrum Master agent then transforms these detailed plans into hyper-detailed development stories that contain everything the Dev agent needs - full context, implementation details, and architectural guidance embedded directly in story files.
+
+**3. Multilingual HITL Support:** All agents support 11 languages with adaptive communication styles and **localized agent names**, allowing global teams to interact with AI agents in their preferred language while maintaining technical precision. Agents introduce themselves with culturally appropriate names (e.g., "María" in Spanish, "美丽" in Chinese) for a more natural interaction experience.
 
 This two-phase approach eliminates both **planning inconsistency** and **context loss** - the biggest problems in AI-assisted development. Your Dev agent opens a story file with complete understanding of what to build, how to build it, and why.
 
@@ -107,6 +109,33 @@ This single command handles:
 git clone https://github.com/bmadcode/bmad-method.git
 npm run install:ai-squad # build and install all to a destination folder
 ```
+
+## 🌍 Multilingual Support & Localized Agent Names
+
+AI-SQUAD supports **11 languages** with full localization, including culturally appropriate agent names:
+
+| Language      | Code    | Agent Examples                                                |
+| ------------- | ------- | ------------------------------------------------------------- |
+| 🇺🇸 English    | `en`    | Mary (Analyst), Winston (Architect), James (Developer)        |
+| 🇪🇸 Spanish    | `es`    | María (Analista), Víctor (Arquitecto), Diego (Desarrollador)  |
+| 🇵🇹 Portuguese | `pt`    | Maria (Analista), Victor (Arquiteto), João (Desenvolvedor)    |
+| 🇫🇷 French     | `fr`    | Marie (Analyste), Victor (Architecte), Antoine (Développeur)  |
+| 🇩🇪 German     | `de`    | Maria (Analystin), Viktor (Architekt), Stefan (Entwickler)    |
+| 🇮🇹 Italian    | `it`    | Maria (Analista), Vittorio (Architetto), Marco (Sviluppatore) |
+| 🇨🇳 Chinese    | `zh-cn` | 美丽 (分析师), 伟强 (架构师), 建华 (开发者)                   |
+| 🇯🇵 Japanese   | `ja`    | 美里 (アナリスト), 勝 (アーキテクト), 拓海 (開発者)           |
+| 🇰🇷 Korean     | `ko`    | 마리아 (분석가), 승현 (설계자), 준호 (개발자)                 |
+| 🇷🇺 Russian    | `ru`    | Мария (Аналитик), Виктор (Архитектор), Дмитрий (Разработчик)  |
+| 🇸🇦 Arabic     | `ar`    | مريم (محللة), وليد (مهندس معماري), أحمد (مطور)                |
+
+**Language Features:**
+
+- 🗣️ **Adaptive Communication**: Agents detect and respond in your preferred language
+- 👤 **Localized Names**: Each agent has culturally appropriate names in all languages
+- 🔧 **Technical Precision**: Technical terms remain in English with local explanations
+- 🌐 **Global Teams**: Perfect for international development teams
+
+During installation, simply select your preferred language and agents will introduce themselves with localized names and communicate in your language while maintaining technical accuracy.
 
 ## 🌟 Beyond Software Development - Expansion Packs
 

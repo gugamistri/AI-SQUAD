@@ -31,6 +31,104 @@ class Installer {
     }
   }
 
+  async updateLanguageConfiguration(aiSquadCoreDestDir, languageCode) {
+    const yaml = require("js-yaml");
+    const fs = require("fs-extra");
+    const coreConfigPath = path.join(aiSquadCoreDestDir, "core-config.yaml");
+    
+    try {
+      // Read the current configuration
+      const configContent = await fs.readFile(coreConfigPath, "utf8");
+      const config = yaml.load(configContent);
+      
+      // Update the default language
+      if (config.language) {
+        config.language.default = languageCode;
+      } else {
+        // If language section doesn't exist, create it
+        config.language = {
+          default: languageCode,
+          hitlMode: "adaptive",
+          fallbackToEnglish: true,
+          supportedLanguages: [
+            "en", "es", "pt", "fr", "de", "it", 
+            "zh-cn", "ja", "ko", "ru", "ar"
+          ]
+        };
+      }
+      
+      // Write the updated configuration back
+      const updatedContent = yaml.dump(config, { 
+        indent: 2,
+        lineWidth: -1,
+        noRefs: true 
+      });
+      await fs.writeFile(coreConfigPath, updatedContent, "utf8");
+      
+      // Update agent names if language is not English
+      if (languageCode !== 'en') {
+        await this.updateAgentNames(aiSquadCoreDestDir, languageCode, config);
+      }
+      
+    } catch (error) {
+      console.warn(`Warning: Could not update language configuration: ${error.message}`);
+    }
+  }
+
+  async updateAgentNames(aiSquadCoreDestDir, languageCode, config) {
+    const fs = require("fs-extra");
+    const path = require("path");
+    
+    if (!config.language || !config.language.agentNames) {
+      return; // No agent names mapping available
+    }
+    
+    const agentsDir = path.join(aiSquadCoreDestDir, "agents");
+    const agentNames = config.language.agentNames;
+    
+    try {
+      // Get list of agent files
+      const agentFiles = await fs.readdir(agentsDir);
+      
+      for (const file of agentFiles) {
+        if (!file.endsWith('.md')) continue;
+        
+        const agentId = path.basename(file, '.md');
+        
+        // Skip meta agents (they keep their technical names)
+        if (agentId.includes('ai-squad')) continue;
+        
+        // Check if we have a localized name for this agent
+        if (agentNames[agentId] && agentNames[agentId][languageCode]) {
+          const localizedName = agentNames[agentId][languageCode];
+          await this.updateAgentNameInFile(path.join(agentsDir, file), localizedName);
+        }
+      }
+    } catch (error) {
+      console.warn(`Warning: Could not update agent names: ${error.message}`);
+    }
+  }
+
+  async updateAgentNameInFile(agentFilePath, newName) {
+    const fs = require("fs-extra");
+    
+    try {
+      let content = await fs.readFile(agentFilePath, "utf8");
+      
+      // Update the name field in the YAML header
+      // Look for the pattern: name: [current name]
+      const nameRegex = /(\s+name:\s+)([^\n\r]+)/;
+      const match = content.match(nameRegex);
+      
+      if (match) {
+        content = content.replace(nameRegex, `$1${newName}`);
+        await fs.writeFile(agentFilePath, content, "utf8");
+      }
+    } catch (error) {
+      console.warn(`Warning: Could not update name in ${agentFilePath}: ${error.message}`);
+    }
+  }
+
   async install(config) {
     // Initialize ES modules
     await initializeModules();
@@ -245,6 +343,12 @@ class Installer {
       const sourceDir = configLoader.getAiSquadCorePath();
       const aiSquadCoreDestDir = path.join(installDir, ".ai-squad-core");
       await fileManager.copyDirectory(sourceDir, aiSquadCoreDestDir);
+      
+      // Update language configuration if specified
+      if (config.language && config.language !== 'en') {
+        spinner.text = "Configuring language preferences...";
+        await this.updateLanguageConfiguration(aiSquadCoreDestDir, config.language);
+      }
       
       // Copy common/ items to .ai-squad-core
       spinner.text = "Copying common utilities...";

@@ -112,8 +112,54 @@ npx ai-squad install
 - `.ai-squad-core/` folder created with all agents
 - IDE-specific integration files created
 - All agent commands/rules/modes available
+- Language preferences configured in `core-config.yaml`
 
 **Remember**: At its core, AI-SQUAD is about mastering and harnessing prompt engineering. Any IDE with AI agent support can use AI-SQUAD - the framework provides the structured prompts and workflows that make AI development effective
+
+## Language Configuration
+
+AI-SQUAD supports multilingual Human-in-the-Loop (HITL) interactions. During installation, you can select your preferred language, and agents will adapt their communication style accordingly.
+
+### Supported Languages
+
+- **English** (en) - Default
+- **Spanish** (es) - Español
+- **Portuguese** (pt) - Português
+- **French** (fr) - Français
+- **German** (de) - Deutsch
+- **Italian** (it) - Italiano
+- **Chinese Simplified** (zh-cn) - 简体中文
+- **Japanese** (ja) - 日本語
+- **Korean** (ko) - 한국어
+- **Russian** (ru) - Русский
+- **Arabic** (ar) - العربية
+
+### Language Configuration
+
+Language settings are stored in `ai-squad-core/core-config.yaml`:
+
+```yaml
+language:
+  default: en # Your preferred language
+  hitlMode: adaptive # adaptive, strict, or bilingual
+  fallbackToEnglish: true # Fallback for technical terms
+  supportedLanguages: [...] # List of available languages
+```
+
+### Language Commands
+
+All agents support language commands:
+
+- `*lang` - Show current language and available options
+- `*lang [code]` - Switch to specified language (e.g., `*lang es`)
+- `*lang auto` - Enable automatic language detection
+- `*lang reset` - Reset to default language
+
+### Language Modes
+
+- **Adaptive**: Detects user language and adapts responses
+- **Strict**: Uses only the configured default language
+- **Bilingual**: Provides responses in both languages
 
 ### Environment Selection Guide
 

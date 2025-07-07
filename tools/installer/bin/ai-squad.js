@@ -246,6 +246,31 @@ async function promptInstallation() {
   // Use selected IDEs directly
   answers.ides = ides;
 
+  // Ask for language preference
+  const { language } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'language',
+      message: 'What is your preferred language for AI-SQUAD agent interactions?',
+      choices: [
+        { name: 'English', value: 'en' },
+        { name: 'Español (Spanish)', value: 'es' },
+        { name: 'Português (Portuguese)', value: 'pt' },
+        { name: 'Français (French)', value: 'fr' },
+        { name: 'Deutsch (German)', value: 'de' },
+        { name: 'Italiano (Italian)', value: 'it' },
+        { name: '简体中文 (Chinese Simplified)', value: 'zh-cn' },
+        { name: '日本語 (Japanese)', value: 'ja' },
+        { name: '한국어 (Korean)', value: 'ko' },
+        { name: 'Русский (Russian)', value: 'ru' },
+        { name: 'العربية (Arabic)', value: 'ar' }
+      ],
+      default: 'en'
+    }
+  ]);
+
+  answers.language = language;
+
   // Ask for web bundles installation
   const { includeWebBundles } = await inquirer.prompt([
     {
