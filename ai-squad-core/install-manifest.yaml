@@ -1,0 +1,70 @@
+version: 4.28.0
+install_type: full
+installed_at: 2025-01-07T15:39:00.000Z
+directory: /Users/guga/Downloads/Projects/Tools/AI-SQUAD
+language: en
+ides_setup: []
+files:
+  - .ai-squad-core/core-config.yaml
+  - .ai-squad-core/agents/ai-squad-master.md
+  - .ai-squad-core/agents/ai-squad-orchestrator.md
+  - .ai-squad-core/agents/analyst.md
+  - .ai-squad-core/agents/architect.md
+  - .ai-squad-core/agents/dev.md
+  - .ai-squad-core/agents/pm.md
+  - .ai-squad-core/agents/po.md
+  - .ai-squad-core/agents/qa.md
+  - .ai-squad-core/agents/sm.md
+  - .ai-squad-core/agents/ux-expert.md
+  - .ai-squad-core/agent-teams/team-all.yaml
+  - .ai-squad-core/agent-teams/team-fullstack.yaml
+  - .ai-squad-core/agent-teams/team-ide-minimal.yaml
+  - .ai-squad-core/agent-teams/team-no-ui.yaml
+  - .ai-squad-core/workflows/brownfield-fullstack.yaml
+  - .ai-squad-core/workflows/brownfield-service.yaml
+  - .ai-squad-core/workflows/brownfield-ui.yaml
+  - .ai-squad-core/workflows/greenfield-fullstack.yaml
+  - .ai-squad-core/workflows/greenfield-service.yaml
+  - .ai-squad-core/workflows/greenfield-ui.yaml
+  - .ai-squad-core/templates/architecture-tmpl.yaml
+  - .ai-squad-core/templates/brainstorming-output-tmpl.yaml
+  - .ai-squad-core/templates/brownfield-architecture-tmpl.yaml
+  - .ai-squad-core/templates/brownfield-prd-tmpl.yaml
+  - .ai-squad-core/templates/competitor-analysis-tmpl.yaml
+  - .ai-squad-core/templates/front-end-architecture-tmpl.yaml
+  - .ai-squad-core/templates/front-end-spec-tmpl.yaml
+  - .ai-squad-core/templates/fullstack-architecture-tmpl.yaml
+  - .ai-squad-core/templates/market-research-tmpl.yaml
+  - .ai-squad-core/templates/prd-tmpl.yaml
+  - .ai-squad-core/templates/project-brief-tmpl.yaml
+  - .ai-squad-core/templates/story-tmpl.yaml
+  - .ai-squad-core/tasks/advanced-elicitation.md
+  - .ai-squad-core/tasks/brownfield-create-epic.md
+  - .ai-squad-core/tasks/brownfield-create-story.md
+  - .ai-squad-core/tasks/correct-course.md
+  - .ai-squad-core/tasks/create-brownfield-story.md
+  - .ai-squad-core/tasks/create-deep-research-prompt.md
+  - .ai-squad-core/tasks/create-next-story.md
+  - .ai-squad-core/tasks/create-workflow-plan.md
+  - .ai-squad-core/tasks/doc-migration-task.md
+  - .ai-squad-core/tasks/document-project.md
+  - .ai-squad-core/tasks/facilitate-brainstorming-session.md
+  - .ai-squad-core/tasks/generate-ai-frontend-prompt.md
+  - .ai-squad-core/tasks/index-docs.md
+  - .ai-squad-core/tasks/kb-mode-interaction.md
+  - .ai-squad-core/tasks/review-story.md
+  - .ai-squad-core/tasks/shard-doc.md
+  - .ai-squad-core/tasks/update-workflow-plan.md
+  - .ai-squad-core/tasks/validate-next-story.md
+  - .ai-squad-core/checklists/architect-checklist.md
+  - .ai-squad-core/checklists/change-checklist.md
+  - .ai-squad-core/checklists/pm-checklist.md
+  - .ai-squad-core/checklists/po-master-checklist.md
+  - .ai-squad-core/checklists/story-dod-checklist.md
+  - .ai-squad-core/checklists/story-draft-checklist.md
+  - .ai-squad-core/data/ai-squad-kb.md
+  - .ai-squad-core/data/brainstorming-techniques.md
+  - .ai-squad-core/data/elicitation-methods.md
+  - .ai-squad-core/data/technical-preferences.md
+  - .ai-squad-core/utils/language-manager.md
+  - .ai-squad-core/utils/plan-management.md

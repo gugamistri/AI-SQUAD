@@ -1,6 +1,6 @@
 {
   "name": "ai-squad",
-  "version": "4.27.4",
+  "version": "4.28.0",
   "description": "AI-SQUAD: AI System for Quick Unified Agile Development (Based on BMad Framework by Brian Madison)",
   "main": "tools/cli.js",
   "bin": {
