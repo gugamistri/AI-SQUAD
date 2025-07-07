@@ -1,14 +1,16 @@
-# The Power of BMad Expansion Packs
+# The Power of AI-SQUAD Expansion Packs
 
 ## Overview
 
-BMad Method's expansion packs unlock the framework's true potential by extending its natural language AI orchestration to ANY domain. While the core framework focuses on software development, expansion packs transform BMad into a universal AI agent system.
+AI-SQUAD's expansion packs unlock the framework's true potential by extending its natural language AI orchestration to ANY domain. While the core framework focuses on software development, expansion packs transform AI-SQUAD into a universal AI agent system.
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 ## Why Expansion Packs?
 
 ### Keep Core Lean
 
-The core BMad framework maintains its focus on software development, ensuring dev agents have maximum context for coding. Expansion packs handle everything else.
+The core AI-SQUAD framework maintains its focus on software development, ensuring dev agents have maximum context for coding. Expansion packs handle everything else.
 
 ### Domain Expertise
 
@@ -275,6 +277,6 @@ Every expansion pack:
 
 ## Remember
 
-The BMad Method is more than a development framework - it's a platform for structuring human expertise into AI-accessible formats. Every expansion pack you create makes specialized knowledge more accessible to everyone.
+The AI-SQUAD framework is more than a development framework - it's a platform for structuring human expertise into AI-accessible formats. Every expansion pack you create makes specialized knowledge more accessible to everyone.
 
 **What expertise will you share with the world?**

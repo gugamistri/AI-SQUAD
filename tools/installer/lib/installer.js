@@ -20,7 +20,7 @@ class Installer {
   async getCoreVersion() {
     const yaml = require("js-yaml");
     const fs = require("fs-extra");
-    const coreConfigPath = path.join(__dirname, "../../../bmad-core/core-config.yaml");
+    const coreConfigPath = path.join(__dirname, "../../../ai-squad-core/core-config.yaml");
     try {
       const coreConfigContent = await fs.readFile(coreConfigPath, "utf8");
       const coreConfig = yaml.load(coreConfigContent);
@@ -46,8 +46,8 @@ class Installer {
         ? config.directory 
         : path.resolve(originalCwd, config.directory);
         
-      if (path.basename(installDir) === '.bmad-core') {
-        // If user points directly to .bmad-core, treat its parent as the project root
+      if (path.basename(installDir) === '.ai-squad-core') {
+        // If user points directly to .ai-squad-core, treat its parent as the project root
         installDir = path.dirname(installDir);
       }
       
@@ -184,14 +184,14 @@ class Installer {
       return state; // clean install
     }
 
-    // Check for V4 installation (has .bmad-core with manifest)
-    const bmadCorePath = path.join(installDir, ".bmad-core");
-    const manifestPath = path.join(bmadCorePath, "install-manifest.yaml");
+    // Check for V4 installation (has .ai-squad-core with manifest)
+    const aiSquadCorePath = path.join(installDir, ".ai-squad-core");
+    const manifestPath = path.join(aiSquadCorePath, "install-manifest.yaml");
 
     if (await fileManager.pathExists(manifestPath)) {
       state.type = "v4_existing";
       state.hasV4Manifest = true;
-      state.hasBmadCore = true;
+      state.hasAiSquadCore = true;
       state.manifest = await fileManager.readManifest(installDir);
       return state;
     }
@@ -204,10 +204,10 @@ class Installer {
       return state;
     }
 
-    // Check for .bmad-core without manifest (broken V4 or manual copy)
-    if (await fileManager.pathExists(bmadCorePath)) {
+    // Check for .ai-squad-core without manifest (broken V4 or manual copy)
+    if (await fileManager.pathExists(aiSquadCorePath)) {
       state.type = "unknown_existing";
-      state.hasBmadCore = true;
+      state.hasAiSquadCore = true;
       return state;
     }
 
@@ -220,7 +220,7 @@ class Installer {
     });
 
     if (files.length > 0) {
-      // Directory has other files, but no BMad installation.
+      // Directory has other files, but no AI Squad installation.
       // Treat as clean install but record that it isn't empty.
       state.hasOtherFiles = true;
     }
@@ -235,30 +235,30 @@ class Installer {
   async performFreshInstall(config, installDir, spinner, options = {}) {
     // Ensure modules are initialized
     await initializeModules();
-    spinner.text = "Installing BMad Method...";
+    spinner.text = "Installing AI Squad Method...";
 
     let files = [];
 
     if (config.installType === "full") {
-      // Full installation - copy entire .bmad-core folder as a subdirectory
-      spinner.text = "Copying complete .bmad-core folder...";
-      const sourceDir = configLoader.getBmadCorePath();
-      const bmadCoreDestDir = path.join(installDir, ".bmad-core");
-      await fileManager.copyDirectory(sourceDir, bmadCoreDestDir);
+      // Full installation - copy entire .ai-squad-core folder as a subdirectory
+      spinner.text = "Copying complete .ai-squad-core folder...";
+      const sourceDir = configLoader.getAiSquadCorePath();
+      const aiSquadCoreDestDir = path.join(installDir, ".ai-squad-core");
+      await fileManager.copyDirectory(sourceDir, aiSquadCoreDestDir);
       
-      // Copy common/ items to .bmad-core
+      // Copy common/ items to .ai-squad-core
       spinner.text = "Copying common utilities...";
-      await this.copyCommonItems(installDir, ".bmad-core", spinner);
+      await this.copyCommonItems(installDir, ".ai-squad-core", spinner);
 
       // Get list of all files for manifest
       const glob = require("glob");
       files = glob
         .sync("**/*", {
-          cwd: bmadCoreDestDir,
+          cwd: aiSquadCoreDestDir,
           nodir: true,
           ignore: ["**/.git/**", "**/node_modules/**"],
         })
-        .map((file) => path.join(".bmad-core", file));
+        .map((file) => path.join(".ai-squad-core", file));
     } else if (config.installType === "single-agent") {
       // Single agent installation
       spinner.text = `Installing ${config.agent} agent...`;
@@ -267,18 +267,18 @@ class Installer {
       const agentPath = configLoader.getAgentPath(config.agent);
       const destAgentPath = path.join(
         installDir,
-        ".bmad-core",
+        ".ai-squad-core",
         "agents",
         `${config.agent}.md`
       );
       await fileManager.copyFile(agentPath, destAgentPath);
-      files.push(`.bmad-core/agents/${config.agent}.md`);
+      files.push(`.ai-squad-core/agents/${config.agent}.md`);
 
       // Copy dependencies
       const dependencies = await configLoader.getAgentDependencies(
         config.agent
       );
-      const sourceBase = configLoader.getBmadCorePath();
+      const sourceBase = configLoader.getAiSquadCorePath();
 
       for (const dep of dependencies) {
         spinner.text = `Copying dependency: ${dep}`;
@@ -286,16 +286,16 @@ class Installer {
         if (dep.includes("*")) {
           // Handle glob patterns
           const copiedFiles = await fileManager.copyGlobPattern(
-            dep.replace(".bmad-core/", ""),
+            dep.replace(".ai-squad-core/", ""),
             sourceBase,
-            path.join(installDir, ".bmad-core")
+            path.join(installDir, ".ai-squad-core")
           );
-          files.push(...copiedFiles.map(f => `.bmad-core/${f}`));
+          files.push(...copiedFiles.map(f => `.ai-squad-core/${f}`));
         } else {
           // Handle single files
           const sourcePath = path.join(
             sourceBase,
-            dep.replace(".bmad-core/", "")
+            dep.replace(".ai-squad-core/", "")
           );
           const destPath = path.join(
             installDir,
@@ -308,9 +308,9 @@ class Installer {
         }
       }
       
-      // Copy common/ items to .bmad-core
+      // Copy common/ items to .ai-squad-core
       spinner.text = "Copying common utilities...";
-      const commonFiles = await this.copyCommonItems(installDir, ".bmad-core", spinner);
+      const commonFiles = await this.copyCommonItems(installDir, ".ai-squad-core", spinner);
       files.push(...commonFiles);
     } else if (config.installType === "team") {
       // Team installation
@@ -318,7 +318,7 @@ class Installer {
       
       // Get team dependencies
       const teamDependencies = await configLoader.getTeamDependencies(config.team);
-      const sourceBase = configLoader.getBmadCorePath();
+      const sourceBase = configLoader.getAiSquadCorePath();
       
       // Install all team dependencies
       for (const dep of teamDependencies) {
@@ -327,14 +327,14 @@ class Installer {
         if (dep.includes("*")) {
           // Handle glob patterns
           const copiedFiles = await fileManager.copyGlobPattern(
-            dep.replace(".bmad-core/", ""),
+            dep.replace(".ai-squad-core/", ""),
             sourceBase,
-            path.join(installDir, ".bmad-core")
+            path.join(installDir, ".ai-squad-core")
           );
-          files.push(...copiedFiles.map(f => `.bmad-core/${f}`));
+          files.push(...copiedFiles.map(f => `.ai-squad-core/${f}`));
         } else {
           // Handle single files
-          const sourcePath = path.join(sourceBase, dep.replace(".bmad-core/", ""));
+          const sourcePath = path.join(sourceBase, dep.replace(".ai-squad-core/", ""));
           const destPath = path.join(installDir, dep);
           
           if (await fileManager.copyFile(sourcePath, destPath)) {
@@ -343,12 +343,12 @@ class Installer {
         }
       }
       
-      // Copy common/ items to .bmad-core
+      // Copy common/ items to .ai-squad-core
       spinner.text = "Copying common utilities...";
-      const commonFiles = await this.copyCommonItems(installDir, ".bmad-core", spinner);
+      const commonFiles = await this.copyCommonItems(installDir, ".ai-squad-core", spinner);
       files.push(...commonFiles);
     } else if (config.installType === "expansion-only") {
-      // Expansion-only installation - DO NOT create .bmad-core
+      // Expansion-only installation - DO NOT create .ai-squad-core
       // Only install expansion packs
       spinner.text = "Installing expansion packs only...";
     }
@@ -396,7 +396,7 @@ class Installer {
     const newVersion = await this.getCoreVersion();
     const versionCompare = this.compareVersions(currentVersion, newVersion);
 
-    console.log(chalk.yellow("\n🔍 Found existing BMad v4 installation"));
+    console.log(chalk.yellow("\n🔍 Found existing AI Squad v4 installation"));
     console.log(`   Directory: ${installDir}`);
     console.log(`   Current version: ${currentVersion}`);
     console.log(`   Available version: ${newVersion}`);
@@ -446,8 +446,8 @@ class Installer {
     let choices = [];
     
     if (versionCompare < 0) {
-      console.log(chalk.cyan("\n⬆️  Upgrade available for BMad core"));
-      choices.push({ name: `Upgrade BMad core (v${currentVersion} → v${newVersion})`, value: "upgrade" });
+      console.log(chalk.cyan("\n⬆️  Upgrade available for AI Squad core"));
+      choices.push({ name: `Upgrade AI Squad core (v${currentVersion} → v${newVersion})`, value: "upgrade" });
     } else if (versionCompare === 0) {
       if (hasIntegrityIssues) {
         // Offer repair option when files are missing or modified
@@ -457,10 +457,10 @@ class Installer {
         });
       }
       console.log(chalk.yellow("\n⚠️  Same version already installed"));
-      choices.push({ name: `Force reinstall BMad core (v${currentVersion} - reinstall)`, value: "reinstall" });
+      choices.push({ name: `Force reinstall AI Squad core (v${currentVersion} - reinstall)`, value: "reinstall" });
     } else {
       console.log(chalk.yellow("\n⬇️  Installed version is newer than available"));
-      choices.push({ name: `Downgrade BMad core (v${currentVersion} → v${newVersion})`, value: "reinstall" });
+      choices.push({ name: `Downgrade AI Squad core (v${currentVersion} → v${newVersion})`, value: "reinstall" });
     }
     
     choices.push(
@@ -535,7 +535,7 @@ class Installer {
     spinner.stop();
 
     console.log(
-      chalk.yellow("\n🔍 Found BMad v3 installation (bmad-agent/ directory)")
+      chalk.yellow("\n🔍 Found AI Squad v3 installation (bmad-agent/ directory)")
     );
     console.log(`   Directory: ${installDir}`);
 
@@ -578,8 +578,8 @@ class Installer {
     console.log(chalk.yellow("\n⚠️  Directory contains existing files"));
     console.log(`   Directory: ${installDir}`);
 
-    if (state.hasBmadCore) {
-      console.log("   Found: .bmad-core directory (but no manifest)");
+    if (state.hasAiSquadCore) {
+      console.log("   Found: .ai-squad-core directory (but no manifest)");
     }
     if (state.hasOtherFiles) {
       console.log("   Found: Other files in directory");
@@ -713,14 +713,14 @@ class Installer {
 
       // Restore missing and modified files
       spinner.text = "Restoring files...";
-      const sourceBase = configLoader.getBmadCorePath();
+      const sourceBase = configLoader.getAiSquadCorePath();
       const filesToRestore = [...integrity.missing, ...integrity.modified];
       
       for (const file of filesToRestore) {
         // Skip the manifest file itself
         if (file.endsWith('install-manifest.yaml')) continue;
         
-        const relativePath = file.replace('.bmad-core/', '');
+        const relativePath = file.replace('.ai-squad-core/', '');
         const destPath = path.join(installDir, file);
         
         // Check if this is a common/ file that needs special processing
@@ -731,12 +731,12 @@ class Installer {
           // This is a common/ file - needs template processing
           const fs = require('fs').promises;
           const content = await fs.readFile(commonSourcePath, 'utf8');
-          const updatedContent = content.replace(/\{root\}/g, '.bmad-core');
+          const updatedContent = content.replace(/\{root\}/g, '.ai-squad-core');
           await fileManager.ensureDirectory(path.dirname(destPath));
           await fs.writeFile(destPath, updatedContent, 'utf8');
           spinner.text = `Restored: ${file}`;
         } else {
-          // Regular file from bmad-core
+          // Regular file from ai-squad-core
           const sourcePath = path.join(sourceBase, relativePath);
           if (await fileManager.pathExists(sourcePath)) {
             await fileManager.copyFile(sourcePath, destPath);
@@ -787,11 +787,11 @@ class Installer {
   }
 
   async performReinstall(config, installDir, spinner) {
-    spinner.start("Preparing to reinstall BMad Method...");
+    spinner.start("Preparing to reinstall AI Squad Method...");
 
-    // Remove existing .bmad-core
-    const bmadCorePath = path.join(installDir, ".bmad-core");
-    if (await fileManager.pathExists(bmadCorePath)) {
+    // Remove existing .ai-squad-core
+    const aiSquadCorePath = path.join(installDir, ".ai-squad-core");
+    if (await fileManager.pathExists(aiSquadCorePath)) {
       spinner.text = "Removing existing installation...";
       await fileManager.removeDirectory(bmadCorePath);
     }
@@ -807,7 +807,7 @@ class Installer {
   }
 
   showSuccessMessage(config, installDir, options = {}) {
-    console.log(chalk.green("\n✓ BMad Method installed successfully!\n"));
+    console.log(chalk.green("\n✓ AI Squad Method installed successfully!\n"));
 
     const ides = config.ides || (config.ide ? [config.ide] : []);
     if (ides.length > 0) {
@@ -815,7 +815,7 @@ class Installer {
         const ideConfig = configLoader.getIdeConfiguration(ide);
         if (ideConfig?.instructions) {
           console.log(
-            chalk.bold(`To use BMad agents in ${ideConfig.name}:`)
+            chalk.bold(`To use AI Squad agents in ${ideConfig.name}:`)
           );
           console.log(ideConfig.instructions);
         }
@@ -831,7 +831,7 @@ class Installer {
     // Information about installation components
     console.log(chalk.bold("\n🎯 Installation Summary:"));
     if (config.installType !== "expansion-only") {
-      console.log(chalk.green("✓ .bmad-core framework installed with all agents and workflows"));
+      console.log(chalk.green("✓ .ai-squad-core framework installed with all agents and workflows"));
     }
     
     if (config.expansionPacks && config.expansionPacks.length > 0) {
@@ -904,7 +904,7 @@ class Installer {
       };
       return await this.install(config);
     }
-    console.log(chalk.red("No BMad installation found."));
+    console.log(chalk.red("No AI Squad installation found."));
   }
 
   async listAgents() {
@@ -912,7 +912,7 @@ class Installer {
     await initializeModules();
     const agents = await configLoader.getAvailableAgents();
 
-    console.log(chalk.bold("\nAvailable BMad Agents:\n"));
+    console.log(chalk.bold("\nAvailable AI Squad Agents:\n"));
 
     for (const agent of agents) {
       console.log(chalk.cyan(`  ${agent.id.padEnd(20)}`), agent.description);
@@ -928,7 +928,7 @@ class Installer {
     await initializeModules();
     const expansionPacks = await this.getAvailableExpansionPacks();
 
-    console.log(chalk.bold("\nAvailable BMad Expansion Packs:\n"));
+    console.log(chalk.bold("\nAvailable AI Squad Expansion Packs:\n"));
 
     if (expansionPacks.length === 0) {
       console.log(chalk.yellow("No expansion packs found."));
@@ -957,7 +957,7 @@ class Installer {
 
     if (!installDir) {
       console.log(
-        chalk.yellow("No BMad installation found in current directory tree")
+        chalk.yellow("No AI Squad installation found in current directory tree")
       );
       return;
     }
@@ -969,7 +969,7 @@ class Installer {
       return;
     }
 
-    console.log(chalk.bold("\nBMad Installation Status:\n"));
+    console.log(chalk.bold("\nAI Squad Installation Status:\n"));
     console.log(`  Directory:      ${installDir}`);
     console.log(`  Version:        ${manifest.version}`);
     console.log(
@@ -1265,7 +1265,7 @@ class Installer {
               // Check if dependency exists in expansion pack
               if (!(await fileManager.pathExists(expansionDepPath))) {
                 // Try to find it in core
-                const coreDepPath = path.join(configLoader.getBmadCorePath(), depType, depFileName);
+                const coreDepPath = path.join(configLoader.getAiSquadCorePath(), depType, depFileName);
                 
                 if (await fileManager.pathExists(coreDepPath)) {
                   spinner.text = `Copying core dependency ${dep} for ${packId}...`;
@@ -1326,7 +1326,7 @@ class Installer {
         for (const agentId of agents) {
           if (!existingAgents.has(agentId)) {
             // Agent not in expansion pack, try to get from core
-            const coreAgentPath = path.join(configLoader.getBmadCorePath(), 'agents', `${agentId}.md`);
+            const coreAgentPath = path.join(configLoader.getAiSquadCorePath(), 'agents', `${agentId}.md`);
             
             if (await fileManager.pathExists(coreAgentPath)) {
               spinner.text = `Copying core agent ${agentId} for ${packId}...`;
@@ -1359,7 +1359,7 @@ class Installer {
                       // Check if dependency exists in expansion pack
                       if (!(await fileManager.pathExists(expansionDepPath))) {
                         // Try to find it in core
-                        const coreDepPath = path.join(configLoader.getBmadCorePath(), depType, depFileName);
+                        const coreDepPath = path.join(configLoader.getAiSquadCorePath(), depType, depFileName);
                         
                         if (await fileManager.pathExists(coreDepPath)) {
                           const destDepPath = path.join(expansionDotFolder, depType, depFileName);
@@ -1424,7 +1424,7 @@ class Installer {
     await initializeModules();
     
     try {
-      // Find the dist directory in the BMad installation
+      // Find the dist directory in the AI Squad installation
       const distDir = configLoader.getDistPath();
       
       if (!(await fileManager.pathExists(distDir))) {
@@ -1542,7 +1542,7 @@ class Installer {
     // Find all dot folders that might be expansion packs
     const dotFolders = glob.sync(".*", {
       cwd: installDir,
-      ignore: [".git", ".git/**", ".bmad-core", ".bmad-core/**"],
+      ignore: [".git", ".git/**", ".ai-squad-core", ".ai-squad-core/**"],
     });
     
     for (const folder of dotFolders) {
@@ -1699,11 +1699,11 @@ class Installer {
   }
 
   async findInstallation() {
-    // Look for .bmad-core in current directory or parent directories
+    // Look for .ai-squad-core in current directory or parent directories
     let currentDir = process.cwd();
 
     while (currentDir !== path.dirname(currentDir)) {
-      const bmadDir = path.join(currentDir, ".bmad-core");
+      const bmadDir = path.join(currentDir, ".ai-squad-core");
       const manifestPath = path.join(bmadDir, "install-manifest.yaml");
 
       if (await fileManager.pathExists(manifestPath)) {
@@ -1713,8 +1713,8 @@ class Installer {
       currentDir = path.dirname(currentDir);
     }
 
-    // Also check if we're inside a .bmad-core directory
-    if (path.basename(process.cwd()) === ".bmad-core") {
+    // Also check if we're inside a .ai-squad-core directory
+    if (path.basename(process.cwd()) === ".ai-squad-core") {
       const manifestPath = path.join(process.cwd(), "install-manifest.yaml");
       if (await fileManager.pathExists(manifestPath)) {
         return process.cwd();

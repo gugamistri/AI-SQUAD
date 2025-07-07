@@ -26,14 +26,14 @@ class V3ToV4Upgrader {
 
       // 1. Welcome message
       console.log(
-        chalk.bold("\nWelcome to BMad-Method V3 to V4 Upgrade Tool\n")
+        chalk.bold("\nWelcome to AI Squad Method V3 to V4 Upgrade Tool\n")
       );
       console.log(
-        "This tool will help you upgrade your BMad-Method V3 project to V4.\n"
+        "This tool will help you upgrade your AI Squad Method V3 project to V4.\n"
       );
       console.log(chalk.cyan("What this tool does:"));
-      console.log("- Creates a backup of your V3 files (.bmad-v3-backup/)");
-      console.log("- Installs the new V4 .bmad-core structure");
+      console.log("- Creates a backup of your V3 files (.ai-squad-v3-backup/)");
+      console.log("- Installs the new V4 .ai-squad-core structure");
       console.log(
         "- Preserves your PRD, Architecture, and Stories in the new format\n"
       );
@@ -311,7 +311,7 @@ class V3ToV4Upgrader {
     console.log(`- Custom files in bmad-agent/: ${analysis.customFileCount}`);
 
     if (!options.dryRun) {
-      console.log("\nThe following will be backed up to .bmad-v3-backup/:");
+      console.log("\nThe following will be backed up to .ai-squad-v3-backup/:");
       console.log("- bmad-agent/ (entire directory)");
       console.log("- docs/ (entire directory)");
 
@@ -334,14 +334,14 @@ class V3ToV4Upgrader {
     const spinner = ora("Creating backup...").start();
 
     try {
-      const backupPath = path.join(projectPath, ".bmad-v3-backup");
+      const backupPath = path.join(projectPath, ".ai-squad-v3-backup");
 
       // Check if backup already exists
       if (await this.pathExists(backupPath)) {
         spinner.fail("Backup directory already exists");
         console.error(
           chalk.red(
-            "\nError: Backup directory .bmad-v3-backup/ already exists."
+            "\nError: Backup directory .ai-squad-v3-backup/ already exists."
           )
         );
         console.error("\nThis might mean an upgrade was already attempted.");
@@ -353,8 +353,8 @@ class V3ToV4Upgrader {
 
       // Create backup directory
       await fs.mkdir(backupPath, { recursive: true });
-      spinner.text = "✓ Created .bmad-v3-backup/";
-      console.log(chalk.green("\n✓ Created .bmad-v3-backup/"));
+      spinner.text = "✓ Created .ai-squad-v3-backup/";
+      console.log(chalk.green("\n✓ Created .ai-squad-v3-backup/"));
 
       // Move bmad-agent
       const bmadAgentSrc = path.join(projectPath, "bmad-agent");
@@ -379,15 +379,15 @@ class V3ToV4Upgrader {
     const spinner = ora("Installing V4 structure...").start();
 
     try {
-      // Get the source bmad-core directory (without dot prefix)
-      const sourcePath = path.join(__dirname, "..", "..", "bmad-core");
-      const destPath = path.join(projectPath, ".bmad-core");
+      // Get the source ai-squad-core directory (without dot prefix)
+      const sourcePath = path.join(__dirname, "..", "..", "ai-squad-core");
+      const destPath = path.join(projectPath, ".ai-squad-core");
 
-      // Copy .bmad-core
+      // Copy .ai-squad-core
       await this.copyDirectory(sourcePath, destPath);
-      spinner.text = "✓ Copied fresh .bmad-core/ directory from V4";
+      spinner.text = "✓ Copied fresh .ai-squad-core/ directory from V4";
       console.log(
-        chalk.green("\n✓ Copied fresh .bmad-core/ directory from V4")
+        chalk.green("\n✓ Copied fresh .ai-squad-core/ directory from V4")
       );
 
       // Create docs directory
@@ -421,7 +421,7 @@ class V3ToV4Upgrader {
     const spinner = ora("Migrating your project documents...").start();
 
     try {
-      const backupDocsPath = path.join(projectPath, ".bmad-v3-backup", "docs");
+      const backupDocsPath = path.join(projectPath, ".ai-squad-v3-backup", "docs");
       const newDocsPath = path.join(projectPath, "docs");
       let copiedCount = 0;
 
@@ -584,8 +584,8 @@ class V3ToV4Upgrader {
   showCompletionReport(projectPath, analysis) {
     console.log(chalk.bold.green("\n✓ Upgrade Complete!\n"));
     console.log(chalk.bold("Summary:"));
-    console.log(`- V3 files backed up to: .bmad-v3-backup/`);
-    console.log(`- V4 structure installed: .bmad-core/ (fresh from V4)`);
+    console.log(`- V3 files backed up to: .ai-squad-v3-backup/`);
+    console.log(`- V4 structure installed: .ai-squad-core/ (fresh from V4)`);
 
     const totalDocs =
       (analysis.prdFile ? 1 : 0) +
@@ -628,17 +628,17 @@ class V3ToV4Upgrader {
     console.log(chalk.bold("\nNext Steps:"));
     console.log("1. Review your documents in the new docs/ folder");
     console.log(
-      "2. Use @bmad-master agent to run the doc-migration-task to align your documents with V4 templates"
+      "2. Use @ai-squad-master agent to run the doc-migration-task to align your documents with V4 templates"
     );
     if (analysis.epicFiles.length === 0) {
       console.log(
-        "3. Use @bmad-master agent to shard the PRD to create epic files"
+        "3. Use @ai-squad-master agent to shard the PRD to create epic files"
       );
     }
 
     console.log(
       chalk.dim(
-        "\nYour V3 backup is preserved in .bmad-v3-backup/ and can be restored if needed."
+        "\nYour V3 backup is preserved in .ai-squad-v3-backup/ and can be restored if needed."
       )
     );
   }
@@ -739,16 +739,16 @@ class V3ToV4Upgrader {
     const fileManager = require("../installer/lib/file-manager");
     const { glob } = require("glob");
 
-    // Get all files in .bmad-core for the manifest
-    const bmadCorePath = path.join(projectPath, ".bmad-core");
+    // Get all files in .ai-squad-core for the manifest
+    const aiSquadCorePath = path.join(projectPath, ".ai-squad-core");
     const files = await glob("**/*", {
-      cwd: bmadCorePath,
+      cwd: aiSquadCorePath,
       nodir: true,
       ignore: ["**/.git/**", "**/node_modules/**"],
     });
 
-    // Prepend .bmad-core/ to file paths for manifest
-    const manifestFiles = files.map((file) => path.join(".bmad-core", file));
+    // Prepend .ai-squad-core/ to file paths for manifest
+    const manifestFiles = files.map((file) => path.join(".ai-squad-core", file));
 
     const config = {
       installType: "full",

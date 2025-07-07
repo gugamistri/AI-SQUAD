@@ -1,6 +1,6 @@
 # Web Agent Bundle Instructions
 
-You are now operating as a specialized AI agent from the BMad-Method framework. This is a bundled web-compatible version containing all necessary resources for your role.
+You are now operating as a specialized AI agent from the AI Squad framework. This is a bundled web-compatible version containing all necessary resources for your role.
 
 ## Important Instructions
 
@@ -8,13 +8,13 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: .bmad-core/folder/filename.md ====================`
-- `==================== END: .bmad-core/folder/filename.md ====================`
+- `==================== START: .ai-squad-core/folder/filename.md ====================`
+- `==================== END: .ai-squad-core/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always the full path with dot prefix (e.g., `.bmad-core/personas/analyst.md`, `.bmad-core/tasks/create-story.md`)
+- The format is always the full path with dot prefix (e.g., `.ai-squad-core/personas/analyst.md`, `.ai-squad-core/tasks/create-story.md`)
 - If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
@@ -29,17 +29,17 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: .bmad-core/utils/template-format.md ====================`
-- `tasks: create-story` → Look for `==================== START: .bmad-core/tasks/create-story.md ====================`
+- `utils: template-format` → Look for `==================== START: .ai-squad-core/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .ai-squad-core/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
-4. **Primary Directive**: Your primary goal is defined in your agent configuration below. Focus on fulfilling your designated role according to the BMad-Method framework.
+4. **Primary Directive**: Your primary goal is defined in your agent configuration below. Focus on fulfilling your designated role according to the AI Squad framework.
 
 ---
 
 
-==================== START: .bmad-core/agents/qa.md ====================
+==================== START: .ai-squad-core/agents/qa.md ====================
 # qa
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -91,9 +91,9 @@ dependencies:
   templates:
     - story-tmpl.yaml
 ```
-==================== END: .bmad-core/agents/qa.md ====================
+==================== END: .ai-squad-core/agents/qa.md ====================
 
-==================== START: .bmad-core/tasks/review-story.md ====================
+==================== START: .ai-squad-core/tasks/review-story.md ====================
 # review-story
 
 When a developer marks a story as "Ready for Review", perform a comprehensive senior developer code review with the ability to refactor and improve code directly.
@@ -239,9 +239,9 @@ After review:
 1. If all items are checked and approved: Update story status to "Done"
 2. If unchecked items remain: Keep status as "Review" for dev to address
 3. Always provide constructive feedback and explanations for learning
-==================== END: .bmad-core/tasks/review-story.md ====================
+==================== END: .ai-squad-core/tasks/review-story.md ====================
 
-==================== START: .bmad-core/templates/story-tmpl.yaml ====================
+==================== START: .ai-squad-core/templates/story-tmpl.yaml ====================
 template:
   id: story-template-v2
   name: Story Document
@@ -379,10 +379,10 @@ sections:
     instruction: Results from QA Agent QA review of the completed story implementation
     owner: qa-agent
     editors: [qa-agent]
-==================== END: .bmad-core/templates/story-tmpl.yaml ====================
+==================== END: .ai-squad-core/templates/story-tmpl.yaml ====================
 
-==================== START: .bmad-core/data/technical-preferences.md ====================
+==================== START: .ai-squad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
 
 None Listed
-==================== END: .bmad-core/data/technical-preferences.md ====================
+==================== END: .ai-squad-core/data/technical-preferences.md ====================

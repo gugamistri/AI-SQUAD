@@ -32,7 +32,7 @@ async function bumpAllVersions() {
   const updatedItems = [];
   
   // First, bump the core version
-  const coreConfigPath = path.join(__dirname, '..', 'bmad-core', 'core-config.yaml');
+  const coreConfigPath = path.join(__dirname, '..', 'ai-squad-core', 'core-config.yaml');
   try {
     const coreConfigContent = fs.readFileSync(coreConfigPath, 'utf8');
     const coreConfig = yaml.load(coreConfigContent);
@@ -44,10 +44,10 @@ async function bumpAllVersions() {
     const updatedCoreYaml = yaml.dump(coreConfig, { indent: 2 });
     fs.writeFileSync(coreConfigPath, updatedCoreYaml);
     
-    updatedItems.push({ type: 'core', name: 'BMad Core', oldVersion: oldCoreVersion, newVersion: newCoreVersion });
-    console.log(`✓ BMad Core: ${oldCoreVersion} → ${newCoreVersion}`);
+    updatedItems.push({ type: 'core', name: 'AI Squad Core', oldVersion: oldCoreVersion, newVersion: newCoreVersion });
+    console.log(`✓ AI Squad Core: ${oldCoreVersion} → ${newCoreVersion}`);
   } catch (error) {
-    console.error(`✗ Failed to update BMad Core: ${error.message}`);
+    console.error(`✗ Failed to update AI Squad Core: ${error.message}`);
   }
   
   // Then, bump all expansion packs

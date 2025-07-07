@@ -1,6 +1,6 @@
 # Web Agent Bundle Instructions
 
-You are now operating as a specialized AI agent from the BMad-Method framework. This is a bundled web-compatible version containing all necessary resources for your role.
+You are now operating as a specialized AI agent from the AI Squad framework. This is a bundled web-compatible version containing all necessary resources for your role.
 
 ## Important Instructions
 
@@ -8,13 +8,13 @@ You are now operating as a specialized AI agent from the BMad-Method framework. 
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: .bmad-core/folder/filename.md ====================`
-- `==================== END: .bmad-core/folder/filename.md ====================`
+- `==================== START: .ai-squad-core/folder/filename.md ====================`
+- `==================== END: .ai-squad-core/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always the full path with dot prefix (e.g., `.bmad-core/personas/analyst.md`, `.bmad-core/tasks/create-story.md`)
+- The format is always the full path with dot prefix (e.g., `.ai-squad-core/personas/analyst.md`, `.ai-squad-core/tasks/create-story.md`)
 - If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
@@ -29,17 +29,17 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: .bmad-core/utils/template-format.md ====================`
-- `tasks: create-story` → Look for `==================== START: .bmad-core/tasks/create-story.md ====================`
+- `utils: template-format` → Look for `==================== START: .ai-squad-core/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .ai-squad-core/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
-4. **Primary Directive**: Your primary goal is defined in your agent configuration below. Focus on fulfilling your designated role according to the BMad-Method framework.
+4. **Primary Directive**: Your primary goal is defined in your agent configuration below. Focus on fulfilling your designated role according to the AI Squad framework.
 
 ---
 
 
-==================== START: .bmad-core/agents/architect.md ====================
+==================== START: .ai-squad-core/agents/architect.md ====================
 # architect
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -99,9 +99,9 @@ dependencies:
   data:
     - technical-preferences.md
 ```
-==================== END: .bmad-core/agents/architect.md ====================
+==================== END: .ai-squad-core/agents/architect.md ====================
 
-==================== START: .bmad-core/tasks/create-doc.md ====================
+==================== START: .ai-squad-core/tasks/create-doc.md ====================
 # Create Document from Template (YAML Driven)
 
 ## CRITICAL: Mandatory Elicitation Format
@@ -181,9 +181,9 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 - Select options 2-9 from data/elicitation-methods only
 - Provide detailed rationale explaining decisions
 - End with "Select 1-9 or just type your question/feedback:"
-==================== END: .bmad-core/tasks/create-doc.md ====================
+==================== END: .ai-squad-core/tasks/create-doc.md ====================
 
-==================== START: .bmad-core/tasks/create-deep-research-prompt.md ====================
+==================== START: .ai-squad-core/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -485,9 +485,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: .bmad-core/tasks/create-deep-research-prompt.md ====================
+==================== END: .ai-squad-core/tasks/create-deep-research-prompt.md ====================
 
-==================== START: .bmad-core/tasks/document-project.md ====================
+==================== START: .ai-squad-core/tasks/document-project.md ====================
 # Document an Existing Project
 
 ## Purpose
@@ -805,16 +805,16 @@ Apply the advanced elicitation task after major sections to refine based on user
 - Documents technical debt, workarounds, and constraints honestly
 - For brownfield projects with PRD: Provides clear enhancement impact analysis
 - The goal is PRACTICAL documentation for AI agents doing real work
-==================== END: .bmad-core/tasks/document-project.md ====================
+==================== END: .ai-squad-core/tasks/document-project.md ====================
 
-==================== START: .bmad-core/tasks/execute-checklist.md ====================
+==================== START: .ai-squad-core/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-core/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .ai-squad-core/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -823,7 +823,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from .bmad-core/checklists/
+     - Load the appropriate checklist from .ai-squad-core/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -901,9 +901,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: .bmad-core/tasks/execute-checklist.md ====================
+==================== END: .ai-squad-core/tasks/execute-checklist.md ====================
 
-==================== START: .bmad-core/templates/architecture-tmpl.yaml ====================
+==================== START: .ai-squad-core/templates/architecture-tmpl.yaml ====================
 template:
   id: architecture-template-v2
   name: Architecture Document
@@ -1033,7 +1033,7 @@ sections:
     instruction: |
       This is the DEFINITIVE technology selection section. Work with the user to make specific choices:
       
-      1. Review PRD technical assumptions and any preferences from .bmad-core/data/technical-preferences.yaml or an attached technical-preferences
+      1. Review PRD technical assumptions and any preferences from .ai-squad-core/data/technical-preferences.yaml or an attached technical-preferences
       2. For each category, present 2-3 viable options with pros/cons
       3. Make a clear recommendation based on project needs
       4. Get explicit user approval for each selection
@@ -1554,9 +1554,9 @@ sections:
           - Key UI requirements from PRD
           - Any frontend-specific decisions made here
           - Request for detailed frontend architecture
-==================== END: .bmad-core/templates/architecture-tmpl.yaml ====================
+==================== END: .ai-squad-core/templates/architecture-tmpl.yaml ====================
 
-==================== START: .bmad-core/templates/front-end-architecture-tmpl.yaml ====================
+==================== START: .ai-squad-core/templates/front-end-architecture-tmpl.yaml ====================
 template:
   id: frontend-architecture-template-v2
   name: Frontend Architecture Document
@@ -1763,9 +1763,9 @@ sections:
           - Key import patterns
           - File naming conventions
           - Project-specific patterns and utilities
-==================== END: .bmad-core/templates/front-end-architecture-tmpl.yaml ====================
+==================== END: .ai-squad-core/templates/front-end-architecture-tmpl.yaml ====================
 
-==================== START: .bmad-core/templates/fullstack-architecture-tmpl.yaml ====================
+==================== START: .ai-squad-core/templates/fullstack-architecture-tmpl.yaml ====================
 template:
   id: fullstack-architecture-template-v2
   name: Fullstack Architecture Document
@@ -2571,9 +2571,9 @@ sections:
   - id: checklist-results
     title: Checklist Results Report
     instruction: Before running the checklist, offer to output the full architecture document. Once user confirms, execute the architect-checklist and populate results here.
-==================== END: .bmad-core/templates/fullstack-architecture-tmpl.yaml ====================
+==================== END: .ai-squad-core/templates/fullstack-architecture-tmpl.yaml ====================
 
-==================== START: .bmad-core/templates/brownfield-architecture-tmpl.yaml ====================
+==================== START: .ai-squad-core/templates/brownfield-architecture-tmpl.yaml ====================
 template:
   id: brownfield-architecture-template-v2
   name: Brownfield Enhancement Architecture
@@ -3050,9 +3050,9 @@ sections:
           - Key technical decisions based on real project constraints
           - Existing system compatibility requirements with specific verification steps
           - Clear sequencing of implementation to minimize risk to existing functionality
-==================== END: .bmad-core/templates/brownfield-architecture-tmpl.yaml ====================
+==================== END: .ai-squad-core/templates/brownfield-architecture-tmpl.yaml ====================
 
-==================== START: .bmad-core/checklists/architect-checklist.md ====================
+==================== START: .ai-squad-core/checklists/architect-checklist.md ====================
 # Architect Solution Validation Checklist
 
 This checklist serves as a comprehensive framework for the Architect to validate the technical design and architecture before development execution. The Architect should systematically work through each item, ensuring the architecture is robust, scalable, secure, and aligned with the product requirements.
@@ -3496,10 +3496,10 @@ Now that you've completed the checklist, generate a comprehensive validation rep
    - Component design clarity
 
 After presenting the report, ask the user if they would like detailed analysis of any specific section, especially those with warnings or failures.]]
-==================== END: .bmad-core/checklists/architect-checklist.md ====================
+==================== END: .ai-squad-core/checklists/architect-checklist.md ====================
 
-==================== START: .bmad-core/data/technical-preferences.md ====================
+==================== START: .ai-squad-core/data/technical-preferences.md ====================
 # User-Defined Preferred Patterns and Preferences
 
 None Listed
-==================== END: .bmad-core/data/technical-preferences.md ====================
+==================== END: .ai-squad-core/data/technical-preferences.md ====================

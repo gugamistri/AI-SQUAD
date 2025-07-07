@@ -1,7 +1,7 @@
 installation-options:
   full:
     name: Complete BMad Core
-    description: Copy the entire .bmad-core folder with all agents, templates, and tools
+    description: Copy the entire .ai-squad-core folder with all agents, templates, and tools
     action: copy-folder
     source: bmad-core
   single-agent:

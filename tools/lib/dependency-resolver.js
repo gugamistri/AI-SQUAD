@@ -6,13 +6,13 @@ const { extractYamlFromAgent } = require('./yaml-utils');
 class DependencyResolver {
   constructor(rootDir) {
     this.rootDir = rootDir;
-    this.bmadCore = path.join(rootDir, 'bmad-core');
+    this.aiSquadCore = path.join(rootDir, 'ai-squad-core');
     this.common = path.join(rootDir, 'common');
     this.cache = new Map();
   }
 
   async resolveAgentDependencies(agentId) {
-    const agentPath = path.join(this.bmadCore, 'agents', `${agentId}.md`);
+    const agentPath = path.join(this.aiSquadCore, 'agents', `${agentId}.md`);
     const agentContent = await fs.readFile(agentPath, 'utf8');
     
     // Extract YAML from markdown content with command cleaning
@@ -49,7 +49,7 @@ class DependencyResolver {
   }
 
   async resolveTeamDependencies(teamId) {
-    const teamPath = path.join(this.bmadCore, 'agent-teams', `${teamId}.yaml`);
+    const teamPath = path.join(this.aiSquadCore, 'agent-teams', `${teamId}.yaml`);
     const teamContent = await fs.readFile(teamPath, 'utf8');
     const teamConfig = yaml.load(teamContent);
     
@@ -64,30 +64,30 @@ class DependencyResolver {
       resources: new Map() // Use Map to deduplicate resources
     };
 
-    // Always add bmad-orchestrator agent first if it's a team
-    const bmadAgent = await this.resolveAgentDependencies('bmad-orchestrator');
-    dependencies.agents.push(bmadAgent.agent);
-    bmadAgent.resources.forEach(res => {
+    // Always add ai-squad-orchestrator agent first if it's a team
+    const aiSquadAgent = await this.resolveAgentDependencies('ai-squad-orchestrator');
+    dependencies.agents.push(aiSquadAgent.agent);
+    aiSquadAgent.resources.forEach(res => {
       dependencies.resources.set(res.path, res);
     });
 
     // Resolve all agents in the team
     let agentsToResolve = teamConfig.agents || [];
     
-    // Handle wildcard "*" - include all agents except bmad-master
+    // Handle wildcard "*" - include all agents except ai-squad-master
     if (agentsToResolve.includes('*')) {
       const allAgents = await this.listAgents();
-      // Remove wildcard and add all agents except those already in the list and bmad-master
+      // Remove wildcard and add all agents except those already in the list and ai-squad-master
       agentsToResolve = agentsToResolve.filter(a => a !== '*');
       for (const agent of allAgents) {
-        if (!agentsToResolve.includes(agent) && agent !== 'bmad-master') {
+        if (!agentsToResolve.includes(agent) && agent !== 'ai-squad-master') {
           agentsToResolve.push(agent);
         }
       }
     }
     
     for (const agentId of agentsToResolve) {
-      if (agentId === 'bmad-orchestrator' || agentId === 'bmad-master') continue; // Already added or excluded
+      if (agentId === 'ai-squad-orchestrator' || agentId === 'ai-squad-master') continue; // Already added or excluded
       const agentDeps = await this.resolveAgentDependencies(agentId);
       dependencies.agents.push(agentDeps.agent);
       
@@ -119,12 +119,12 @@ class DependencyResolver {
       let content = null;
       let filePath = null;
 
-      // First try bmad-core
+      // First try ai-squad-core
       try {
-        filePath = path.join(this.bmadCore, type, id);
+        filePath = path.join(this.aiSquadCore, type, id);
         content = await fs.readFile(filePath, 'utf8');
       } catch (e) {
-        // If not found in bmad-core, try common folder
+        // If not found in ai-squad-core, try common folder
         try {
           filePath = path.join(this.common, type, id);
           content = await fs.readFile(filePath, 'utf8');
@@ -155,7 +155,7 @@ class DependencyResolver {
 
   async listAgents() {
     try {
-      const files = await fs.readdir(path.join(this.bmadCore, 'agents'));
+      const files = await fs.readdir(path.join(this.aiSquadCore, 'agents'));
       return files
         .filter(f => f.endsWith('.md'))
         .map(f => f.replace('.md', ''));
@@ -166,7 +166,7 @@ class DependencyResolver {
 
   async listTeams() {
     try {
-      const files = await fs.readdir(path.join(this.bmadCore, 'agent-teams'));
+      const files = await fs.readdir(path.join(this.aiSquadCore, 'agent-teams'));
       return files
         .filter(f => f.endsWith('.yaml'))
         .map(f => f.replace('.yaml', ''));

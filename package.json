@@ -1,11 +1,11 @@
 {
-  "name": "bmad-method",
+  "name": "ai-squad",
   "version": "4.27.4",
-  "description": "Breakthrough Method of Agile AI-driven Development",
+  "description": "AI-SQUAD: AI System for Quick Unified Agile Development (Based on BMad Framework by Brian Madison)",
   "main": "tools/cli.js",
   "bin": {
-    "bmad": "tools/bmad-npx-wrapper.js",
-    "bmad-method": "tools/bmad-npx-wrapper.js"
+    "ai-squad": "tools/ai-squad-npx-wrapper.js",
+    "aisquad": "tools/ai-squad-npx-wrapper.js"
   },
   "scripts": {
     "build": "node tools/cli.js build",
@@ -13,7 +13,7 @@
     "build:teams": "node tools/cli.js build --teams-only",
     "list:agents": "node tools/cli.js list:agents",
     "validate": "node tools/cli.js validate",
-    "install:bmad": "node tools/installer/bin/bmad.js install",
+    "install:ai-squad": "node tools/installer/bin/ai-squad.js install",
     "format": "prettier --write \"**/*.md\"",
     "version:patch": "node tools/version-bump.js patch",
     "version:minor": "node tools/version-bump.js minor",
@@ -53,6 +53,8 @@
     "development",
     "methodology",
     "agents",
+    "ai-squad",
+    "squad",
     "bmad"
   ],
   "author": "Brian (BMad) Madison",

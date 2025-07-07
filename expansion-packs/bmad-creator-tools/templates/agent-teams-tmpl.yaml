@@ -44,7 +44,7 @@ sections:
       
       List the agents that make up this team. Guidelines:
       - Use shortened agent names (e.g., 'analyst' not 'business-analyst')
-      - Include 'bmad-orchestrator' for bmad-core teams as the coordinator
+      - Include 'ai-squad-orchestrator' for ai-squad-core teams as the coordinator
       - Only use '*' for an all-inclusive team (rare)
       - Order agents logically by workflow (analysis → design → development → testing)
       - For expansion packs, include both core agents and custom agents
@@ -58,7 +58,7 @@ sections:
         condition: Standard team configuration
         template: |
           # Core workflow agents
-          - bmad-orchestrator  # Team coordinator
+          - ai-squad-orchestrator  # Team coordinator
           - analyst            # Requirements and analysis
           - pm                 # Product management
           - architect          # System design
@@ -68,7 +68,7 @@ sections:
         condition: Minimal team configuration
         template: |
           # Minimal team for quick iterations
-          - bmad-orchestrator  # Team coordinator
+          - ai-squad-orchestrator  # Team coordinator
           - architect          # Design and planning
           - dev                # Implementation
       - id: specialized-team
@@ -116,7 +116,7 @@ sections:
             icon: 🚀
             description: Complete agile team for full-stack web applications. Handles everything from requirements to deployment.
           agents:
-            - bmad-orchestrator
+            - ai-squad-orchestrator
             - analyst
             - pm
             - architect
@@ -160,7 +160,7 @@ sections:
             icon: ⚡
             description: Minimal team for IDE usage. Just the essentials for quick development.
           agents:
-            - bmad-orchestrator
+            - ai-squad-orchestrator
             - architect
             - dev
           workflows: null

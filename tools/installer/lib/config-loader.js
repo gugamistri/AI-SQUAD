@@ -27,7 +27,7 @@ class ConfigLoader {
   }
 
   async getAvailableAgents() {
-    const agentsDir = path.join(this.getBmadCorePath(), 'agents');
+    const agentsDir = path.join(this.getAiSquadCorePath(), 'agents');
     
     try {
       const entries = await fs.readdir(agentsDir, { withFileTypes: true });
@@ -50,7 +50,7 @@ class ConfigLoader {
               agents.push({
                 id: agentId,
                 name: agentConfig.title || agentConfig.name || agentId,
-                file: `bmad-core/agents/${entry.name}`,
+                file: `ai-squad-core/agents/${entry.name}`,
                 description: agentConfig.whenToUse || 'No description available'
               });
             }
@@ -71,7 +71,7 @@ class ConfigLoader {
   }
 
   async getAvailableExpansionPacks() {
-    const expansionPacksDir = path.join(this.getBmadCorePath(), '..', 'expansion-packs');
+    const expansionPacksDir = path.join(this.getAiSquadCorePath(), '..', 'expansion-packs');
     
     try {
       const entries = await fs.readdir(expansionPacksDir, { withFileTypes: true });
@@ -93,7 +93,7 @@ class ConfigLoader {
               description: config['short-title'] || config.description || 'No description available',
               fullDescription: config.description || config['short-title'] || 'No description available',
               version: config.version || '1.0.0',
-              author: config.author || 'BMad Team',
+              author: config.author || 'AI Squad Team',
               packPath: packPath,
               dependencies: config.dependencies?.agents || []
             });
@@ -113,7 +113,7 @@ class ConfigLoader {
               description: 'No description available',
               fullDescription: 'No description available',
               version: '1.0.0',
-              author: 'BMad Team',
+              author: 'AI Squad Team',
               packPath: packPath,
               dependencies: []
             });
@@ -144,7 +144,7 @@ class ConfigLoader {
     
     // Add all resolved resources
     for (const resource of agentDeps.resources) {
-      const filePath = `.bmad-core/${resource.type}/${resource.id}.md`;
+      const filePath = `.ai-squad-core/${resource.type}/${resource.id}.md`;
       if (!depPaths.includes(filePath)) {
         depPaths.push(filePath);
       }
@@ -159,9 +159,9 @@ class ConfigLoader {
     return ideConfigs[ide] || null;
   }
 
-  getBmadCorePath() {
-    // Get the path to bmad-core relative to the installer (now under tools)
-    return path.join(__dirname, '..', '..', '..', 'bmad-core');
+  getAiSquadCorePath() {
+    // Get the path to ai-squad-core relative to the installer (now under tools)
+    return path.join(__dirname, '..', '..', '..', 'ai-squad-core');
   }
 
   getDistPath() {
@@ -170,11 +170,11 @@ class ConfigLoader {
   }
 
   getAgentPath(agentId) {
-    return path.join(this.getBmadCorePath(), 'agents', `${agentId}.md`);
+    return path.join(this.getAiSquadCorePath(), 'agents', `${agentId}.md`);
   }
 
   async getAvailableTeams() {
-    const teamsDir = path.join(this.getBmadCorePath(), 'agent-teams');
+    const teamsDir = path.join(this.getAiSquadCorePath(), 'agent-teams');
     
     try {
       const entries = await fs.readdir(teamsDir, { withFileTypes: true });
@@ -210,7 +210,7 @@ class ConfigLoader {
   }
 
   getTeamPath(teamId) {
-    return path.join(this.getBmadCorePath(), 'agent-teams', `${teamId}.yaml`);
+    return path.join(this.getAiSquadCorePath(), 'agent-teams', `${teamId}.yaml`);
   }
 
   async getTeamDependencies(teamId) {
@@ -225,11 +225,11 @@ class ConfigLoader {
       const depPaths = [];
       
       // Add team config file
-      depPaths.push(`.bmad-core/agent-teams/${teamId}.yaml`);
+      depPaths.push(`.ai-squad-core/agent-teams/${teamId}.yaml`);
       
       // Add all agents
       for (const agent of teamDeps.agents) {
-        const filePath = `.bmad-core/agents/${agent.id}.md`;
+        const filePath = `.ai-squad-core/agents/${agent.id}.md`;
         if (!depPaths.includes(filePath)) {
           depPaths.push(filePath);
         }
@@ -237,7 +237,7 @@ class ConfigLoader {
       
       // Add all resolved resources
       for (const resource of teamDeps.resources) {
-        const filePath = `.bmad-core/${resource.type}/${resource.id}.${resource.type === 'workflows' ? 'yaml' : 'md'}`;
+        const filePath = `.ai-squad-core/${resource.type}/${resource.id}.${resource.type === 'workflows' ? 'yaml' : 'md'}`;
         if (!depPaths.includes(filePath)) {
           depPaths.push(filePath);
         }

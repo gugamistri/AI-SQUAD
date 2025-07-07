@@ -264,7 +264,7 @@ class IdeSetup {
   async findAgentPath(agentId, installDir) {
     // Try to find the agent file in various locations
     const possiblePaths = [
-      path.join(installDir, ".bmad-core", "agents", `${agentId}.md`),
+      path.join(installDir, ".ai-squad-core", "agents", `${agentId}.md`),
       path.join(installDir, "agents", `${agentId}.md`)
     ];
     
@@ -288,8 +288,8 @@ class IdeSetup {
     const glob = require("glob");
     const allAgentIds = [];
     
-    // Check core agents in .bmad-core or root
-    let agentsDir = path.join(installDir, ".bmad-core", "agents");
+    // Check core agents in .ai-squad-core or root
+    let agentsDir = path.join(installDir, ".ai-squad-core", "agents");
     if (!(await fileManager.pathExists(agentsDir))) {
       agentsDir = path.join(installDir, "agents");
     }
@@ -314,7 +314,7 @@ class IdeSetup {
   async getAgentTitle(agentId, installDir) {
     // Try to find the agent file in various locations
     const possiblePaths = [
-      path.join(installDir, ".bmad-core", "agents", `${agentId}.md`),
+      path.join(installDir, ".ai-squad-core", "agents", `${agentId}.md`),
       path.join(installDir, "agents", `${agentId}.md`)
     ];
     
@@ -491,7 +491,7 @@ class IdeSetup {
         }
         mdContent += "\n```\n\n";
         mdContent += "## Project Standards\n\n";
-        mdContent += `- Always maintain consistency with project documentation in .bmad-core/\n`;
+        mdContent += `- Always maintain consistency with project documentation in .ai-squad-core/\n`;
         mdContent += `- Follow the agent's specific guidelines and constraints\n`;
         mdContent += `- Update relevant project files when making changes\n`;
         const relativePath = path.relative(installDir, agentPath).replace(/\\/g, '/');
@@ -611,7 +611,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     }
 
     console.log(chalk.green(`\n✓ Github Copilot setup complete!`));
-    console.log(chalk.dim(`You can now find the BMad agents in the Chat view's mode selector.`));
+    console.log(chalk.dim(`You can now find the AI Squad agents in the Chat view's mode selector.`));
 
     return true;
   }
@@ -629,7 +629,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
       try {
         const existingContent = await fileManager.readFile(settingsPath);
         existingSettings = JSON.parse(existingContent);
-        console.log(chalk.yellow("Found existing .vscode/settings.json. Merging BMad settings..."));
+        console.log(chalk.yellow("Found existing .vscode/settings.json. Merging AI Squad settings..."));
       } catch (error) {
         console.warn(chalk.yellow("Could not parse existing settings.json. Creating new one."));
         existingSettings = {};
@@ -639,7 +639,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     // Clear any previous output and add spacing to avoid conflicts with loaders
     console.log('\n'.repeat(2));
     console.log(chalk.blue("🔧 Github Copilot Agent Settings Configuration"));
-    console.log(chalk.dim("BMad works best with specific VS Code settings for optimal agent experience."));
+    console.log(chalk.dim("AI Squad works best with specific VS Code settings for optimal agent experience."));
     console.log(''); // Add extra spacing
     
     const { configChoice } = await inquirer.prompt([
@@ -665,7 +665,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
       }
     ]);
     
-    let bmadSettings = {};
+    let aiSquadSettings = {};
     
     if (configChoice === 'skip') {
       console.log(chalk.yellow("⚠️  Skipping VS Code settings configuration."));
@@ -681,7 +681,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     
     if (configChoice === 'defaults') {
       // Use recommended defaults
-      bmadSettings = {
+      aiSquadSettings = {
         "chat.agent.enabled": true,
         "chat.agent.maxRequests": 15,
         "github.copilot.chat.agent.runTasks": true,
@@ -689,7 +689,7 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
         "github.copilot.chat.agent.autoFix": true,
         "chat.tools.autoApprove": false
       };
-      console.log(chalk.green("✓ Using recommended BMad defaults for Github Copilot settings"));
+      console.log(chalk.green("✓ Using recommended AI Squad defaults for Github Copilot settings"));
     } else {
       // Manual configuration
       console.log(chalk.blue("\n📋 Let's configure each setting for your preferences:"));
@@ -746,8 +746,8 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
         spinner.start();
       }
       
-      bmadSettings = {
-        "chat.agent.enabled": true, // Always enabled - required for BMad agents
+      aiSquadSettings = {
+        "chat.agent.enabled": true, // Always enabled - required for AI Squad agents
         "chat.agent.maxRequests": parseInt(manualSettings.maxRequests),
         "github.copilot.chat.agent.runTasks": manualSettings.runTasks,
         "chat.mcp.discovery.enabled": manualSettings.mcpDiscovery,
@@ -759,14 +759,14 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
     }
     
     // Merge settings (existing settings take precedence to avoid overriding user preferences)
-    const mergedSettings = { ...bmadSettings, ...existingSettings };
+    const mergedSettings = { ...aiSquadSettings, ...existingSettings };
     
     // Write the updated settings
     await fileManager.writeFile(settingsPath, JSON.stringify(mergedSettings, null, 2));
     
     console.log(chalk.green("✓ VS Code workspace settings configured successfully"));
     console.log(chalk.dim("  Settings written to .vscode/settings.json:"));
-    Object.entries(bmadSettings).forEach(([key, value]) => {
+    Object.entries(aiSquadSettings).forEach(([key, value]) => {
       console.log(chalk.dim(`  • ${key}: ${value}`));
     });
     console.log(chalk.dim(""));

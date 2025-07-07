@@ -9,8 +9,8 @@ const path = require('path');
 const program = new Command();
 
 program
-  .name('bmad-build')
-  .description('BMad-Method build tool for creating web bundles')
+  .name('ai-squad-build')
+  .description('AI-SQUAD build tool for creating web bundles')
   .version('4.0.0');
 
 program

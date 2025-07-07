@@ -16,7 +16,7 @@ async function initializeModules() {
 
 class FileManager {
   constructor() {
-    this.manifestDir = ".bmad-core";
+    this.manifestDir = ".ai-squad-core";
     this.manifestFile = "install-manifest.yaml";
   }
 
@@ -84,7 +84,7 @@ class FileManager {
     );
 
     // Read version from core-config.yaml
-    const coreConfigPath = path.join(__dirname, "../../../bmad-core/core-config.yaml");
+    const coreConfigPath = path.join(__dirname, "../../../ai-squad-core/core-config.yaml");
     let coreVersion = "unknown";
     try {
       const coreConfigContent = await fs.readFile(coreConfigPath, "utf8");

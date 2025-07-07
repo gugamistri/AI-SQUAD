@@ -40,8 +40,8 @@ roo-permissions:
 # Agents not listed get order 99
 cline-order:
   # Core agents
-  bmad-master: 1
-  bmad-orchestrator: 2
+  ai-squad-master: 1
+  ai-squad-orchestrator: 2
   pm: 3
   analyst: 4
   architect: 5

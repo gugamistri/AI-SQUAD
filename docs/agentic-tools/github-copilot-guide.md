@@ -1,12 +1,14 @@
-# BMad Method Guide for GitHub Copilot
+# AI-SQUAD Guide for GitHub Copilot
 
-For the complete workflow, see the [BMad Workflow Guide](../bmad-workflow-guide.md).
+For the complete workflow, see the [AI-SQUAD Workflow Guide](../bmad-workflow-guide.md).
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 ## Installation
 
-When running `npx bmad-method install`, select **GitHub Copilot** as your IDE. This command will perform the following actions:
+When running `npx ai-squad install`, select **GitHub Copilot** as your IDE. This command will perform the following actions:
 
-- Create the `.bmad-core/` directory with all the agent rule files.
+- Create the `.ai-squad-core/` directory with all the agent rule files.
 - Create the `.vscode/` directory and add a `settings.json` file if it does not already exist, and add the basic configuration to enable GitHub Copilot's agent mode.
 - Create a chatmodes file under your .github folder for each specific agent being added
 
@@ -21,7 +23,7 @@ When running `npx bmad-method install`, select **GitHub Copilot** as your IDE. T
 
 You can switch between agents using the chat participant selector. The following agents are available for GitHub Copilot:
 
-- `bmad-master` - Master Task Executor
+- `ai-squad-master` - Master Task Executor
 - `dev` - Development expert
 - `qa` - Quality Assurance specialist
 - `ux-expert` - UX specialist

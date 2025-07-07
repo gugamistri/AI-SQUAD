@@ -30,7 +30,7 @@ function bumpVersion(currentVersion, type) {
 
 async function bumpCoreVersion() {
   try {
-    const coreConfigPath = path.join(__dirname, '..', 'bmad-core', 'core-config.yaml');
+    const coreConfigPath = path.join(__dirname, '..', 'ai-squad-core', 'core-config.yaml');
     
     const coreConfigContent = fs.readFileSync(coreConfigPath, 'utf8');
     const coreConfig = yaml.load(coreConfigContent);
@@ -42,8 +42,8 @@ async function bumpCoreVersion() {
     const updatedYaml = yaml.dump(coreConfig, { indent: 2 });
     fs.writeFileSync(coreConfigPath, updatedYaml);
     
-    console.log(`✓ BMad Core: ${oldVersion} → ${newVersion}`);
-    console.log(`\n✓ Successfully bumped BMad Core with ${bumpType} version bump`);
+    console.log(`✓ AI Squad Core: ${oldVersion} → ${newVersion}`);
+    console.log(`\n✓ Successfully bumped AI Squad Core with ${bumpType} version bump`);
     console.log('\nNext steps:');
     console.log('1. Test the changes');
     console.log('2. Commit: git add -A && git commit -m "chore: bump core version (' + bumpType + ')"');

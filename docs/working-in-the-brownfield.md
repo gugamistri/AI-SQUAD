@@ -11,7 +11,7 @@
 
 Brownfield development refers to adding features, fixing bugs, or modernizing existing software projects. Unlike greenfield (new) projects, brownfield work requires understanding existing code, respecting constraints, and ensuring new changes integrate seamlessly without breaking existing functionality.
 
-## When to Use BMad for Brownfield
+## When to Use AI-SQUAD for Brownfield
 
 - Add significant new features to existing applications
 - Modernize legacy codebases
@@ -22,7 +22,7 @@ Brownfield development refers to adding features, fixing bugs, or modernizing ex
 
 ## When NOT to use a Brownfield Flow
 
-If you have just completed an MVP with BMad, and you want to continue with post-MVP, its easier to just talk to the PM and ask him to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
+If you have just completed an MVP with AI-SQUAD, and you want to continue with post-MVP, its easier to just talk to the PM and ask him to work with you to create a new epic to add into the PRD, shard out the epic, update any architecture documents with the architect, and just go from there.
 
 ## The Complete Brownfield Workflow
 
@@ -356,6 +356,8 @@ Is this a major enhancement affecting multiple systems?
 
 ## Conclusion
 
-Brownfield development with BMad-Method provides structure and safety when modifying existing systems. The key is providing comprehensive context through documentation, using specialized templates that consider integration requirements, and following workflows that respect existing constraints while enabling progress.
+Brownfield development with AI-SQUAD provides structure and safety when modifying existing systems. The key is providing comprehensive context through documentation, using specialized templates that consider integration requirements, and following workflows that respect existing constraints while enabling progress.
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 Remember: **Document First, Plan Carefully, Integrate Safely**

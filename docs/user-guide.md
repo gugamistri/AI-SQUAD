@@ -1,10 +1,12 @@
-# BMad-Method Agentic Agile Driven Development User Guide
+# AI-SQUAD Agentic Agile Driven Development User Guide
 
-This comprehensive guide will help you understand and effectively use the BMad Method framework for AI-assisted software development along with many expansion purposes.
+This comprehensive guide will help you understand and effectively use the AI-SQUAD framework for AI-assisted software development along with many expansion purposes.
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 ## Table of Contents
 
-1. [Understanding BMad](#understanding-bmad)
+1. [Understanding AI-SQUAD](#understanding-ai-squad)
 2. [Getting Started](#getting-started)
 3. [Agent System](#agent-system)
 4. [Templates and Document Creation](#templates-and-document-creation)
@@ -13,11 +15,11 @@ This comprehensive guide will help you understand and effectively use the BMad M
 7. [Web UI Usage](#web-ui-usage)
 8. [Advanced Features](#advanced-features)
 
-## Understanding BMad
+## Understanding AI-SQUAD
 
-### What is BMad-Method?
+### What is AI-SQUAD?
 
-BMad-Method (Breakthrough Method of Agile AI-Driven Development) is an AI agent orchestration framework that provides specialized AI agents for every role in a complete Agile development team. Unlike generic AI assistants, each BMad agent has deep expertise in their specific domain and can collaborate with you using advanced elicitation techniques, and guided workflows
+AI-SQUAD (Agile Intelligence - Specialized Quality-Assured Development) is an AI agent orchestration framework that provides specialized AI agents for every role in a complete Agile development team. Unlike generic AI assistants, each AI-SQUAD agent has deep expertise in their specific domain and can collaborate with you using advanced elicitation techniques, and guided workflows
 
 ### Core Principles
 
@@ -27,7 +29,7 @@ BMad-Method (Breakthrough Method of Agile AI-Driven Development) is an AI agent 
 4. **Dynamic Dependencies**: Agents only load resources they need
 5. **Platform Agnostic**: Works with any Project Type or Agentic IDE
 
-### When to Use BMad
+### When to Use AI-SQUAD
 
 - **New Projects (Greenfield)**: Complete end-to-end development
 - **Existing Projects (Brownfield)**: Feature additions and enhancements
@@ -53,20 +55,20 @@ If you want to do the planning int he Web:
 
 ```bash
 # Interactive installation (recommended)
-npx bmad-method install
+npx ai-squad install
 ```
 
 ### CLI Commands
 
 ```bash
 # List all available agents
-npx bmad-method list
+npx ai-squad list
 
 # Install or update (automatically detects existing installations)
-npx bmad-method install
+npx ai-squad install
 
 # Check installation status
-npx bmad-method status
+npx ai-squad status
 ```
 
 ## Agent System
@@ -86,10 +88,10 @@ npx bmad-method status
 
 ### Meta Agents
 
-| Agent               | Role             | Primary Functions                     | When to Use                       |
-| ------------------- | ---------------- | ------------------------------------- | --------------------------------- |
-| `bmad-orchestrator` | Team Coordinator | Multi-agent workflows, role switching | Complex multi-role tasks          |
-| `bmad-master`       | Universal Expert | All capabilities without switching    | Single-session comprehensive work |
+| Agent                   | Role             | Primary Functions                     | When to Use                       |
+| ----------------------- | ---------------- | ------------------------------------- | --------------------------------- |
+| `ai-squad-orchestrator` | Team Coordinator | Multi-agent workflows, role switching | Complex multi-role tasks          |
+| `ai-squad-master`       | Universal Expert | All capabilities without switching    | Single-session comprehensive work |
 
 ### How Agents Work
 
@@ -106,7 +108,7 @@ dependencies:
     - create-doc.md
     - shard-doc.md
   data:
-    - bmad-kb.md
+    - ai-squad-kb.md
 ```
 
 **Key Points:**
@@ -142,7 +144,7 @@ dependencies:
 
 ### Understanding Templates
 
-BMad templates are **self-contained and interactive** - they embed both the desired document output and the LLM instructions needed to work with users. This means no separate task is needed for most document creation.
+AI-SQUAD templates are **self-contained and interactive** - they embed both the desired document output and the LLM instructions needed to work with users. This means no separate task is needed for most document creation.
 
 #### Template Structure
 
@@ -244,7 +246,7 @@ This provides 10 structured brainstorming actions:
 
 ### The Planning Workflow (Web UI)
 
-Before development begins, BMad follows a structured planning workflow that's ideally done in web UI for cost efficiency:
+Before development begins, AI-SQUAD follows a structured planning workflow that's ideally done in web UI for cost efficiency:
 
 ```mermaid
 graph TD
@@ -281,7 +283,7 @@ graph TD
 
 ### The Core Development Cycle (IDE)
 
-Once planning is complete and documents are sharded, BMad follows a structured development workflow:
+Once planning is complete and documents are sharded, AI-SQUAD follows a structured development workflow:
 
 ```mermaid
 graph TD
@@ -503,7 +505,7 @@ For existing projects:
 
 ### Web UI Commands
 
-type #help when in the Gem or Custom GPT with one of the teams, and the BMad-Orchestrator will give you an up to date list of commands.
+type #help when in the Gem or Custom GPT with one of the teams, and the AI-SQUAD-Orchestrator will give you an up to date list of commands.
 
 ### Web UI Agent Interaction
 
@@ -513,7 +515,7 @@ Web UI agents focus on planning and documentation. Here's how to interact with e
 
 ### Dynamic Resource Loading
 
-BMad's dependency system ensures agents only load necessary resources:
+AI-SQUAD's dependency system ensures agents only load necessary resources:
 
 - **Templates**: Only relevant document templates
 - **Tasks**: Only required automation tasks
@@ -549,7 +551,7 @@ dependencies:
 
 ### Workflow Customization
 
-Modify workflows in `.bmad-core/workflows/`:
+Modify workflows in `.ai-squad-core/workflows/`:
 
 ```yaml
 name: Custom Workflow
@@ -777,7 +779,7 @@ Agents can reference and load documents from the `docs/` folder:
 
 ### Technical Preferences System
 
-BMad includes a powerful personalization system through the `technical-preferences.md` file located in `.bmad-core/data/`.
+AI-SQUAD includes a powerful personalization system through the `technical-preferences.md` file located in `.ai-squad-core/data/`.
 
 #### What is technical-preferences.md?
 
@@ -871,11 +873,11 @@ When creating custom web bundles or uploading to AI platforms, include your `tec
 
 ### Core Configuration
 
-The `bmad-core/core-config.yaml` file is a critical V4 innovation that enables BMad to work seamlessly with any project structure, providing maximum flexibility and backwards compatibility.
+The `ai-squad-core/core-config.yaml` file is a critical V4 innovation that enables AI-SQUAD to work seamlessly with any project structure, providing maximum flexibility and backwards compatibility.
 
 #### Understanding core-config.yaml
 
-This configuration file acts as a map for BMad agents, telling them exactly where to find your project documents and how they're structured. It's what makes V4 agents intelligent enough to work with V3 projects, custom layouts, or any document organization you prefer.
+This configuration file acts as a map for AI-SQUAD agents, telling them exactly where to find your project documents and how they're structured. It's what makes V4 agents intelligent enough to work with V3 projects, custom layouts, or any document organization you prefer.
 
 #### Configuration Structure
 
@@ -1085,7 +1087,7 @@ customTechnicalDocuments:
 
 #### Best Practices
 
-1. **Always Configure for Your Structure**: Don't force your project to match BMad defaults
+1. **Always Configure for Your Structure**: Don't force your project to match AI-SQUAD defaults
 2. **Keep devLoadAlwaysFiles Focused**: Only include files needed for every dev task
 3. **Use Debug Log**: Enable when troubleshooting story implementation issues
 4. **Version Control core-config.yaml**: Track changes to understand project evolution
@@ -1131,7 +1133,7 @@ Add specialized capabilities:
 
 ## Conclusion
 
-BMad-Method provides a comprehensive framework for AI-assisted software development. By following this guide, you'll be able to:
+AI-SQUAD provides a comprehensive framework for AI-assisted software development. By following this guide, you'll be able to:
 
 - Effectively use specialized AI agents
 - Create professional documentation
@@ -1139,4 +1141,4 @@ BMad-Method provides a comprehensive framework for AI-assisted software developm
 - Integrate with your preferred tools
 - Maintain high quality standards
 
-Remember: BMad is designed to enhance your development process, not replace your expertise. Use it as a powerful tool to accelerate your projects while maintaining control over design decisions and implementation details.
+Remember: AI-SQUAD is designed to enhance your development process, not replace your expertise. Use it as a powerful tool to accelerate your projects while maintaining control over design decisions and implementation details.

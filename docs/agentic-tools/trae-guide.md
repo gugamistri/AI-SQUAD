@@ -1,14 +1,16 @@
-# BMad Method Guide for Trae
+# AI-SQUAD Guide for Trae
 
-For the complete workflow, see the [BMad Workflow Guide](../bmad-workflow-guide.md).
+For the complete workflow, see the [AI-SQUAD Workflow Guide](../bmad-workflow-guide.md).
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 ## Installation
 
-When running `npx bmad-method install`, select **Trae** as your IDE. This creates:
+When running `npx ai-squad install`, select **Trae** as your IDE. This creates:
 
-- `.bmad-core/` folder with all agents
+- `.ai-squad-core/` folder with all agents
 - `.trae/rules/` folder with agent rule files (`.md`)
 
-## Using BMad Agents in Trae
+## Using AI-SQUAD Agents in Trae
 
 Type `@agent-name` in chat to activate an agent.

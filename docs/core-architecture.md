@@ -1,8 +1,10 @@
-# BMad Method: Core Architecture
+# AI-SQUAD: Core Architecture
 
 ## 1. Overview
 
-The BMad Method is designed to provide agentic modes, tasks and templates to allow repeatable helpful workflows be it for agile agentic development, or expansion into vastly different domains. The core purpose of the project is to provide a structured yet flexible set of prompts, templates, and workflows that users can employ to guide AI agents (like Gemini, Claude, or ChatGPT) to perform complex tasks, guided discussions, or other meaningful domain specific flows in a predictable, high-quality manner.
+AI-SQUAD is designed to provide agentic modes, tasks and templates to allow repeatable helpful workflows be it for agile agentic development, or expansion into vastly different domains. The core purpose of the project is to provide a structured yet flexible set of prompts, templates, and workflows that users can employ to guide AI agents (like Gemini, Claude, or ChatGPT) to perform complex tasks, guided discussions, or other meaningful domain specific flows in a predictable, high-quality manner.
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 The systems core module facilitates a full development lifecycle tailored to the challenges of current modern AI Agentic tooling:
 
@@ -12,13 +14,13 @@ The systems core module facilitates a full development lifecycle tailored to the
 
 ## 2. System Architecture Diagram
 
-The entire BMad-Method ecosystem is designed around the installed `bmad-core` directory, which acts as the brain of the operation. The `tools` directory provides the means to process and package this brain for different environments.
+The entire AI-SQUAD ecosystem is designed around the installed `ai-squad-core` directory, which acts as the brain of the operation. The `tools` directory provides the means to process and package this brain for different environments.
 
 ```mermaid
 graph TD
-    subgraph BMad Method Project
+    subgraph AI-SQUAD Project
         subgraph Core Framework
-            A["bmad-core"]
+            A["ai-squad-core"]
             A --> B["agents"]
             A --> C["agent-teams"]
             A --> D["workflows"]
@@ -61,24 +63,24 @@ graph TD
 
 ## 3. Core Components
 
-The `bmad-core` directory contains all the definitions and resources that give the agents their capabilities.
+The `ai-squad-core` directory contains all the definitions and resources that give the agents their capabilities.
 
-### 3.1. Agents (`bmad-core/agents/`)
+### 3.1. Agents (`ai-squad-core/agents/`)
 
-- **Purpose**: These are the foundational building blocks of the system. Each markdown file (e.g., `bmad-master.md`, `pm.md`, `dev.md`) defines the persona, capabilities, and dependencies of a single AI agent.
+- **Purpose**: These are the foundational building blocks of the system. Each markdown file (e.g., `ai-squad-master.md`, `pm.md`, `dev.md`) defines the persona, capabilities, and dependencies of a single AI agent.
 - **Structure**: An agent file contains a YAML header that specifies its role, persona, dependencies, and startup instructions. These dependencies are lists of tasks, templates, checklists, and data files that the agent is allowed to use.
 - **Startup Instructions**: Agents can include startup sequences that load project-specific documentation from the `docs/` folder, such as coding standards, API specifications, or project structure documents. This provides immediate project context upon activation.
 - **Document Integration**: Agents can reference and load documents from the project's `docs/` folder as part of tasks, workflows, or startup sequences. Users can also drag documents directly into chat interfaces to provide additional context.
-- **Example**: The `bmad-master` agent lists its dependencies, which tells the build tool which files to include in a web bundle and informs the agent of its own capabilities.
+- **Example**: The `ai-squad-master` agent lists its dependencies, which tells the build tool which files to include in a web bundle and informs the agent of its own capabilities.
 
-### 3.2. Agent Teams (`bmad-core/agent-teams/`)
+### 3.2. Agent Teams (`ai-squad-core/agent-teams/`)
 
 - **Purpose**: Team files (e.g., `team-all.yaml`) define collections of agents and workflows that are bundled together for a specific purpose, like "full-stack development" or "backend-only". This creates a larger, pre-packaged context for web UI environments.
 - **Structure**: A team file lists the agents to include. It can use wildcards, such as `"*"` to include all agents. This allows for the creation of comprehensive bundles like `team-all`.
 
-### 3.3. Workflows (`bmad-core/workflows/`)
+### 3.3. Workflows (`ai-squad-core/workflows/`)
 
-- **Purpose**: Workflows are YAML files (e.g., `greenfield-fullstack.yaml`) that define a prescribed sequence of steps and agent interactions for a specific project type. They act as a strategic guide for the user and the `bmad-orchestrator` agent.
+- **Purpose**: Workflows are YAML files (e.g., `greenfield-fullstack.yaml`) that define a prescribed sequence of steps and agent interactions for a specific project type. They act as a strategic guide for the user and the `ai-squad-orchestrator` agent.
 - **Structure**: A workflow defines sequences for both complex and simple projects, lists the agents involved at each step, the artifacts they create, and the conditions for moving from one step to the next. It often includes a Mermaid diagram for visualization.
 
 ### 3.4. Reusable Resources (`templates`, `tasks`, `checklists`, `data`)
@@ -87,25 +89,25 @@ The `bmad-core` directory contains all the definitions and resources that give t
   - **`templates/`**: Contains markdown templates for common documents like PRDs, architecture specifications, and user stories.
   - **`tasks/`**: Defines the instructions for carrying out specific, repeatable actions like "shard-doc" or "create-next-story".
   - **`checklists/`**: Provides quality assurance checklists for agents like the Product Owner (`po`) or Architect.
-  - **`data/`**: Contains the core knowledge base (`bmad-kb.md`), technical preferences (`technical-preferences.md`), and other key data files.
+  - **`data/`**: Contains the core knowledge base (`ai-squad-kb.md`), technical preferences (`technical-preferences.md`), and other key data files.
 
 #### 3.4.1. Template Processing System
 
-A key architectural principle of BMad is that templates are self-contained and interactive - they embed both the desired document output and the LLM instructions needed to work with users. This means that in many cases, no separate task is needed for document creation, as the template itself contains all the processing logic.
+A key architectural principle of AI-SQUAD is that templates are self-contained and interactive - they embed both the desired document output and the LLM instructions needed to work with users. This means that in many cases, no separate task is needed for document creation, as the template itself contains all the processing logic.
 
-The BMad framework employs a sophisticated template processing system orchestrated by three key components:
+The AI-SQUAD framework employs a sophisticated template processing system orchestrated by three key components:
 
-- **`template-format.md`** (`bmad-core/utils/`): Defines the foundational markup language used throughout all BMad templates. This specification establishes syntax rules for variable substitution (`{{placeholders}}`), AI-only processing directives (`[[LLM: instructions]]`), and conditional logic blocks. Templates follow this format to ensure consistent processing across the system.
+- **`template-format.md`** (`ai-squad-core/utils/`): Defines the foundational markup language used throughout all AI-SQUAD templates. This specification establishes syntax rules for variable substitution (`{{placeholders}}`), AI-only processing directives (`[[LLM: instructions]]`), and conditional logic blocks. Templates follow this format to ensure consistent processing across the system.
 
-- **`create-doc.md`** (`bmad-core/tasks/`): Acts as the orchestration engine that manages the entire document generation workflow. This task coordinates template selection, manages user interaction modes (incremental vs. rapid generation), enforces template-format processing rules, and handles validation. It serves as the primary interface between users and the template system.
+- **`create-doc.md`** (`ai-squad-core/tasks/`): Acts as the orchestration engine that manages the entire document generation workflow. This task coordinates template selection, manages user interaction modes (incremental vs. rapid generation), enforces template-format processing rules, and handles validation. It serves as the primary interface between users and the template system.
 
-- **`advanced-elicitation.md`** (`bmad-core/tasks/`): Provides an interactive refinement layer that can be embedded within templates through `[[LLM: instructions]]` blocks. This component offers 10 structured brainstorming actions, section-by-section review capabilities, and iterative improvement workflows to enhance content quality.
+- **`advanced-elicitation.md`** (`ai-squad-core/tasks/`): Provides an interactive refinement layer that can be embedded within templates through `[[LLM: instructions]]` blocks. This component offers 10 structured brainstorming actions, section-by-section review capabilities, and iterative improvement workflows to enhance content quality.
 
 The system maintains a clean separation of concerns: template markup is processed internally by AI agents but never exposed to users, while providing sophisticated AI processing capabilities through embedded intelligence within the templates themselves.
 
 #### 3.4.2. Technical Preferences System
 
-BMad includes a personalization layer through the `technical-preferences.md` file in `bmad-core/data/`. This file serves as a persistent technical profile that influences agent behavior across all projects.
+AI-SQUAD includes a personalization layer through the `technical-preferences.md` file in `ai-squad-core/data/`. This file serves as a persistent technical profile that influences agent behavior across all projects.
 
 **Purpose and Benefits:**
 
@@ -142,14 +144,14 @@ The framework is designed for two primary environments: local IDEs and web-based
 
 ### 4.2. Environment-Specific Usage
 
-- **For IDEs**: Users interact with the agents directly via their markdown files in `bmad-core/agents/`. The IDE integration (for Cursor, Claude Code, etc.) knows how to call these agents.
+- **For IDEs**: Users interact with the agents directly via their markdown files in `ai-squad-core/agents/`. The IDE integration (for Cursor, Claude Code, etc.) knows how to call these agents.
 - **For Web UIs**: Users upload a pre-built bundle from `dist`. This single file provides the AI with the context of the entire team and all their required tools and knowledge.
 
-## 5. BMad Workflows
+## 5. AI-SQUAD Workflows
 
 ### 5.1. The Planning Workflow
 
-Before development begins, BMad follows a structured planning workflow that establishes the foundation for successful project execution:
+Before development begins, AI-SQUAD follows a structured planning workflow that establishes the foundation for successful project execution:
 
 ```mermaid
 graph TD
@@ -186,11 +188,11 @@ graph TD
 7. **Environment Transition**: Critical switch from web UI to IDE for development workflow
 8. **Document Preparation**: PO shards large documents for development consumption
 
-**Workflow Orchestration**: The `bmad-orchestrator` agent uses these workflow definitions to guide users through the complete process, ensuring proper transitions between planning (web UI) and development (IDE) phases.
+**Workflow Orchestration**: The `ai-squad-orchestrator` agent uses these workflow definitions to guide users through the complete process, ensuring proper transitions between planning (web UI) and development (IDE) phases.
 
 ### 5.2. The Core Development Cycle
 
-Once the initial planning and architecture phases are complete, the project moves into a cyclical development workflow, as detailed in the `bmad-kb.md`. This ensures a steady, sequential, and quality-controlled implementation process.
+Once the initial planning and architecture phases are complete, the project moves into a cyclical development workflow, as detailed in the `ai-squad-kb.md`. This ensures a steady, sequential, and quality-controlled implementation process.
 
 ```mermaid
 graph TD

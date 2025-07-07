@@ -1,15 +1,17 @@
-# BMad Method Guide for Gemini CLI
+# AI-SQUAD Guide for Gemini CLI
 
-For the complete workflow, see the [BMad Workflow Guide](../bmad-workflow-guide.md).
+For the complete workflow, see the [AI-SQUAD Workflow Guide](../bmad-workflow-guide.md).
+
+_Based on the BMad Method framework by Brian (BMad) Madison._
 
 ## Installation
 
-When running `npx bmad-method install`, select **Gemini CLI** as your IDE. This creates:
+When running `npx ai-squad install`, select **Gemini CLI** as your IDE. This creates:
 
 - `.gemini/agents/` directory with all agent context files
 - `.gemini/settings.json` configured to load all agents automatically
 
-## Using BMad Agents with Gemini CLI
+## Using AI-SQUAD Agents with Gemini CLI
 
 Simply mention the agent in your prompt:
 

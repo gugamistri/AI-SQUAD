@@ -5,7 +5,7 @@ This task guides you through creating a new BMad agent following the standard te
 ## Prerequisites
 
 - Agent template: `../templates/agent-tmpl.md`
-- Target directory: `.bmad-core/agents/`
+- Target directory: `.ai-squad-core/agents/`
 
 ## Steps
 
@@ -27,16 +27,16 @@ Collect the following information from the user:
 
 **IMPORTANT**:
 
-- If your agent will perform any actions → You MUST create corresponding tasks in `.bmad-core/tasks/`
-- If your agent will create any documents → You MUST create templates in `.bmad-core/templates/` AND include the `create-doc` task
+- If your agent will perform any actions → You MUST create corresponding tasks in `.ai-squad-core/tasks/`
+- If your agent will create any documents → You MUST create templates in `.ai-squad-core/templates/` AND include the `create-doc` task
 
 Determine:
 
 - **Custom Commands**: Agent-specific commands beyond the defaults
-- **Required Tasks**: Tasks from `.bmad-core/tasks/` the agent needs
+- **Required Tasks**: Tasks from `.ai-squad-core/tasks/` the agent needs
   - For any action the agent performs, a corresponding task file must exist
   - Always include `create-doc` if the agent creates any documents
-- **Required Templates**: Templates from `.bmad-core/templates/` the agent uses
+- **Required Templates**: Templates from `.ai-squad-core/templates/` the agent uses
   - For any document the agent can create, a template must exist
 - **Required Checklists**: Checklists the agent references
 - **Required Data**: Data files the agent needs access to
@@ -67,7 +67,7 @@ Created during agent setup:
 
 ### 4. Create Agent File
 
-1. Copy the template from `.bmad-core/templates/agent-tmpl.md`
+1. Copy the template from `.ai-squad-core/templates/agent-tmpl.md`
 2. Replace all placeholders with gathered information:
 
    - `[AGENT_ID]` → agent id
@@ -83,7 +83,7 @@ Created during agent setup:
    - `[STARTUP_INSTRUCTIONS]` → what the agent should do on activation
    - Add custom commands, tasks, templates, etc.
 
-3. Save as `.bmad-core/agents/[agent-id].md`
+3. Save as `.ai-squad-core/agents/[agent-id].md`
 
 ### 4. Validate Agent
 
@@ -106,7 +106,7 @@ Present to the user:
 
 ```text
 ✅ Agent Created: [agent-name]
-   Location: .bmad-core/agents/[agent-id].md
+   Location: .ai-squad-core/agents/[agent-id].md
 
 📝 Dependencies Created:
    Tasks:
@@ -156,7 +156,7 @@ persona:
 
 When a required task or template doesn't exist:
 
-1. **For Missing Tasks**: Create using `.bmad-core/templates/task-template.md`
+1. **For Missing Tasks**: Create using `.ai-squad-core/templates/task-template.md`
 
    - Name it descriptively (e.g., `analyze-metrics.md`)
    - Define clear steps for the action
