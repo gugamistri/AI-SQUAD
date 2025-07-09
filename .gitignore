@@ -23,8 +23,8 @@ sample-project/*
 .claude
 .windsurf/
 .trae/
-.bmad-core
-.bmad-creator-tools
+.ai-squad-core
+.ai-squad-creator-tools
 .gemini
-.bmad*/.cursor/
+.ai-squad*/.cursor/
 web-bundles/

@@ -377,7 +377,7 @@ class IdeSetup {
 
     for (const agentId of agents) {
       // Skip if already exists
-      if (existingModes.includes(`bmad-${agentId}`)) {
+      if (existingModes.includes(`ai-squad-${agentId}`)) {
         console.log(chalk.dim(`Skipping ${agentId} - already exists in .roomodes`));
         continue;
       }
@@ -407,7 +407,7 @@ class IdeSetup {
             : `You are a ${title} specializing in ${title.toLowerCase()} tasks and responsibilities.`;
 
           // Build mode entry with proper formatting (matching exact indentation)
-          newModesContent += ` - slug: bmad-${agentId}\n`;
+          newModesContent += ` - slug: ai-squad-${agentId}\n`;
           newModesContent += `   name: '${icon} ${title}'\n`;
           newModesContent += `   roleDefinition: ${roleDefinition}\n`;
           newModesContent += `   whenToUse: ${whenToUse}\n`;
@@ -427,7 +427,7 @@ class IdeSetup {
             newModesContent += `    - edit\n`;
           }
 
-          console.log(chalk.green(`✓ Added mode: bmad-${agentId} (${icon} ${title})`));
+          console.log(chalk.green(`✓ Added mode: ai-squad-${agentId} (${icon} ${title})`));
         }
       }
     }

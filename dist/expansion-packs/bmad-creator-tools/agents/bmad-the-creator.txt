@@ -8,13 +8,13 @@ You are now operating as a specialized AI agent from the AI Squad framework. Thi
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: .bmad-creator-tools/folder/filename.md ====================`
-- `==================== END: .bmad-creator-tools/folder/filename.md ====================`
+- `==================== START: .ai-squad-creator-tools/folder/filename.md ====================`
+- `==================== END: .ai-squad-creator-tools/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always the full path with dot prefix (e.g., `.bmad-creator-tools/personas/analyst.md`, `.bmad-creator-tools/tasks/create-story.md`)
+- The format is always the full path with dot prefix (e.g., `.ai-squad-creator-tools/personas/analyst.md`, `.ai-squad-creator-tools/tasks/create-story.md`)
 - If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: .bmad-creator-tools/utils/template-format.md ====================`
-- `tasks: create-story` → Look for `==================== START: .bmad-creator-tools/tasks/create-story.md ====================`
+- `utils: template-format` → Look for `==================== START: .ai-squad-creator-tools/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .ai-squad-creator-tools/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -39,7 +39,7 @@ These references map directly to bundle sections:
 ---
 
 
-==================== START: .bmad-creator-tools/agents/bmad-the-creator.md ====================
+==================== START: .ai-squad-creator-tools/agents/bmad-the-creator.md ====================
 # bmad-the-creator
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -90,9 +90,9 @@ dependencies:
     - agent-tmpl.yaml
     - expansion-pack-plan-tmpl.yaml
 ```
-==================== END: .bmad-creator-tools/agents/bmad-the-creator.md ====================
+==================== END: .ai-squad-creator-tools/agents/bmad-the-creator.md ====================
 
-==================== START: .bmad-creator-tools/tasks/create-agent.md ====================
+==================== START: .ai-squad-creator-tools/tasks/create-agent.md ====================
 # Create Agent Task
 
 This task guides you through creating a new BMad agent following the standard template.
@@ -293,9 +293,9 @@ dependencies:
 - Test thoroughly before distribution
 - Follow existing agent patterns for consistency
 - Remember: No task = agent can't do it, No template = agent can't create it
-==================== END: .bmad-creator-tools/tasks/create-agent.md ====================
+==================== END: .ai-squad-creator-tools/tasks/create-agent.md ====================
 
-==================== START: .bmad-creator-tools/tasks/generate-expansion-pack.md ====================
+==================== START: .ai-squad-creator-tools/tasks/generate-expansion-pack.md ====================
 # Create Expansion Pack Task
 
 This task helps you create a sophisticated BMad expansion pack with advanced agent orchestration, template systems, and quality assurance patterns based on proven best practices.
@@ -1316,9 +1316,9 @@ Embedded knowledge (automatic):
 - [ ] Template conditional content tested with different scenarios
 - [ ] Workflow decision trees validated with sample use cases
 - [ ] Character interactions tested for consistency and professional authenticity
-==================== END: .bmad-creator-tools/tasks/generate-expansion-pack.md ====================
+==================== END: .ai-squad-creator-tools/tasks/generate-expansion-pack.md ====================
 
-==================== START: .bmad-creator-tools/tasks/advanced-elicitation.md ====================
+==================== START: .ai-squad-creator-tools/tasks/advanced-elicitation.md ====================
 # Advanced Elicitation Task
 
 ## Purpose
@@ -1438,9 +1438,9 @@ Choose a number (0-8) or 9 to proceed:
 - **Stay Relevant**: Tie all elicitation back to the specific content being analyzed
 - **Identify Personas**: For multi-persona methods, clearly identify which viewpoint is speaking
 - **Maintain Flow**: Keep the process moving efficiently
-==================== END: .bmad-creator-tools/tasks/advanced-elicitation.md ====================
+==================== END: .ai-squad-creator-tools/tasks/advanced-elicitation.md ====================
 
-==================== START: .bmad-creator-tools/tasks/create-deep-research-prompt.md ====================
+==================== START: .ai-squad-creator-tools/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -1742,9 +1742,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: .bmad-creator-tools/tasks/create-deep-research-prompt.md ====================
+==================== END: .ai-squad-creator-tools/tasks/create-deep-research-prompt.md ====================
 
-==================== START: .bmad-creator-tools/templates/agent-tmpl.yaml ====================
+==================== START: .ai-squad-creator-tools/templates/agent-tmpl.yaml ====================
 template:
   id: agent-template-v2
   name: Agent Definition
@@ -1899,9 +1899,9 @@ sections:
           - materials-guide.md
         utils:
           - template-format
-==================== END: .bmad-creator-tools/templates/agent-tmpl.yaml ====================
+==================== END: .ai-squad-creator-tools/templates/agent-tmpl.yaml ====================
 
-==================== START: .bmad-creator-tools/templates/expansion-pack-plan-tmpl.yaml ====================
+==================== START: .ai-squad-creator-tools/templates/expansion-pack-plan-tmpl.yaml ====================
 template:
   id: expansion-pack-plan-template-v2
   name: Expansion Pack Plan
@@ -2022,4 +2022,4 @@ sections:
       ---
       
       **Next Steps**: Once approved, proceed with Phase 3 implementation starting with the orchestrator agent.
-==================== END: .bmad-creator-tools/templates/expansion-pack-plan-tmpl.yaml ====================
+==================== END: .ai-squad-creator-tools/templates/expansion-pack-plan-tmpl.yaml ====================

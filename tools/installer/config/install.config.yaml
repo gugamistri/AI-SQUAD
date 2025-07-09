@@ -1,9 +1,9 @@
 installation-options:
   full:
-    name: Complete BMad Core
+    name: Complete AI-SQUAD Core
     description: Copy the entire .ai-squad-core folder with all agents, templates, and tools
     action: copy-folder
-    source: bmad-core
+    source: ai-squad-core
   single-agent:
     name: Single Agent
     description: Select and install a single agent with its dependencies
@@ -15,7 +15,7 @@ ide-configurations:
     format: multi-file
     command-suffix: .mdc
     instructions: |
-      # To use BMad agents in Cursor:
+      # To use AI-SQUAD agents in Cursor:
       # 1. Press Ctrl+L (Cmd+L on Mac) to open the chat
       # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
       # 3. The agent will adopt that persona for the conversation
@@ -25,7 +25,7 @@ ide-configurations:
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Claude Code:
+      # To use AI-SQUAD agents in Claude Code:
       # 1. Type /agent-name (e.g., "/dev", "/pm", "/architect")
       # 2. Claude will switch to that agent's persona
   windsurf:
@@ -34,7 +34,7 @@ ide-configurations:
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Windsurf:
+      # To use AI-SQUAD agents in Windsurf:
       # 1. Type @agent-name (e.g., "@dev", "@pm")
       # 2. Windsurf will adopt that agent's persona
   trae:
@@ -43,7 +43,7 @@ ide-configurations:
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Trae:
+      # To use AI-SQUAD agents in Trae:
       # 1. Type @agent-name (e.g., "@dev", "@pm", "@architect")
       # 2. Trae will adopt that agent's persona
   roo:
@@ -51,9 +51,9 @@ ide-configurations:
     format: custom-modes
     file: .roomodes
     instructions: |
-      # To use BMad agents in Roo Code:
+      # To use AI-SQUAD agents in Roo Code:
       # 1. Open the mode selector (usually in the status bar)
-      # 2. Select any bmad-{agent} mode (e.g., "bmad-dev", "bmad-pm")
+      # 2. Select any ai-squad-{agent} mode (e.g., "ai-squad-dev", "ai-squad-pm")
       # 3. The AI will adopt that agent's full personality and capabilities
   cline:
     name: Cline
@@ -61,7 +61,7 @@ ide-configurations:
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents in Cline:
+      # To use AI-SQUAD agents in Cline:
       # 1. Open the Cline chat panel in VS Code
       # 2. Type @agent-name (e.g., "@dev", "@pm", "@architect")
       # 3. The agent will adopt that persona for the conversation
@@ -71,7 +71,7 @@ ide-configurations:
     rule-dir: .gemini/agents/
     format: context-files
     instructions: |
-      # To use BMad agents with the Gemini CLI:
+      # To use AI-SQUAD agents with the Gemini CLI:
       # 1. The installer creates a .gemini/ directory in your project.
       # 2. It also configures .gemini/settings.json to load all agent files.
       # 3. Simply mention the agent in your prompt (e.g., "As @dev, ...").
@@ -82,7 +82,7 @@ ide-configurations:
     format: multi-file
     command-suffix: .md
     instructions: |
-      # To use BMad agents with Github Copilot:
+      # To use AI-SQUAD agents with Github Copilot:
       # 1. The installer creates a .github/chatmodes/ directory in your project
       # 2. Open the Chat view (`⌃⌘I` on Mac, `Ctrl+Alt+I` on Windows/Linux) and select **Agent** from the chat mode selector.
       # 3. The agent will adopt that persona for the conversation

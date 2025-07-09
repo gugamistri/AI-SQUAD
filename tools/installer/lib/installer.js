@@ -123,6 +123,15 @@ class Installer {
       if (match) {
         content = content.replace(nameRegex, `$1${newName}`);
         await fs.writeFile(agentFilePath, content, "utf8");
+      } else {
+        // If no name field exists, add it after the id field
+        const idRegex = /(\s+id:\s+[^\n\r]+)/;
+        const idMatch = content.match(idRegex);
+        
+        if (idMatch) {
+          content = content.replace(idRegex, `$1\n  name: ${newName}`);
+          await fs.writeFile(agentFilePath, content, "utf8");
+        }
       }
     } catch (error) {
       console.warn(`Warning: Could not update name in ${agentFilePath}: ${error.message}`);
@@ -271,7 +280,7 @@ class Installer {
       type: "clean",
       hasV4Manifest: false,
       hasV3Structure: false,
-      hasBmadCore: false,
+      hasAiSquadCore: false,
       hasOtherFiles: false,
       manifest: null,
       expansionPacks: {},
@@ -344,10 +353,35 @@ class Installer {
       const aiSquadCoreDestDir = path.join(installDir, ".ai-squad-core");
       await fileManager.copyDirectory(sourceDir, aiSquadCoreDestDir);
       
-      // Update language configuration if specified
+      // Update language configuration if specified or if default language is not English
+      const coreConfigPath = path.join(aiSquadCoreDestDir, "core-config.yaml");
+      let shouldUpdateLanguage = false;
+      let targetLanguage = 'en';
+      
       if (config.language && config.language !== 'en') {
-        spinner.text = "Configuring language preferences...";
-        await this.updateLanguageConfiguration(aiSquadCoreDestDir, config.language);
+        // Language explicitly specified during installation
+        shouldUpdateLanguage = true;
+        targetLanguage = config.language;
+      } else {
+        // Check if core-config.yaml has a non-English default language
+        try {
+          const yaml = require("js-yaml");
+          const fs = require("fs-extra");
+          const configContent = await fs.readFile(coreConfigPath, "utf8");
+          const coreConfig = yaml.load(configContent);
+          
+          if (coreConfig.language && coreConfig.language.default && coreConfig.language.default !== 'en') {
+            shouldUpdateLanguage = true;
+            targetLanguage = coreConfig.language.default;
+          }
+        } catch (error) {
+          console.warn("Could not read core-config.yaml for language detection");
+        }
+      }
+      
+      if (shouldUpdateLanguage) {
+        spinner.text = `Configuring language preferences (${targetLanguage})...`;
+        await this.updateLanguageConfiguration(aiSquadCoreDestDir, targetLanguage);
       }
       
       // Copy common/ items to .ai-squad-core
@@ -711,7 +745,7 @@ class Installer {
             type: "input",
             name: "newDir",
             message: "Enter new installation directory:",
-            default: path.join(path.dirname(installDir), "bmad-project"),
+            default: path.join(path.dirname(installDir), "ai-squad-project"),
           },
         ]);
         config.directory = newDir;
@@ -897,7 +931,7 @@ class Installer {
     const aiSquadCorePath = path.join(installDir, ".ai-squad-core");
     if (await fileManager.pathExists(aiSquadCorePath)) {
       spinner.text = "Removing existing installation...";
-      await fileManager.removeDirectory(bmadCorePath);
+      await fileManager.removeDirectory(aiSquadCorePath);
     }
     
     spinner.text = "Installing fresh copy...";
@@ -975,11 +1009,11 @@ class Installer {
     if (config.installType === "single-agent") {
       console.log(
         chalk.dim(
-          "\nNeed other agents? Run: npx bmad-method install --agent=<name>"
+          "\nNeed other agents? Run: npx ai-squad install --agent=<name>"
         )
       );
       console.log(
-        chalk.dim("Need everything? Run: npx bmad-method install --full")
+        chalk.dim("Need everything? Run: npx ai-squad install --full")
       );
     }
 
@@ -1023,7 +1057,7 @@ class Installer {
     }
 
     console.log(
-      chalk.dim("\nInstall with: npx bmad-method install --agent=<id>\n")
+      chalk.dim("\nInstall with: npx ai-squad install --agent=<id>\n")
     );
   }
 
@@ -1050,7 +1084,7 @@ class Installer {
     }
 
     console.log(
-      chalk.dim("Install with: npx bmad-method install --full --expansion-packs <id>\n")
+      chalk.dim("Install with: npx ai-squad install --full --expansion-packs <id>\n")
     );
   }
 
@@ -1421,9 +1455,9 @@ class Installer {
         const teamConfig = yaml.parse(teamContent);
         const agents = teamConfig.agents || [];
         
-        // Add bmad-orchestrator if not present (required for all teams)
-        if (!agents.includes('bmad-orchestrator')) {
-          agents.unshift('bmad-orchestrator');
+        // Add ai-squad-orchestrator if not present (required for all teams)
+        if (!agents.includes('ai-squad-orchestrator')) {
+          agents.unshift('ai-squad-orchestrator');
         }
         
         // Check each agent in the team
@@ -1807,11 +1841,11 @@ class Installer {
     let currentDir = process.cwd();
 
     while (currentDir !== path.dirname(currentDir)) {
-      const bmadDir = path.join(currentDir, ".ai-squad-core");
-      const manifestPath = path.join(bmadDir, "install-manifest.yaml");
+      const aiSquadDir = path.join(currentDir, ".ai-squad-core");
+      const manifestPath = path.join(aiSquadDir, "install-manifest.yaml");
 
       if (await fileManager.pathExists(manifestPath)) {
-        return bmadDir;
+        return aiSquadDir;
       }
 
       currentDir = path.dirname(currentDir);

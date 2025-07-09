@@ -8,13 +8,13 @@ You are now operating as a specialized AI agent from the AI Squad framework. Thi
 
 2. **Resource Navigation**: This bundle contains all resources you need. Resources are marked with tags like:
 
-- `==================== START: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
-- `==================== END: .bmad-2d-phaser-game-dev/folder/filename.md ====================`
+- `==================== START: .ai-squad-2d-phaser-game-dev/folder/filename.md ====================`
+- `==================== END: .ai-squad-2d-phaser-game-dev/folder/filename.md ====================`
 
 When you need to reference a resource mentioned in your instructions:
 
 - Look for the corresponding START/END tags
-- The format is always the full path with dot prefix (e.g., `.bmad-2d-phaser-game-dev/personas/analyst.md`, `.bmad-2d-phaser-game-dev/tasks/create-story.md`)
+- The format is always the full path with dot prefix (e.g., `.ai-squad-2d-phaser-game-dev/personas/analyst.md`, `.ai-squad-2d-phaser-game-dev/tasks/create-story.md`)
 - If a section is specified (e.g., `{root}/tasks/create-story.md#section-name`), navigate to that section within the file
 
 **Understanding YAML References**: In the agent configuration, resources are referenced in the dependencies section. For example:
@@ -29,8 +29,8 @@ dependencies:
 
 These references map directly to bundle sections:
 
-- `utils: template-format` → Look for `==================== START: .bmad-2d-phaser-game-dev/utils/template-format.md ====================`
-- `tasks: create-story` → Look for `==================== START: .bmad-2d-phaser-game-dev/tasks/create-story.md ====================`
+- `utils: template-format` → Look for `==================== START: .ai-squad-2d-phaser-game-dev/utils/template-format.md ====================`
+- `tasks: create-story` → Look for `==================== START: .ai-squad-2d-phaser-game-dev/tasks/create-story.md ====================`
 
 3. **Execution Context**: You are operating in a web environment. All your capabilities and knowledge are contained within this bundle. Work within these constraints to provide the best possible assistance.
 
@@ -39,7 +39,7 @@ These references map directly to bundle sections:
 ---
 
 
-==================== START: .bmad-2d-phaser-game-dev/agent-teams/phaser-2d-nodejs-game-team.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/agent-teams/phaser-2d-nodejs-game-team.yaml ====================
 bundle:
   name: Phaser 2D NodeJS Game Team
   icon: 🎮
@@ -53,9 +53,9 @@ agents:
 workflows:
   - game-dev-greenfield.md
   - game-prototype.md
-==================== END: .bmad-2d-phaser-game-dev/agent-teams/phaser-2d-nodejs-game-team.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/agent-teams/phaser-2d-nodejs-game-team.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/agents/analyst.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/agents/analyst.md ====================
 # analyst
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -124,9 +124,9 @@ dependencies:
     - ai-squad-kb.md
     - brainstorming-techniques.md
 ```
-==================== END: .bmad-2d-phaser-game-dev/agents/analyst.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/agents/analyst.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/agents/ai-squad-orchestrator.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/agents/ai-squad-orchestrator.md ====================
 # ai-squad-orchestrator
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -141,7 +141,7 @@ language-directives:
 activation-instructions:
   - Load language preferences from core-config.yaml
   - Mention *help shows all available commands and options
-  - Check for active workflow plan using .bmad-2d-phaser-game-dev/utils/plan-management.md
+  - Check for active workflow plan using .ai-squad-2d-phaser-game-dev/utils/plan-management.md
   - 'If plan exists: Show 📋 Active plan: {workflow} ({progress}% complete). Use *plan-status for details.'
   - 'If plan exists: Suggest next action based on plan progress'
   - Assess user goal against available agents and workflows in this bundle
@@ -273,9 +273,9 @@ dependencies:
     - workflow-management.md
     - language-manager.md
 ```
-==================== END: .bmad-2d-phaser-game-dev/agents/ai-squad-orchestrator.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/agents/ai-squad-orchestrator.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/agents/game-designer.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/agents/game-designer.md ====================
 # game-designer
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -331,9 +331,9 @@ dependencies:
   checklists:
     - game-design-checklist.md
 ```
-==================== END: .bmad-2d-phaser-game-dev/agents/game-designer.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/agents/game-designer.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/agents/game-developer.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/agents/game-developer.md ====================
 # game-developer
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -397,9 +397,9 @@ dependencies:
   data:
     - development-guidelines.md
 ```
-==================== END: .bmad-2d-phaser-game-dev/agents/game-developer.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/agents/game-developer.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/agents/game-sm.md ====================
 # game-sm
 
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
@@ -448,9 +448,9 @@ dependencies:
   checklists:
     - game-story-dod-checklist.md
 ```
-==================== END: .bmad-2d-phaser-game-dev/agents/game-sm.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/agents/game-sm.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
 ---
 docOutputLocation: docs/brainstorming-session-results.md
 template: brainstorming-output-tmpl
@@ -587,9 +587,9 @@ Generate structured document with these sections:
 - Always ask before switching techniques: "Ready to try a different approach?"
 - Offer options: "Should we explore this idea deeper or generate more alternatives?"
 - Respect their process and timing
-==================== END: .bmad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/facilitate-brainstorming-session.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
 # Create Deep Research Prompt Task
 
 This task helps create comprehensive research prompts for various types of deep analysis. It can process inputs from brainstorming sessions, project briefs, market research, or specific research questions to generate targeted prompts for deeper investigation.
@@ -891,9 +891,9 @@ Present these numbered options to the user:
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
-==================== END: .bmad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/create-deep-research-prompt.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/create-doc.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/create-doc.md ====================
 # Create Document from Template (YAML Driven)
 
 ## CRITICAL: Mandatory Elicitation Format
@@ -973,9 +973,9 @@ User can type `#yolo` to toggle to YOLO mode (process all sections at once).
 - Select options 2-9 from data/elicitation-methods only
 - Provide detailed rationale explaining decisions
 - End with "Select 1-9 or just type your question/feedback:"
-==================== END: .bmad-2d-phaser-game-dev/tasks/create-doc.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/create-doc.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 # Advanced Game Design Elicitation Task
 
 ## Purpose
@@ -1087,9 +1087,9 @@ The questions and perspectives offered should always consider:
 - Performance implications for 60 FPS targets
 - Cross-platform compatibility (desktop and mobile)
 - Game development best practices and common pitfalls
-==================== END: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/document-project.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/document-project.md ====================
 # Document an Existing Project
 
 ## Purpose
@@ -1440,9 +1440,9 @@ Apply the advanced elicitation task after major sections to refine based on user
 - Documents technical debt, workarounds, and constraints honestly
 - For brownfield projects with PRD: Provides clear enhancement impact analysis
 - The goal is PRACTICAL documentation for AI agents doing real work
-==================== END: .bmad-2d-phaser-game-dev/tasks/document-project.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/document-project.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/project-brief-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/project-brief-tmpl.yaml ====================
 template:
   id: project-brief-template-v2
   name: Project Brief
@@ -1664,9 +1664,9 @@ sections:
         title: PM Handoff
         content: |
           This Project Brief provides the full context for {{project_name}}. Please start in 'PRD Generation Mode', review the brief thoroughly to work with the user to create the PRD section by section as the template indicates, asking for any necessary clarification or suggesting improvements.
-==================== END: .bmad-2d-phaser-game-dev/templates/project-brief-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/project-brief-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/market-research-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/market-research-tmpl.yaml ====================
 template:
   id: market-research-template-v2
   name: Market Research Report
@@ -1919,9 +1919,9 @@ sections:
       - id: additional-analysis
         title: C. Additional Analysis
         instruction: Any supplementary analysis not included in main body
-==================== END: .bmad-2d-phaser-game-dev/templates/market-research-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/market-research-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/competitor-analysis-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/competitor-analysis-tmpl.yaml ====================
 template:
   id: competitor-analysis-template-v2
   name: Competitive Analysis Report
@@ -2215,9 +2215,9 @@ sections:
           - Weekly: {{weekly_items}}
           - Monthly: {{monthly_items}}
           - Quarterly: {{quarterly_analysis}}
-==================== END: .bmad-2d-phaser-game-dev/templates/competitor-analysis-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/competitor-analysis-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.yaml ====================
 template:
   id: brainstorming-output-template-v2
   name: Brainstorming Session Results
@@ -2374,9 +2374,9 @@ sections:
       ---
       
       *Session facilitated using the BMAD-METHOD brainstorming framework*
-==================== END: .bmad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/brainstorming-output-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/data/ai-squad-kb.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/data/ai-squad-kb.md ====================
 # AI-SQUAD Knowledge Base
 
 ## Overview
@@ -3240,9 +3240,9 @@ Use the **expansion-creator** pack to build your own:
 - **Documentation**: Check `docs/` folder for project-specific context
 - **Community**: Discord and GitHub resources available for support
 - **Contributing**: See `CONTRIBUTING.md` for full guidelines
-==================== END: .bmad-2d-phaser-game-dev/data/ai-squad-kb.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/data/ai-squad-kb.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
 # Brainstorming Techniques Data
 
 ## Creative Expansion
@@ -3279,9 +3279,9 @@ Use the **expansion-creator** pack to build your own:
 18. **Resource Constraints**: "What if you had only $10 and 1 hour?"
 19. **Metaphor Mapping**: Use extended metaphors to explore solutions
 20. **Question Storming**: Generate questions instead of answers first
-==================== END: .bmad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/data/brainstorming-techniques.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
 # Create Workflow Plan Task
 
 ## Purpose
@@ -3581,9 +3581,9 @@ BMad Orchestrator: "Based on your answers, I recommend the brownfield-fullstack 
 
 BMad Orchestrator: "I've created a workflow plan at docs/workflow-plan.md. This shows all the steps we'll go through, what documents will be created, and where you'll need to make decisions. Would you like to review it together?"
 ```
-==================== END: .bmad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/create-workflow-plan.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
 # KB Mode Interaction Task
 
 ## Purpose
@@ -3661,9 +3661,9 @@ Or ask me about anything else related to BMad-Method!
 **User**: Tell me about workflows
 
 **Assistant**: [Provides focused information about workflows from the KB, then offers to explore specific workflow types or related topics]
-==================== END: .bmad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/kb-mode-interaction.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
 # Update Workflow Plan Task
 
 ## Purpose
@@ -3916,9 +3916,9 @@ The update is successful when:
 - Consider creating backup before major updates
 - Updates should enhance, not complicate, the workflow experience
 - If plan becomes too cluttered, suggest creating fresh plan for next phase
-==================== END: .bmad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/update-workflow-plan.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/data/elicitation-methods.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/data/elicitation-methods.md ====================
 # Elicitation Methods Data
 
 ## Core Reflective Methods
@@ -4073,9 +4073,9 @@ The update is successful when:
 - Acknowledge choice to finalize current work
 - Accept output as-is or move to next step
 - Prepare to continue without additional elicitation
-==================== END: .bmad-2d-phaser-game-dev/data/elicitation-methods.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/data/elicitation-methods.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/utils/plan-management.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/utils/plan-management.md ====================
 # Plan Management Utility
 
 ## Purpose
@@ -4300,9 +4300,9 @@ Would you like to:
 - Malformed plan: Warn but continue, treat as no plan
 - Update failures: Log but don't block task completion
 - Parse errors: Fallback to basic text search
-==================== END: .bmad-2d-phaser-game-dev/utils/plan-management.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/utils/plan-management.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/utils/workflow-management.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/utils/workflow-management.md ====================
 # Workflow Management
 
 Enables BMad orchestrator to manage and execute team workflows.
@@ -4372,9 +4372,9 @@ Handle conditional paths by asking clarifying questions when needed.
 ## Agent Integration
 
 Agents should be workflow-aware: know active workflow, their role, access artifacts, understand expected outputs.
-==================== END: .bmad-2d-phaser-game-dev/utils/workflow-management.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/utils/workflow-management.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/utils/language-manager.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/utils/language-manager.md ====================
 # Language Manager Utility
 
 ## Purpose
@@ -4630,16 +4630,16 @@ startup-instructions:
 3. **Regional Variants**: Support for regional language variants (en-US, en-GB, etc.)
 4. **Custom Terminology**: User-defined technical term translations
 5. **Team Language Profiles**: Shared language settings for team collaboration
-==================== END: .bmad-2d-phaser-game-dev/utils/language-manager.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/utils/language-manager.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 # Checklist Validation Task
 
 This task provides instructions for validating documentation against checklists. The agent MUST follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Available Checklists
 
-If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .bmad-2d-phaser-game-dev/checklists folder to select the appropriate one to run.
+If the user asks or does not specify a specific checklist, list the checklists available to the agent persona. If the task is being run not with a specific agent, tell the user to check the .ai-squad-2d-phaser-game-dev/checklists folder to select the appropriate one to run.
 
 ## Instructions
 
@@ -4648,7 +4648,7 @@ If the user asks or does not specify a specific checklist, list the checklists a
    - If user or the task being run provides a checklist name:
      - Try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
      - If multiple matches found, ask user to clarify
-     - Load the appropriate checklist from .bmad-2d-phaser-game-dev/checklists/
+     - Load the appropriate checklist from .ai-squad-2d-phaser-game-dev/checklists/
    - If no checklist specified:
      - Ask the user which checklist they want to use
      - Present the available options from the files in the checklists folder
@@ -4726,9 +4726,9 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
-==================== END: .bmad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/execute-checklist.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 # Game Design Brainstorming Techniques Task
 
 This task provides a comprehensive toolkit of creative brainstorming techniques specifically designed for game design ideation and innovative thinking. The game designer can use these techniques to facilitate productive brainstorming sessions focused on game mechanics, player experience, and creative concepts.
@@ -5037,9 +5037,9 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 - Consider accessibility and inclusivity from the start
 - Balance innovation with market viability
 - Plan for iteration based on player feedback
-==================== END: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
 template:
   id: game-design-doc-template-v2
   name: Game Design Document (GDD)
@@ -5383,9 +5383,9 @@ sections:
         instruction: List any competitive analysis, inspiration, or research sources
         type: bullet-list
         template: "{{reference}}"
-==================== END: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
 template:
   id: level-design-doc-template-v2
   name: Level Design Document
@@ -5870,9 +5870,9 @@ sections:
           - Mechanic integration effectiveness: {{integration_score}}
           - Player guidance clarity: {{guidance_score}}
           - Content accessibility: {{accessibility_rate}}%
-==================== END: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
 template:
   id: game-brief-template-v2
   name: Game Brief
@@ -6229,9 +6229,9 @@ sections:
         template: |
           | Date | Version | Description | Author |
           | :--- | :------ | :---------- | :----- |
-==================== END: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 # Game Design Document Quality Checklist
 
 ## Document Completeness
@@ -6433,9 +6433,9 @@ _List any critical items that need attention before moving to implementation pha
 
 **Next Steps:**
 _Outline immediate next actions for the team based on this assessment._
-==================== END: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
 template:
   id: game-architecture-template-v2
   name: Game Architecture Document
@@ -7049,9 +7049,9 @@ sections:
           - Zero TypeScript errors in strict mode
           - Consistent adherence to coding standards
           - Comprehensive documentation coverage
-==================== END: .bmad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 # Game Development Story Definition of Done Checklist
 
 ## Story Completeness
@@ -7212,9 +7212,9 @@ sections:
 
 **Additional Notes:**
 _Any specific concerns, recommendations, or clarifications needed before development begins._
-==================== END: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/data/development-guidelines.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/data/development-guidelines.md ====================
 # Game Development Guidelines
 
 ## Overview
@@ -7866,9 +7866,9 @@ src/
 - **Asset Streaming**: Background loading for upcoming content
 
 These guidelines ensure consistent, high-quality game development that meets performance targets and maintains code quality across all implementation stories.
-==================== END: .bmad-2d-phaser-game-dev/data/development-guidelines.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/data/development-guidelines.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 # Create Game Development Story Task
 
 ## Purpose
@@ -7928,7 +7928,7 @@ Before creating stories, ensure you have:
 ### 3. Template Execution
 
 **Load Template:**
-Use `.bmad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedded LLM instructions
+Use `.ai-squad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedded LLM instructions
 
 **Key Focus Areas:**
 
@@ -7964,7 +7964,7 @@ Use `.bmad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedd
 ### 5. Quality Assurance
 
 **Apply Checklist:**
-Execute `.bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` against completed story
+Execute `.ai-squad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` against completed story
 
 **Story Criteria:**
 
@@ -8085,9 +8085,9 @@ Execute `.bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` agains
 - Testing → Done
 
 This task ensures game development stories are immediately actionable and enable efficient AI-driven development of game features.
-==================== END: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
 template:
   id: game-story-template-v2
   name: Game Development Story
@@ -8341,9 +8341,9 @@ sections:
       
       - {{future_enhancement_1}}
       - {{future_optimization_1}}
-==================== END: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
 template:
   id: game-architecture-template-v2
   name: Game Architecture Document
@@ -8957,9 +8957,9 @@ sections:
           - Zero TypeScript errors in strict mode
           - Consistent adherence to coding standards
           - Comprehensive documentation coverage
-==================== END: .bmad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-architecture-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
 template:
   id: game-brief-template-v2
   name: Game Brief
@@ -9316,9 +9316,9 @@ sections:
         template: |
           | Date | Version | Description | Author |
           | :--- | :------ | :---------- | :----- |
-==================== END: .bmad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-brief-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
 template:
   id: game-design-doc-template-v2
   name: Game Design Document (GDD)
@@ -9662,9 +9662,9 @@ sections:
         instruction: List any competitive analysis, inspiration, or research sources
         type: bullet-list
         template: "{{reference}}"
-==================== END: .bmad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-design-doc-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
 template:
   id: game-story-template-v2
   name: Game Development Story
@@ -9918,9 +9918,9 @@ sections:
       
       - {{future_enhancement_1}}
       - {{future_optimization_1}}
-==================== END: .bmad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/game-story-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
 template:
   id: level-design-doc-template-v2
   name: Level Design Document
@@ -10405,9 +10405,9 @@ sections:
           - Mechanic integration effectiveness: {{integration_score}}
           - Player guidance clarity: {{guidance_score}}
           - Content accessibility: {{accessibility_rate}}%
-==================== END: .bmad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/templates/level-design-doc-tmpl.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 # Advanced Game Design Elicitation Task
 
 ## Purpose
@@ -10519,9 +10519,9 @@ The questions and perspectives offered should always consider:
 - Performance implications for 60 FPS targets
 - Cross-platform compatibility (desktop and mobile)
 - Game development best practices and common pitfalls
-==================== END: .bmad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/advanced-elicitation.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 # Create Game Development Story Task
 
 ## Purpose
@@ -10581,7 +10581,7 @@ Before creating stories, ensure you have:
 ### 3. Template Execution
 
 **Load Template:**
-Use `.bmad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedded LLM instructions
+Use `.ai-squad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedded LLM instructions
 
 **Key Focus Areas:**
 
@@ -10617,7 +10617,7 @@ Use `.bmad-2d-phaser-game-dev/templates/game-story-tmpl.md` following all embedd
 ### 5. Quality Assurance
 
 **Apply Checklist:**
-Execute `.bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` against completed story
+Execute `.ai-squad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` against completed story
 
 **Story Criteria:**
 
@@ -10738,9 +10738,9 @@ Execute `.bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md` agains
 - Testing → Done
 
 This task ensures game development stories are immediately actionable and enable efficient AI-driven development of game features.
-==================== END: .bmad-2d-phaser-game-dev/tasks/create-game-story.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/create-game-story.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 # Game Design Brainstorming Techniques Task
 
 This task provides a comprehensive toolkit of creative brainstorming techniques specifically designed for game design ideation and innovative thinking. The game designer can use these techniques to facilitate productive brainstorming sessions focused on game mechanics, player experience, and creative concepts.
@@ -11049,9 +11049,9 @@ This task provides a comprehensive toolkit of creative brainstorming techniques 
 - Consider accessibility and inclusivity from the start
 - Balance innovation with market viability
 - Plan for iteration based on player feedback
-==================== END: .bmad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/tasks/game-design-brainstorming.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 # Game Design Document Quality Checklist
 
 ## Document Completeness
@@ -11253,9 +11253,9 @@ _List any critical items that need attention before moving to implementation pha
 
 **Next Steps:**
 _Outline immediate next actions for the team based on this assessment._
-==================== END: .bmad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/checklists/game-design-checklist.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 # Game Development Story Definition of Done Checklist
 
 ## Story Completeness
@@ -11416,9 +11416,9 @@ _Outline immediate next actions for the team based on this assessment._
 
 **Additional Notes:**
 _Any specific concerns, recommendations, or clarifications needed before development begins._
-==================== END: .bmad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/checklists/game-story-dod-checklist.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/workflows/game-dev-greenfield.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/workflows/game-dev-greenfield.yaml ====================
 workflow:
   id: game-dev-greenfield
   name: Game Development - Greenfield Project
@@ -11602,9 +11602,9 @@ workflow:
       - Testing framework in place
       - Team roles and responsibilities defined
       - First implementation stories created and ready
-==================== END: .bmad-2d-phaser-game-dev/workflows/game-dev-greenfield.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/workflows/game-dev-greenfield.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/workflows/game-prototype.yaml ====================
+==================== START: .ai-squad-2d-phaser-game-dev/workflows/game-prototype.yaml ====================
 workflow:
   id: game-prototype
   name: Game Prototype Development
@@ -11780,9 +11780,9 @@ workflow:
     technical_to_stories: Technical plan complete. Create focused implementation stories for prototype development.
     stories_to_implementation: Stories ready. Begin iterative implementation with frequent playtesting and design validation.
     prototype_to_evaluation: Prototype playable. Evaluate core mechanics, gather feedback, and determine next development steps.
-==================== END: .bmad-2d-phaser-game-dev/workflows/game-prototype.yaml ====================
+==================== END: .ai-squad-2d-phaser-game-dev/workflows/game-prototype.yaml ====================
 
-==================== START: .bmad-2d-phaser-game-dev/data/bmad-kb.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/data/bmad-kb.md ====================
 # Game Development BMad Knowledge Base
 
 ## Overview
@@ -12037,9 +12037,9 @@ game-project/
 - Memory management and garbage collection optimization
 
 This knowledge base provides the foundation for effective game development using the BMad-Method framework with specialized focus on 2D game creation using Phaser 3 and TypeScript.
-==================== END: .bmad-2d-phaser-game-dev/data/bmad-kb.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/data/bmad-kb.md ====================
 
-==================== START: .bmad-2d-phaser-game-dev/data/development-guidelines.md ====================
+==================== START: .ai-squad-2d-phaser-game-dev/data/development-guidelines.md ====================
 # Game Development Guidelines
 
 ## Overview
@@ -12691,4 +12691,4 @@ src/
 - **Asset Streaming**: Background loading for upcoming content
 
 These guidelines ensure consistent, high-quality game development that meets performance targets and maintains code quality across all implementation stories.
-==================== END: .bmad-2d-phaser-game-dev/data/development-guidelines.md ====================
+==================== END: .ai-squad-2d-phaser-game-dev/data/development-guidelines.md ====================

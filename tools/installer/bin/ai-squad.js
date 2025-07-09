@@ -42,7 +42,7 @@ try {
 
 program
   .version(version)
-  .description('AI-SQUAD installer - Universal AI agent framework for any domain (Based on BMad Method)');
+  .description('AI-SQUAD installer - Universal AI agent framework for any domain');
 
 program
   .command('install')
@@ -83,7 +83,7 @@ program
 
 program
   .command('update')
-  .description('Update existing BMad installation')
+  .description('Update existing AI-SQUAD installation')
   .option('--force', 'Force update, overwriting modified files')
   .option('--dry-run', 'Show what would be updated without making changes')
   .action(async () => {
@@ -124,7 +124,7 @@ program
 
 async function promptInstallation() {
   await initializeModules();
-  console.log(chalk.bold.blue(`\nWelcome to BMad Method Installer v${version}\n`));
+  console.log(chalk.bold.blue(`\nWelcome to AI-SQUAD Method Installer v${version}\n`));
 
   const answers = {};
 
@@ -133,7 +133,7 @@ async function promptInstallation() {
     {
       type: 'input',
       name: 'directory',
-      message: 'Enter the full path to your project directory where BMad should be installed:',
+      message: 'Enter the full path to your project directory where AI-SQUAD should be installed:',
       validate: (input) => {
         if (!input.trim()) {
           return 'Please enter a valid project path';
@@ -158,26 +158,26 @@ async function promptInstallation() {
   const choices = [];
   
   // Load core config to get short-title
-  const coreConfigPath = path.join(__dirname, '..', '..', '..', 'bmad-core', 'core-config.yaml');
+  const coreConfigPath = path.join(__dirname, '..', '..', '..', 'ai-squad-core', 'core-config.yaml');
   const coreConfig = yaml.load(await fs.readFile(coreConfigPath, 'utf8'));
-  const coreShortTitle = coreConfig['short-title'] || 'BMad Agile Core System';
+  const coreShortTitle = coreConfig['short-title'] || 'AI-SQUAD Core System';
   
-  // Add BMad core option
-  let bmadOptionText;
+  // Add AI-SQUAD core option
+  let aiSquadOptionText;
   if (state.type === 'v4_existing') {
     const currentVersion = state.manifest?.version || 'unknown';
     const newVersion = coreConfig.version || 'unknown'; // Use version from core-config.yaml
     const versionInfo = currentVersion === newVersion 
       ? `(v${currentVersion} - reinstall)`
       : `(v${currentVersion} → v${newVersion})`;
-    bmadOptionText = `Update ${coreShortTitle} ${versionInfo} .ai-squad-core`;
+    aiSquadOptionText = `Update ${coreShortTitle} ${versionInfo} .ai-squad-core`;
   } else {
-    bmadOptionText = `Install ${coreShortTitle} (v${coreConfig.version || version}) .ai-squad-core`;
+    aiSquadOptionText = `Install ${coreShortTitle} (v${coreConfig.version || version}) .ai-squad-core`;
   }
   
   choices.push({
-    name: bmadOptionText,
-    value: 'bmad-core',
+    name: aiSquadOptionText,
+    value: 'ai-squad-core',
     checked: true
   });
   
@@ -221,8 +221,8 @@ async function promptInstallation() {
   ]);
   
   // Process selections
-  answers.installType = selectedItems.includes('bmad-core') ? 'full' : 'expansion-only';
-  answers.expansionPacks = selectedItems.filter(item => item !== 'bmad-core');
+  answers.installType = selectedItems.includes('ai-squad-core') ? 'full' : 'expansion-only';
+  answers.expansionPacks = selectedItems.filter(item => item !== 'ai-squad-core');
 
   // Ask for IDE configuration
   const { ides } = await inquirer.prompt([

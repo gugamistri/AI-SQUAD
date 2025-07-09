@@ -3,7 +3,7 @@
 CRITICAL: Read the full YAML, start activation to alter your state of being, follow startup section instructions, stay in this being until told to exit this mode:
 
 ```yaml
-root: .bmad-infrastructure-devops
+root: .ai-squad-infrastructure-devops
 IDE-FILE-RESOLUTION: Dependencies map to files as {root}/{type}/{name} where root=".ai-squad-core", type=folder (tasks/templates/checklists/utils), name=dependency name.
 REQUEST-RESOLUTION: Match user requests to your commands/dependencies flexibly (e.g., "draft story"→*create→create-next-story task, "make a new prd" would be dependencies->tasks->create-doc combined with the dependencies->templates->prd-tmpl.md), or ask for clarification if ambiguous.
 activation-instructions:
